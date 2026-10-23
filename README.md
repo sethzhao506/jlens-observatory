@@ -1,21 +1,15 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.png">
-    <img src="docs/assets/banner-light.png" alt="AIHOT：每个行业，都可以有自己的 AIHOT。很多条信源流进中间的精选，再分给法律、人力资源、金融等各个行业" width="100%">
-  </picture>
-</p>
+<h1 align="center">J-lens Research Observatory</h1>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-176b75?style=flat-square" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/Node.js-24-176b75?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js 24">
+  <img src="https://img.shields.io/badge/Node.js-24.22.1%2B-176b75?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js 24.22.1 或更新版本">
   <img src="https://img.shields.io/badge/PostgreSQL-17-176b75?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL 17">
   <img src="https://img.shields.io/badge/Docker-Compose-176b75?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose">
-  <a href="https://aihot.news"><img src="https://img.shields.io/badge/%E7%BA%BF%E4%B8%8A%E5%8E%9F%E7%AB%99-aihot.news-202a30?style=flat-square" alt="线上原站 aihot.news"></a>
 </p>
 
 <p align="center">
-  <b>一个自己找热点、自己写日报的网站框架。</b><br>
-  把信源换成你的，把精选标准换成你的 KnowHow，它就是你的行业热点站。
+  <b>看懂 J-lens，沿证据理解研究发展，找到值得检验的下一步。</b><br>
+  研究讨论、双语导读、演化图，以及从来源报告到小检查和实验提案的一条阅读路径。
 </p>
 
 <p align="center">
@@ -24,164 +18,193 @@
 
 <p align="center">
   <a href="#跑起来">跑起来</a> ·
-  <a href="docs/customize.md">改成你的行业</a> ·
+  <a href="#项目配置">项目配置</a> ·
   <a href="#它是怎么工作的">它是怎么工作的</a> ·
   <a href="#文档">文档</a> ·
-  <a href="https://github.com/KKKKhazix/AIHOT/discussions">社区交流</a>
+  <a href="https://github.com/sethzhao506/jlens-observatory/issues">交流与纠错</a>
 </p>
 
 <br>
 
 ## 这是什么
 
-[AIHOT](https://aihot.news) 是我做的一个 AI 热点网站。它每天从一批信源里收资料，用大模型先筛一遍、再独立打两次分，挑出真正值得看的，写成中文标题和摘要；把不同来源说的同一件事聚成一个事件，按有多少人在说排出热点；每天早上出一份日报。
+J-lens Research Observatory 是基于 [AIHOT 开源框架](https://github.com/KKKKhazix/AIHOT) 开发的研究入口。保留原有排版、色调、动态流、搜索、来源标注、后台和发布机制，在原布局内增加研究工具。
 
-这个仓库是它的引擎和框架：网站、后台、精选流程、聚簇和热度算法，**所有提示词的原文和入选门槛**，都在这里。
+首个主题是 **J-lens**，首个完整案例是 **J-lens on looped language models / Ouro**。希望帮助读者沿着这条路径进入研究：
 
-## 为什么开源
+**看懂问题 → 沿演化图理解发展 → 找到主张的原文依据 → 查看来源曲线 → 完成小检查 → 比较竞争解释 → 保存并导出调查提案。**
 
-这半年，很多做法律、做 HR、做金融、做贵金属的朋友问我，能不能也给他们的行业做一个。
+内容以 LessWrong 讨论、论文、代码和直接相关进展为主；X 讨论是计划追踪的来源，目前暂缓接入。通用 AI 新闻、融资、人事和营销不进入默认研究范围。关注的是新证据改变了什么判断，而不只是热度。
 
-我做不了。我不懂你们的行业，不知道哪些信源有用，也不知道什么样的消息，对你们来说才叫热点。
+## 为什么做这个项目
 
-但你们懂。
+进入一个研究方向，通常不缺链接，缺的是把问题、方法、证据和下一步行动连接起来的解释：一种读出究竟测量了什么？结论在哪些条件下成立？什么仍有争议？哪个可负担的小实验能区分竞争解释？
 
-既然我没办法满足所有人，那就把火种交到大家自己手上。
+这个项目先做好一个可点击、可追溯的案例，不声称已经完成全面综述、独立复现或自动化科研。
 
 ## 说在前面
 
-- **我不是专业的开发者。** 我是设计师出身，半年前还看不太懂代码。这套代码是我和 AI 一起重写的，比以前干净了很多，但一定还有写得不好的地方。发现问题欢迎提 Issue，我不一定能很快回复，先说声抱歉。
-- **这是 AIHOT 的引擎。** 它和 AIHOT 线上跑的是同一份引擎代码，同步时直接从线上导出，不是精心打磨的通用框架。以后 AIHOT 的更新，我会尽量同步过来，但没法保证每一次都同步。模型榜、Codex 重置监控、主题页的大事记这些只对 AI 行业有意义的功能，以及 AIHOT 自己的运营工具，只留在 AIHOT 上。
-- **里面没有 AIHOT 的信源名单和运营数据。** 仓库带了 18 个公开的海外 AI 资讯源做示范，够你跑起来看效果；真正的信源，要换成你自己行业的。
-- **请不要用 AIHOT 的名字和 Logo。** 换上你自己的名字，它就是你的站。
+- **研究页面默认英文，可以切换中文。** 使用 `?lang=zh` 切换；原框架导航、后台及部分工具页仍为中文，尚未完成全站翻译。
+- **阅读和确定性检查无需登录或模型密钥。** 当前使用人工整理的阅读目录，本地采集、模型调用、推送和 IndexNow 均关闭。从上游模板生成新 `.env` 后，需要先关闭相关开关，见[跑起来](#跑起来)。
+- **收录数量不等于全部引用。** 当前目录有 30 条资料，28 条有日期、进入动态流，另两条未知日期资料保留详情入口。演化图的 7 个核心来源是阅读路径，不是完整 citation graph；J-lens 全球引用总数仍未知。
+- **作者报告、算术重算和独立复现是不同状态。** Try 重算来源汇总值，没有运行 Ouro 模型实验。个人提案尚未公共审核，也尚未运行。
+- **延续原框架，精简读者入口。** 热点榜、日报和收藏入口已隐藏，保留历史记录和上游机器接口。`site/site.ts` 已停用自动日报、周报和月报排程。
+- **当前为本地开发版本。** 尚未配置正式 Observatory 域名。正式部署前需要确认管理员认证、条款、隐私与来源权限；本站使用自己的名称，不使用上游 AIHOT 品牌。
 
 ## 它是怎么工作的
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/how-dark.png">
-  <img src="docs/assets/how-light.png" alt="六步：采集、预筛、两次评分、写作、聚簇、热点与成刊" width="100%">
-</picture>
+沿用原有 API、数据库和 worker，复用信源管理、去重、内容诊断、人工修改和统一发布读取层。前端只通过 HTTP 读取后端，数据库与模型密钥保留在后端；普通页面浏览不触发模型调用。
 
-一条资料从信源进来，先判重，再预筛；可能重要的独立打两次分，写好中文标题和摘要，和别的报道聚成事件，算进热度。X 帖子没有正文或只有链接时，保留原帖的链接和图片，不调用写作或翻译模型。分数过了门槛、又不是精选里已有新闻的重复，才进精选；日报按规则编出当天要闻，周报、月报再从日报里汇编。每一步的提示词都在 [`industry/prompts/`](industry/prompts/)，改标准不用改代码。详见 [精选与校准](docs/selection.md)。
+研究模块保存来源、主张、证据、带类型的关系及提案模板。导读、图谱、Try 和 Investigate 共享这些标识，通过原有发布边界读取研究文档，没有另建一套网站框架。
 
-### 聚簇与热点
+### 来源与研究动态
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/cluster-dark.png">
-  <img src="docs/assets/cluster-light.png" alt="五个来源的报道聚成一个事件，事件进入当前热点榜" width="100%">
-</picture>
+目标流程是 **采集 → 去重 → 候选更新 → 核查 → 更新证据与图谱 → 发布**。当前通过脚本导入人工整理的阅读目录，尚未开启无人值守的持续检索与发布。
 
-同一件事，官网发一篇、媒体转十篇、X 上吵一天，读者只需要看到一次。AIHOT 把它们聚成一个**事件**：先用标题摘要的向量（没配向量服务时比文字重合度）在最近两周里找候选，再让模型判断是同一件事、后续进展，还是两件事；拿不准的合并，写入前再让模型复核一遍（复核可以单独换一家模型，设 `GROUP_REVIEW_MODEL`）。
+动态卡片和详情标出 LessWrong、X、GitHub、arXiv 等平台，并保留具体来源名及原文链接。来源配置共 34 条：30 个手动归属记录、2 个暂停的 LessWrong RSS 草案、2 个暂停的 X 搜索。来源归属不是订阅，配置存在也不代表已经采集成功。
 
-**热度**按事件算，不按文章算：48 小时内，每个独立来源只算一次，24 小时减半。重复抓取不会多算，一家媒体发十篇也只算一次，所以排在前面的，是真正有很多人在说的事。
+沿用现有评分结构、维度和门槛；热度不能替代证据质量。同一研究的论文、代码和作者解读可以相互关联，不算多次独立验证。已核对的引用及访问失败记录见[引用补查](docs/citation-search-2026-10-22.md)。
 
-### 速度
+### 证据与研究状态
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/perf-dark.png">
-  <img src="docs/assets/perf-light.png" alt="AIHOT 线上实测：页面中位数 10 毫秒，95% 在 50 毫秒内；接口中位数 6 毫秒，95% 在 12 毫秒内；文章页 95% 在 14 毫秒内" width="100%">
-</picture>
+图谱区分直接引用、方法改进、评测、质疑、编辑性阅读顺序、证据支持和真实提案修订。节点从左到右的位置表示阅读顺序，不证明继承关系。发表、版本更新、首次收录、机器检查和人工审核分别记录；未知日期保留为空。
+
+Ouro 的 Try 示例从来源四舍五入后的均值重算 **34.17 − 22.60 = 11.57 个百分点**。这不能证明机制、因果使用、统计显著性，也不能在缺少样本数据时产生置信区间。不同估计器家族的分数不能错误拼接；未运行提案不会生成实验结果节点。
 
 ## 你会得到什么
 
 | | |
 |---|---|
-| **六种信源** | RSS、网页列表、JSON 接口、X 账号、微信公众号，以及你自己脚本推送进来的内容。信源分三级（官方一手、官方账号与准官方、媒体与个人），各级入选门槛不同；抓取频率按产出自动调整 |
-| **精选** | 预筛，同一份评分标准独立打两次分，再按信源分级的门槛决定入选；同一条新闻只占一条，换个说法的重复不进。提示词和门槛全部公开，全部可以改；用你自己标注的样本在 SelectBench 里校准 |
-| **写作** | 中文标题、答案先行的摘要、推荐理由，外文全文翻译；分类、标签和新闻事实单独抽取；防止模型把原文没提到的公司写进标题 |
-| **聚簇** | 不同来源报道的同一件事聚成一个事件，后续进展挂在同一个事件下，事件页有综述；进展和报道时间线可一起切换“最新在前”或“最早在前”；人工改过的归属不会被覆盖 |
-| **热点** | 按事件算热度：独立来源越多越靠前，X 上的讨论也算进来；和 6 小时前比，涨得快的标上升，新出现的标“新” |
-| **日报、周报、月报** | 每天出日报（默认 08:00），按规则编出当天要闻：一件事一条，报过的事只在有新进展时跟进，不调模型。每周一出周报、每月 1 日出月报（默认 10:00、10:30），从日报里汇编，模型只写总述和栏目导读。几点出刊在 `site/site.ts` 的 `EDITION_TIMES` 里改 |
-| **主题与搜索** | 公司、方向、内容形态三类主题页；标题摘要搜索和全文相关搜索 |
-| **阅读设置** | 深浅色外观、网站默认字体或浏览器默认字体；收藏和阅读设置只保存在本机，可以导出、导入备份 |
-| **给 Agent 用** | RSS（精选、全部、全文、日报、周报、月报）、公开 API、MCP、Agent Markdown、`llms.txt`，同一份内容给人看也给 Agent 用 |
-| **后台** | 信源管理与试抓、内容诊断与人工评分更正、精选评测、每一步单独换模型、付费服务的预算熔断、运行记录与告警 |
+| **研究动态与讨论** | 沿用精选、全部动态、主题与搜索，聚焦 J-lens、读出方法和 looped LM/Ouro，保留来源平台与原文链接。 |
+| **Understand 导读** | 英中短导读，完整长文、公式和技术细节按需展开。 |
+| **Research Evolution Graph** | 从 7 个核心来源开始，保留五个研究分支；点击查看关系类型、方向、原文定位与核查状态，并可切换证据和假设视图。手机提供列表阅读。 |
+| **Evidence 证据** | 一个有范围的 Ouro 主张、固定版本来源、报告曲线、估计器说明、局限和审核状态；不补造判断历史或运行结果。 |
+| **Try 小检查** | 重算来源汇总值，检查结果是否可比；明确结果能说明什么、不能说明什么。 |
+| **Investigate 调查计划** | 人工修改竞争解释、预测、控制、预算及结果判据；浏览器保存真实版本和父子关系，导出 JSON/Markdown，并关联回假设图。 |
+| **阅读体验** | 保留原排版、色调、深浅色与阅读设置；手机底栏为“精选、研究、我的”，隐藏收藏和报告入口。 |
+| **给 Agent 用** | 复用 RSS、公开 API、MCP、Agent Markdown 和 `llms.txt`，增加研究文档和候选更新出口。这些是读取接口，不是已接入的聊天研究助手。 |
+| **后台** | 复用信源试抓、诊断、人工修改、评测、付费回执、预算熔断和运行记录；付费处理仍在 worker 内执行。 |
+| **开发端研究 skills** | 项目内安装四个 K-Dense 技能，用于文献检索、引用核对、综述与批判性审查；不会自动开启网站采集或读者 Agent。 |
 
 ## 看一眼
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/shots-dark.png">
-  <img src="docs/assets/shots-light.png" alt="首页的每日精选，关于页的信源河" width="100%">
-</picture>
+本地启动后可打开：
 
-<p align="center"><sub>截图来自用示范信源跑起来的本地站，站名是默认的 MyHOT。</sub></p>
+| 页面 | 可以检查什么 |
+|---|---|
+| [精选](http://localhost:3000/) / [全部动态](http://localhost:3000/all) | 论文、研究讨论、来源平台与原文链接。 |
+| [Understand](http://localhost:3000/understand) | 从短导读进入，按需展开技术细节和检索覆盖说明。 |
+| [Explore](http://localhost:3000/explore) | 从左到右阅读，点击节点和连线，追到主张与原文。 |
+| [Try](http://localhost:3000/try) | 重算报告值，并理解算术检查的边界。 |
+| [Investigate](http://localhost:3000/investigate) | 比较竞争解释，保存一次真实修订，下载提案。 |
+| [主题](http://localhost:3000/topics) / [后台](http://localhost:3000/admin) | 查看研究分类与既有管理工具。 |
+
+首个调查问题是：**匹配剩余计算距离、校准预算及独立测得的概念强度后，源轮次或目标出口是否仍影响可恢复性？** 当前提供调查计划，不声称完成了这个实验。
 
 ## 跑起来
 
-想创建自己的独立站点，可以先点 [Use this template](https://github.com/KKKKhazix/AIHOT/generate)，再克隆你生成的仓库。想持续合并上游更新或贡献代码，建议先 Fork。下面的命令适合直接试用。
-
-需要 [Docker](https://docs.docker.com/get-started/get-docker/)、[Node.js 24](https://nodejs.org/en/download)（运行 `init-env` 生成配置要用），和一个 OpenAI 兼容的模型 API Key（DeepSeek、千问、智谱都可以）。
-
-`init-env` 默认按 DeepSeek 配置。用千问、智谱等别家，照 `.env.example` 里的例子改 `.env` 的 `LLM_BASE_URL`、`LLM_MODEL` 和 `LLM_EXTRA_JSON`；用推理模型（先想再答）时，还要设 `LLM_REASONING_TOKENS` 给推理留出输出额度。
+需要 [Node.js 24.22.1 或更新版本](https://nodejs.org/en/download) 和 [Docker Compose](https://docs.docker.com/compose/install/)。Compose 提供 PostgreSQL 17。查看人工整理的阅读路径不需要模型 API Key。
 
 ```bash
-git clone https://github.com/KKKKhazix/AIHOT.git myhot
-cd myhot
-node scripts/init-env.ts --llm-key <你的模型 API Key>
+git clone --branch setup/jlens-observatory https://github.com/sethzhao506/jlens-observatory.git
+cd jlens-observatory
+node scripts/init-env.ts
+```
+
+启动服务前，编辑生成的 `.env`，设置：
+
+```dotenv
+COLLECT_ENABLED=false
+MODEL_CALLS_ENABLED=false
+```
+
+`FEISHU_*_ENABLED` 和 `INDEXNOW_SUBMIT_ENABLED` 也保持 false。上游 `.env.example` 中采集与模型调用默认是 true，`init-env` 会复制这些值并提示配置模型密钥；本次无模型预览无需填写 `LLM_API_KEY`，但必须显式关闭这两个开关。不要提交 `.env`，也不要把密钥发到聊天。
+
+```bash
 docker compose up -d --build
+docker compose exec api node scripts/import-reading-list.ts
 ```
 
-打开 <http://localhost:3000>。后台在 `/admin`，管理员密码在 `.env` 的 `ADMIN_PASSWORD` 里。一两分钟后开始有内容，第一次导入的资料大约半小时处理完。
+打开 <http://localhost:3000>。Compose 的 setup 只执行迁移和信源初始化，第二条命令导入阅读目录。重复导入会保留已有条目与后台修改，不重复新增；导入不代表启动持续采集。管理员密码由 `init-env` 生成，保存在 `.env` 的 `ADMIN_PASSWORD`。
 
-机器上没有 Node、服务器在中国大陆、要配域名和 HTTPS，或者不用 Docker、直接在 Linux、macOS 上跑（Windows 用 WSL2），见 [部署](docs/deploy.md)。
+已有数据库与本机运行环境可以执行：
 
-站点跑起来后，打开 `/agent` 可以复制 MCP、RSS 或 API 的接入方式；只能读网页的 Agent 从 `/api/v1/agent` 开始；接口说明在 `/openapi-v1.json`。
-
-## 把它改成你的行业
-
-最省事的办法：打开你的 Agent（Claude Code、Codex 都可以），把这个仓库交给它，然后说：
-
-```text
-请读 AGENTS.md 和 docs/customize.md，把这个站改成「XX 行业」的热点站。
-我关心的是：……（写你想盯的信源、你觉得什么消息重要、什么不重要，越具体越好）。
-改完帮我跑 npm run typecheck、npm test 和 node scripts/smoke.ts，并告诉我还需要我自己决定哪些事。
+```bash
+node --env-file=.env scripts/seed.ts
+node --env-file=.env scripts/import-reading-list.ts
 ```
 
-要改的东西几乎都在 [`site/`](site/) 和 [`industry/`](industry/) 这两个文件夹里，代码基本不用动：
+原生运行、域名、HTTPS、备份与进程配置见[部署](docs/deploy.md)。部署文档也介绍上游可选的付费采集与模型流程；人工目录预览仍保持开关关闭。当前开发机器的便携 Node/PostgreSQL 位于忽略的 `.data/`，不随仓库提交。
 
-| 文件 | 改什么 |
+运行后，`/agent` 提供 MCP、RSS 和 API 接入说明，`/api/v1/agent` 是机器入口，`/openapi-v1.json` 是公开接口描述。`/api/v1/observatory` 提供研究文档；`/api/v1/research-updates` 仅返回七天发布窗口内的相关候选，不是完整档案，也不自动确认科学关系。
+
+### 运行检查
+
+代码变更沿用已有检查，测试数据库名称必须以 `_test` 或 `_ci` 结尾：
+
+```bash
+npm ci
+npm run typecheck
+DATABASE_URL=postgres://127.0.0.1:5432/jlens_test npm test
+npm run build -w @aihot/web
+node --test apps/web/tests/*.test.ts
+node scripts/smoke.ts --base http://localhost:3000
+```
+
+上面环境变量写法用于 POSIX shell；PowerShell 使用 `$env:DATABASE_URL`。当前阅读路径已有类型、构建、定向后端/模块与浏览器验证记录；原生 Windows 完整测试尚未全部通过，工具条件与本地免登录 smoke 例外见[本地预览](docs/local-preview.md)。旧原型报告不能代替当前网站验收。
+
+## 项目配置
+
+本仓库已经按 J-lens 配置。继续在现有文件中扩充内容与行为，保留原网站布局：
+
+| 文件 | 负责什么 |
 |---|---|
-| `site/site.ts` | 站名、行业词、出刊时间、首页文案、关于页、条目与日报周报月报上的说法、公开接口的分类 |
-| `industry/taxonomy.ts`、`industry/topics.json` | 分类、标签、主题 |
-| `industry/sources.json` | 首次启动时导入的信源 |
-| `industry/prompts/` | 精选标准和写作要求。**你的行业 KnowHow，就写在这里** |
-| `industry/selection.ts` | 入选门槛 |
-| `site/models.ts` | 每一步默认用哪个模型（不改也行：都用 `.env` 里配的那一个） |
-| `site/brand/`、`site/pages/`、`site/public/`、`site/changelog.json` | 图标与 Logo，使用规则和隐私说明，`robots.txt` 这类发布在网站根目录的文件，更新日志 |
-| `modules/` | 框架里没有、只有你的站要的功能，做成模块放在这里，见 [架构](docs/architecture.md#模块) 的“模块” |
+| `site/site.ts` | 项目名称、原布局文案、导航可见性、停用自动报告。 |
+| `industry/taxonomy.ts`、`industry/topics.json` | 研究分类、标签和主题。 |
+| `industry/sources.json` | 手动来源归属与暂停的采集草案。 |
+| `industry/reading-list.json`、`scripts/import-reading-list.ts` | 阅读目录及可重复执行的导入。 |
+| `industry/prompts/`、`industry/selection.ts` | 研究相关性、写作要求及原有门槛；数字调整需要人工标注样本校准。 |
+| `site/models.ts` | 将来启用付费处理时，各步骤使用的后端模型。 |
+| `site/brand/`、`site/pages/`、`site/public/`、`site/changelog.json` | 品牌、条款与隐私模板、根文件及真实更新记录。 |
+| `modules/observatory/` | 双语导读、图谱、证据、小检查、个人提案修订与导出。 |
+| `modules/observatory/data/observatory.json`、`updates.json` | 研究记录和双语动态文案。 |
+| `.agents/skills/` | 固定版本的 K-Dense 开发技能、许可证与安装来源。 |
 
-最值得花时间的是评分标准（`industry/prompts/selection-score.md`）和门槛：拿一两百条你自己标注过的资料，用 `scripts/eval-selection.ts` 跑一遍，看它选得准不准，再回去改。怎么做写在 [精选与校准](docs/selection.md) 里。
+来源存在、来源支持某条主张、主张得到独立验证要分别判断。个人浏览器草稿与公共审核内容分开。启用新采集源前，先试抓少量资料，检查相关性与噪声，并重复抓取验证去重。
 
 ## 文档
 
 | 文档 | 内容 |
 |---|---|
-| [把它改成你的行业](docs/customize.md) | 站名、分类、主题、信源、提示词、门槛、模型、品牌，一步一步来 |
-| [信源](docs/sources.md) | 六种信源怎么配，分级和全文，抓取频率，旧文和存档，固定起点 `publishedAfter`，外部推送接口 |
-| [精选与校准](docs/selection.md) | 一条资料怎么变成精选、怎么编进日报周报月报，怎么用自己的样本校准 |
-| [事件归组与关系评测](docs/grouping.md) | 事件关系怎么判断，怎么用自己标注的成对样本评测 |
-| [综述评测](docs/story-digest-evaluation.md) | 改事件综述提示词前，怎么在同一批事件上并排比较 |
-| [部署](docs/deploy.md) | Docker、域名和 HTTPS、中国大陆、更新、备份、花多少钱，不用 Docker 时在 Linux、macOS（Windows 用 WSL2）上怎么跑 |
-| [架构](docs/architecture.md) | 三个进程、几条不变的规则、目录、模块、数据库迁移、对外出口、测试 |
+| [本地预览](docs/local-preview.md) | 可打开的页面、内容数量、实际检查记录与已知限制。 |
+| [读者路径与实现](docs/observatory-reader-path.md) | 路由、架构复用、图谱、确定性检查、提案修订与采集范围。 |
+| [研究来源与迁移](docs/research-provenance.md) | 复用资料、固定版本原文、数值快照、科学边界与缺失历史。 |
+| [引用补查](docs/citation-search-2026-10-22.md) | 已核查的引用论文、作者讨论、去重和检索缺口。 |
+| [项目研究 skills](docs/research-skills.md) | 四个 K-Dense 技能、来源版本、依赖与安装验证。 |
+| [AISafetyHot 参考审查](docs/aisafetyhot-reference-plan.md) | 公开 Hub 实际提供什么、来源标注参考与许可边界。 |
+| [定制](docs/customize.md) | 原框架站点配置、分类、信源、提示词、门槛、模型和品牌。 |
+| [信源](docs/sources.md) | 采集类型、分级、权限、频率、旧文与外部推送。 |
+| [精选与校准](docs/selection.md) | 原有评分流程及人工样本校准。 |
+| [事件归组](docs/grouping.md) / [综述评测](docs/story-digest-evaluation.md) | 事件关系与综述评测；事件归组不等于科学证据支持。 |
+| [部署](docs/deploy.md) | Docker、域名、更新、备份、进程设置和正式部署条件。 |
+| [架构](docs/architecture.md) | API/web/worker 边界、模块、迁移、统一发布层与测试。 |
 
 技术栈：Node.js 24 · TypeScript · React Router（服务端渲染）· Fastify · PostgreSQL · pg-boss · Tailwind CSS · Docker Compose。
 
 ## 交流与贡献
 
-部署和使用问题到 [问答区](https://github.com/KKKKhazix/AIHOT/discussions/categories/q-a)，新想法到 [想法交流区](https://github.com/KKKKhazix/AIHOT/discussions/categories/ideas)，欢迎在 [作品展示区](https://github.com/KKKKhazix/AIHOT/discussions/categories/show-and-tell) 分享你做出的行业热点站。
+来源补充、纠错、研究提案和实现问题请提交到[本站仓库 Issues](https://github.com/sethzhao506/jlens-observatory/issues)。涉及主张或关系时，附上原始 URL、版本和具体段落。提交来源只是进入候选审核，不会自动变成已确认结论。
 
-发现 Bug 或有明确的功能建议，可以 [提交 Issue](https://github.com/KKKKhazix/AIHOT/issues/new/choose)。准备改代码前，先看 [贡献说明](CONTRIBUTING.md)；安全漏洞请走 [私密报告入口](SECURITY.md)。
+修改代码前阅读 [AGENTS.md](AGENTS.md)。[CONTRIBUTING.md](CONTRIBUTING.md) 保留上游框架的贡献要求；J-lens 专属内容留在本站，不作为通用框架能力提交上游。安全报告说明见 [SECURITY.md](SECURITY.md)。
 
-## 最后
+## 下一步
 
-AIHOT 曾经只是我无数个深夜里，一个很小、很小的念头。
+先审核首条主张与图谱关系，人工试抓少量 LessWrong 来源并重复检查去重，再记录候选更新。X 等合适的服务配置后接入。
 
-我不知道它会被改成什么样子，会走到多远的地方。但这可能就是开源最浪漫的地方。
-
-剩下的路，就交给你们了。
-
-<p align="right">—— 数字生命卡兹克</p>
+真实模型检查另行推进：固定源码 commit、checkpoint、数据、环境、预期结果、容限和预算，先尝试复现一个参考结果，再检验新假设。来源报告的数字和保存的提案不能替代实际运行。
 
 ## 许可
 
-代码使用 [MIT 许可证](LICENSE)。AIHOT 的名字和 Logo 不在许可范围内。字体有自己的许可，见 [NOTICE](NOTICE)。
+代码保留上游 [MIT 许可证](LICENSE) 与**数字生命卡兹克（Khazix）**的版权署名。AIHOT 名称和 Logo 不在该许可范围内；本站使用自己的身份。字体等说明见 [NOTICE](NOTICE)。
+
+项目内 K-Dense skills 保留其上游 MIT 许可与来源记录。论文、帖子、外部代码和其他研究材料仍适用各自权利人的条款；代码许可证不代表可以任意转载这些内容。网站默认展示摘要与原文链接。
