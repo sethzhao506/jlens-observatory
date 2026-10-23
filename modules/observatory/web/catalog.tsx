@@ -1,0 +1,30 @@
+import { useState } from "react";
+import type { DiscussionNote, ResearchEntry } from "../research.ts";
+import { text, type Lang } from "./shell.tsx";
+import { Badge } from "./ui.tsx";
+import { DiscussionNotes } from "./discussions.tsx";
+
+export function ResearchCatalog({ entries, notes, branch, lang, onSelect }: { entries: ResearchEntry[]; notes: DiscussionNote[]; branch: string; lang: Lang; onSelect: (id: string) => void }) {
+  const [query, setQuery] = useState("");
+  const [kind, setKind] = useState("all");
+  const [limit, setLimit] = useState(6);
+  const needle = query.trim().toLocaleLowerCase();
+  const materials = entries.filter((entry) => (branch === "all" || entry.coreSourceId === "jlens" || entry.branchIds.includes(branch)) && (kind === "all" || kind === entry.kind) && (!needle || [entry.author, ...entry.title, ...entry.label, ...entry.brief].join(" ").toLocaleLowerCase().includes(needle))).sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+  const viewpoints = notes.filter((note) => (kind === "all" || kind === "discussion") && (!needle || [note.author.displayName, note.postTitle, ...note.summary].join(" ").toLocaleLowerCase().includes(needle)) && (branch === "all" || entries.some((entry) => entry.branchIds.includes(branch) && note.readingListIds.includes(entry.itemId))));
+  return <section className="obs-catalog" id="research-library" aria-label={lang ? "论文、博客与讨论索引" : "Papers, blogs, and discussion index"}>
+    <div className="obs-section-heading"><div><h2>{lang ? "论文、博客与讨论" : "Papers, blogs & discussion"}</h2><p className="obs-small">{lang ? `${entries.length} 条资料 · ${notes.length} 条已整理观点。选一条加入图中；简要直接链接原文。` : `${entries.length} materials · ${notes.length} curated viewpoints. Select one to add it to the graph; each brief links to its source.`}</p></div></div>
+    <div className="obs-catalog-filters"><label><span className="obs-label">{lang ? "搜索标题、作者或观点" : "Search title, author, or viewpoint"}</span><input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setLimit(6); }} /></label><label><span className="obs-label">{lang ? "内容类型" : "Material type"}</span><select value={kind} onChange={(event) => { setKind(event.target.value); setLimit(6); }}>{[["all", "All", "全部"], ["paper", "Papers", "论文"], ["blog", "Research blogs", "研究博客"], ["code", "Code / report", "代码与报告"], ["discussion", "Comment viewpoints", "评论观点"]].map(([value, en, zh]) => <option key={value} value={value}>{lang ? zh : en}</option>)}</select></label></div>
+    <div className="obs-catalog-list">{materials.slice(0, limit).map((entry) => <article key={entry.id} data-material-id={entry.id}>
+      <div className="obs-catalog-meta"><Badge>{entry.kind === "paper" ? "Paper" : entry.kind === "code" ? "Code / report" : "Research blog"}</Badge><span>{entry.author}</span><span>{entry.publishedAt?.slice(0, 10) ?? (lang ? "发表日期未知" : "Publication date unknown")}</span>{entry.version && <span>{entry.version}</span>}</div>
+      <h3><button onClick={() => onSelect(entry.coreSourceId ?? entry.id)}>{text(entry.title, lang)}</button></h3><p>{text(entry.brief, lang)}</p>
+      <div className="obs-catalog-links"><a href={entry.sourceUrl} target="_blank" rel="noreferrer">{lang ? "原始来源 ↗" : "Source ↗"}</a><button onClick={() => onSelect(entry.coreSourceId ?? entry.id)}>{lang ? "在图谱中查看" : "Show in graph"}</button>{entry.directCitation && <span>{lang ? "原文已定位：直接引用 J-lens" : "Located in original: directly cites J-lens"}</span>}</div>
+    </article>)}</div>
+    {materials.length > limit && <button className="obs-button" onClick={() => setLimit(limit + 12)}>{lang ? `继续展开 · 还有 ${materials.length - limit} 条` : `Show more · ${materials.length - limit} remaining`}</button>}
+    {viewpoints.length > 0 && <details className="obs-details" open={kind === "discussion"}><summary>{lang ? "研究者的具体观点与回应" : "Researcher viewpoints and replies"} · {viewpoints.length}</summary><DiscussionNotes notes={viewpoints} lang={lang} onSelect={onSelect} /></details>}
+    {!materials.length && !viewpoints.length && <p className="obs-small">{lang ? "当前筛选中没有已整理资料；这不代表没有相关研究。" : "No curated material matches this filter. This does not establish that relevant research is absent."}</p>}
+  </section>;
+}
+
+export function CatalogInspector({ entry, lang }: { entry: ResearchEntry; lang: Lang }) {
+  return <><Badge>{entry.kind === "paper" ? "Paper" : entry.kind === "code" ? "Code / report" : "Research blog"}</Badge><h2>{text(entry.label, lang)}</h2><p>{text(entry.brief, lang)} <a className="obs-source-link" href={entry.sourceUrl} target="_blank" rel="noreferrer">{lang ? "原始来源 ↗" : "Source ↗"}</a></p><p className="obs-small">{text(entry.limitation, lang)}</p><dl className="obs-record"><dt>{lang ? "作者" : "Author"}</dt><dd>{entry.author ?? (lang ? "未核对" : "Unverified")}</dd><dt>{lang ? "发表" : "Published"}</dt><dd>{entry.publishedAt ?? (lang ? "未知" : "Unknown")}</dd><dt>{lang ? "版本" : "Version"}</dt><dd>{entry.version ?? "—"}</dd><dt>{lang ? "版本更新" : "Updated"}</dt><dd>{entry.versionUpdatedAt ?? "—"}</dd><dt>{lang ? "原文定位" : "Locator"}</dt><dd>{entry.locator || (lang ? "见原始来源；关系未升级为科学支持" : "See the original; no scientific-support relation inferred")}</dd><dt>{lang ? "来源核对" : "Source checked"}</dt><dd>{entry.checkedAt ?? (lang ? "未记录" : "Not recorded")}</dd></dl>{entry.relatedPublications.length > 0 && <div className="obs-companion-links"><strong>{lang ? "同一研究的其他原始入口" : "Other original entries to the same work"}</strong>{entry.relatedPublications.map((report) => <p key={report.url}><a href={report.url} target="_blank" rel="noreferrer">{report.title ?? (lang ? "作者文章 / 相关发布 ↗" : "Author article / related publication ↗")}</a> · {report.publishedAt?.slice(0, 10) ?? (lang ? "日期未知" : "Date unknown")}</p>)}<p className="obs-small">{lang ? "不另计独立研究或独立支持。" : "Not counted as an additional study or independent support."}</p></div>}<p className="obs-small">{lang ? "机器检查，人工审核待完成；本站未独立复现。" : "Machine inspected; human review pending. Not independently reproduced here."}</p></>;
+}

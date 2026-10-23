@@ -5,13 +5,25 @@ import Fastify from 'fastify';
 import { installModules } from '@aihot/backend/modules';
 import { readModulePublication } from '@aihot/backend/publication/modules';
 import { closeDb } from '@aihot/backend/db';
+import { resolveRedirect } from '@aihot/contracts/http-policy';
 import { checkComparability, summarizeCurve, type Curve } from '../checks.ts';
 import { createProposal, createRevision, proposalJSON, proposalMarkdown, validateHistory, validateProposal, type Proposal, type ProposalCatalog, type ProposalDraft } from '../proposals.ts';
 import { researchContext } from '../updates.ts';
+import { discussionForItem, type DiscussionDocument, type DiscussionNote } from '../research.ts';
 import server from '../server.ts';
 import document from '../data/observatory.json' with { type: 'json' };
 
 const app = Fastify();
+
+test('legacy introductions redirect to the research graph without losing language or selected context', () => {
+  for (const path of ['/understand', '/understand/']) {
+    assert.deepEqual(resolveRedirect(path, '?lang=zh&node=ouro&view=evidence'), {
+      status: 302, location: '/explore?lang=zh&node=ouro&view=evidence', headers: {},
+    });
+  }
+  assert.equal(resolveRedirect('/understanding', ''), null);
+});
+
 before(async () => {
   installModules([server]);
   await server.http!(app);
@@ -315,6 +327,91 @@ test('the public research document uses the shared publication read layer and re
   first.claims[0].statement[0] = 'This mutation must not change the public record.';
   const second = readModulePublication<typeof document>('observatory');
   assert.equal(second.claims[0].statement[0], document.claims[0].statement[0]);
+});
+
+test('discussion snapshots separate comments on a material from editorial cross-links and unchecked materials', () => {
+  const note: DiscussionNote = {
+    id: 'comment-a', platform: 'LessWrong', postId: 'post-a', postTitle: 'Fixture research post',
+    postUrl: 'https://www.lesswrong.com/posts/fixture-a', commentId: 'comment-a',
+    originalUrl: 'https://www.lesswrong.com/posts/fixture-a?commentId=comment-a', parentCommentId: null, parentCommentUrl: null,
+    author: { displayName: 'Fixture Author', slug: null }, postedAt: null, baseScore: null, voteCount: null, checkedAt: '2026-10-22T12:00:00Z',
+    readingListIds: ['material-a'], relatedItemIds: ['material-b'], graphSourceIds: ['jlens'], viewpointType: 'method-question',
+    summary: ['A scoped question.', '有范围的问题。'], limitation: ['Not a result.', '不是结果。'],
+    reviewStatus: 'machine_inspected_pending_human', humanReviewedAt: null, scientificStatus: 'discussion_not_independent_validation', relationType: 'comments_on',
+  };
+  const fixture: DiscussionDocument = {
+    checkedAt: note.checkedAt, selectionPolicy: ['Methodological questions only.', '仅收录方法问题。'], notes: [note],
+    posts: ['a', 'b'].map((suffix) => ({
+      postId: `post-${suffix}`, originalUrl: `https://www.lesswrong.com/posts/fixture-${suffix}`, title: `Fixture ${suffix}`,
+      readingListIds: [`material-${suffix}`], checkedAt: note.checkedAt, status: 'ok', reportedCommentCount: suffix === 'a' ? 1 : 0,
+      retrievedCommentCount: suffix === 'a' ? 1 : 0, countsReconciled: true, selectedNoteIds: suffix === 'a' ? [note.id] : [], selectionStatus: 'inspected',
+    })),
+  };
+  assert.deepEqual(discussionForItem(fixture, 'material-a').notes.map((entry) => entry.id), ['comment-a']);
+  const noSelection = discussionForItem(fixture, 'material-b');
+  assert.equal(noSelection.status, 'checked_snapshot');
+  assert.equal(noSelection.posts.length, 1);
+  assert.deepEqual(noSelection.notes, [], 'An editorial cross-link does not move a comment below another source.');
+  const unknown = discussionForItem(fixture, 'unknown-material');
+  assert.equal(unknown.status, 'not_checked');
+  assert.deepEqual(unknown.posts, []);
+  assert.deepEqual(unknown.notes, []);
+  assert.equal(note.baseScore, null, 'Missing source scores remain unknown rather than zero.');
+});
+
+test('curated updates lead to their own research nodes and recorded branches without keyword inference', () => {
+  for (const id of ['jlens-foreword', 'jlens-j-cot', 'jlens-safety-accessibility', 'jlens-topic-detector']) {
+    const entry = document.researchCatalog.find((entry) => entry.itemId === id)!;
+    const context = researchContext({ id, title: 'No research keywords in this title', originalTitle: null, summary: null });
+    assert.ok(context);
+    assert.deepEqual(context.nodeIds, [entry.coreSourceId ?? entry.id]);
+    assert.deepEqual(context.branchIds, entry.branchIds);
+    assert.equal(context.association, 'editorial');
+    assert.equal(context.verificationStatus, 'candidate_not_scientifically_reviewed');
+  }
+});
+
+test('discussion reply context and source identity survive publication without invented validation', () => {
+  const note = document.discussions.notes.find((entry) => entry.author.displayName === 'Neel Nanda')!;
+  assert.ok(note);
+  const parent = document.discussions.notes.find((entry) => entry.commentId === note.parentCommentId)!;
+  assert.ok(parent);
+  assert.equal(parent.postId, note.postId);
+  assert.equal(new URL(note.originalUrl).searchParams.get('commentId'), note.commentId);
+  assert.equal(new URL(note.parentCommentUrl!).searchParams.get('commentId'), parent.commentId);
+  assert.equal(note.humanReviewedAt, null);
+  assert.equal(note.scientificStatus, 'discussion_not_independent_validation');
+  const sourceIds = new Set([...document.sources.map((entry) => entry.id), ...document.researchCatalog.map((entry) => entry.id)]);
+  for (const relation of document.catalogRelations) {
+    assert.ok(sourceIds.has(relation.source), relation.source);
+    assert.ok(sourceIds.has(relation.target), relation.target);
+    assert.ok(['citation', 'method'].includes(relation.kind));
+    assert.match(relation.proof_url, /^https:\/\//);
+    assert.equal(relation.humanReviewedAt, null);
+  }
+  for (const entry of document.researchCatalog) assert.equal(new Set(entry.relatedPublications.map((report) => report.url)).size, entry.relatedPublications.length);
+});
+
+test('discussion HTTP is a public per-material snapshot with ETags and strict identifiers', async () => {
+  const { discussions } = readModulePublication<{ discussions: DiscussionDocument }>('observatory');
+  const itemId = discussions.posts[0].readingListIds[0];
+  const path = `/api/v1/research-discussions?item=${encodeURIComponent(itemId)}`;
+  const response = await app.inject(path);
+  assert.equal(response.statusCode, 200, response.body);
+  assert.deepEqual(response.json(), { ...discussionForItem(discussions, itemId), checkedAt: discussions.checkedAt });
+  assert.match(response.headers['cache-control']!, /public, max-age=60/);
+  const cached = await app.inject({ url: path, headers: { 'if-none-match': response.headers.etag! } });
+  assert.equal(cached.statusCode, 304);
+  assert.equal(cached.body, '');
+  const unknown = await app.inject('/api/v1/research-discussions?item=unknown-material');
+  assert.equal(unknown.statusCode, 200);
+  assert.equal(unknown.json().status, 'not_checked');
+  assert.deepEqual(unknown.json().notes, []);
+  for (const query of ['', '?item=', '?item=%20', '?item=%00', `?item=${'a'.repeat(201)}`, '?item=a&item=b', '?item=a&draft=private']) {
+    const rejected = await app.inject(`/api/v1/research-discussions${query}`);
+    assert.equal(rejected.statusCode, 400, query);
+    assert.equal(rejected.json().code, 'invalid_request');
+  }
 });
 
 test('anonymous document HTTP supports ETags, rejects unknown input and cannot publish browser drafts', async () => {

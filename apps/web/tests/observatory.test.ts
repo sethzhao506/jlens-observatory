@@ -6,6 +6,7 @@ import * as cheerio from 'cheerio';
 import { chromium, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { SITE } from '@aihot/site';
 import type { Proposal } from '../../../modules/observatory/proposals.ts';
+import { discussionForItem } from '../../../modules/observatory/research.ts';
 import { FIXTURE_AT, fakeApi, feedItem, itemDetail, startWebServer, visit, type WebServer } from './web-server.ts';
 
 const document: typeof import('../../../modules/observatory/data/observatory.json') = JSON.parse(readFileSync(new URL('../../../modules/observatory/data/observatory.json', import.meta.url), 'utf8'));
@@ -21,6 +22,7 @@ const xDiscussion = feedItem({
   x: { authorName: 'Fixture Researcher', handle: 'fixture_jlens', avatarUrl: null, media: [], quoted: null },
 });
 const discussionDetail = itemDetail({ ...discussion, x: null, links: { original: discussionUrl }, readingMode: 'summary-only', body: null });
+const unrelatedDetail = itemDetail({ id: 'fixture-unrelated', title: 'Unrelated local fixture', summary: 'An unrelated item does not load research discussion.', body: null });
 const catalog: { items: Array<{ id: string; title: string; url: string; publishedAt: string | null; selected?: boolean }> } = JSON.parse(readFileSync(new URL('../../../industry/reading-list.json', import.meta.url), 'utf8'));
 const catalogDetails = new Map(catalog.items.map((item) => [item.id, itemDetail({
   id: item.id, title: item.title, links: { original: item.url }, publishedAt: item.publishedAt,
@@ -28,7 +30,9 @@ const catalogDetails = new Map(catalog.items.map((item) => [item.id, itemDetail(
 })]));
 const api = fakeApi((url) => {
   if (url.pathname === '/api/v1/observatory') return document;
+  if (url.pathname === '/api/v1/research-discussions') return { ...discussionForItem(document.discussions, url.searchParams.get('item') ?? ''), checkedAt: document.discussions.checkedAt };
   if (url.pathname === `/api/site/items/${discussion.id}`) return discussionDetail;
+  if (url.pathname === `/api/site/items/${unrelatedDetail.id}`) return unrelatedDetail;
   if (url.pathname.startsWith('/api/site/items/')) return catalogDetails.get(decodeURIComponent(url.pathname.slice('/api/site/items/'.length)));
   if (url.pathname === '/api/site/timeline') return {
     filters: { channel: 'all', category: null, tag: null },
@@ -72,8 +76,8 @@ async function personalRecords(page: Page): Promise<Proposal[]> {
 
 test('research pages keep the original site navigation and support English or Chinese inside that frame', async () => {
   for (const [suffix, lang, heading, navigation] of [
-    ['', 'en', 'Reading information is one question. Using it is another.', ['Guide', 'Research graph', 'Try', 'Investigate', 'All updates']],
-    ['?lang=zh', 'zh-CN', '读得出，与实际使用，是两个问题。', ['导读', '研究图谱', '小检查', '调查计划', '全部动态']],
+    ['', 'en', 'Follow the research from left to right.', ['Research graph', 'Try', 'Investigate', 'All updates']],
+    ['?lang=zh', 'zh-CN', '从左到右，读懂研究怎样发展。', ['研究图谱', '小检查', '调查计划', '全部动态']],
   ] as const) {
     const response = await fetch(`${web.origin}/understand${suffix}`);
     assert.equal(response.status, 200, web.logs());
@@ -87,9 +91,26 @@ test('research pages keep the original site navigation and support English or Ch
       if (href !== '/all') assert.equal(new URL(href, web.origin).searchParams.get('lang'), lang === 'en' ? 'en' : 'zh');
     }
     const originalNav = $('nav[aria-label="主导航"]');
-    for (const href of ['/', '/all', '/topics', '/understand', '/explore']) assert.ok(originalNav.find(`a[href="${href}"]`).length, href);
-    for (const href of ['/hot', '/daily', '/starred']) assert.equal(originalNav.find(`a[href="${href}"]`).length, 0, href);
-    assert.ok($('main a[href="https://github.com/VykosMolt/JLens-Ouro"]').length);
+    for (const href of ['/', '/all', '/topics', '/explore']) assert.ok(originalNav.find(`a[href="${href}"]`).length, href);
+    for (const href of ['/hot', '/daily', '/starred', '/understand']) assert.equal(originalNav.find(`a[href="${href}"]`).length, 0, href);
+    assert.ok($(`main a[href="${document.sources[0].url}"]`).length);
+  }
+});
+
+test('catalog core identifiers open the existing graph node and its source inspector', async () => {
+  for (const entry of document.researchCatalog.filter((entry) => entry.coreSourceId)) {
+    const source = document.sources.find((source) => source.id === entry.coreSourceId)!;
+    const response = await fetch(`${web.origin}/explore?node=${encodeURIComponent(entry.id)}`);
+    assert.equal(response.status, 200);
+    const $ = cheerio.load(await response.text());
+    assert.equal($('#obs-graph-inspector h2').first().text(), source.label[0], entry.id);
+    const canonicalResponse = await fetch(`${web.origin}/explore?node=${encodeURIComponent(source.id)}`);
+    assert.equal(canonicalResponse.status, 200);
+    const canonical = cheerio.load(await canonicalResponse.text());
+    const nodes = $('button').filter((_, button) => $(button).find('strong').text() === source.label[0]).length;
+    const canonicalNodes = canonical('button').filter((_, button) => canonical(button).find('strong').text() === source.label[0]).length;
+    assert.ok(canonicalNodes > 0);
+    assert.equal(nodes, canonicalNodes, 'An alternate catalog ID does not duplicate the core node.');
   }
 });
 
@@ -117,7 +138,10 @@ test('the original news and discussion feeds remain primary and Research Updates
   assert.equal(response.status, 200, web.logs());
   assert.ok($('main').text().includes(updateTitle));
   assert.ok($('main').text().includes('LessWrong'));
-  assert.ok($('nav[aria-label="主导航"] a[href="/understand"]').length);
+  assert.ok($('nav[aria-label="主导航"] a[href="/explore"]').length);
+  const legacy = await fetch(`${web.origin}/understand?lang=zh&node=ouro`, { redirect: 'manual' });
+  assert.equal(legacy.status, 302);
+  assert.equal(legacy.headers.get('location'), '/explore?lang=zh&node=ouro');
 });
 
 test('updates expose the original platform and source link while bookmark controls stay hidden', { timeout: 30000 }, async () => {
@@ -154,16 +178,21 @@ test('updates expose the original platform and source link while bookmark contro
 });
 
 test('readers can inspect bounded search coverage, original citation references, companions, and undated materials', { timeout: 45000 }, async () => {
+  assert.equal(document.searchCoverage.catalogEntries, 36);
+  assert.equal(document.searchCoverage.datedEntries, 34);
+  assert.equal(document.searchCoverage.newDirectCitingRecords.length, 18);
+  assert.equal(document.searchCoverage.newDirectCitingWorks, 6);
+  assert.equal(document.searchCoverage.undated.length, 2);
   const context = await localContext({ viewport: { width: 1440, height: 1000 } });
   try {
     const page = await context.newPage();
     const coverage = page.locator('#search-coverage');
-    await visit(page, `${web.origin}/understand`);
+    await visit(page, `${web.origin}/explore`);
     await expect(coverage.locator(':scope > summary')).toHaveText('Search coverage and remaining gaps');
     await expect(coverage.getByText('Unknown; no exhaustive citation search completed', { exact: true })).toBeHidden();
     await visit(page, `${web.origin}/all`);
     const entry = page.getByRole('link', { name: '查看检索范围', exact: true });
-    await expect(entry).toHaveAttribute('href', '/understand#search-coverage');
+    await expect(entry).toHaveAttribute('href', '/explore#search-coverage');
     await entry.click();
     await expect(coverage.getByText('Catalogued materials', { exact: true })).toBeVisible();
     await expect(coverage.getByText(`${document.searchCoverage.catalogEntries}, including ${document.searchCoverage.datedEntries} with known original dates`, { exact: true })).toBeVisible();
@@ -184,7 +213,7 @@ test('readers can inspect bounded search coverage, original citation references,
     const companion = document.searchCoverage.companionPosts[0];
     await expect(companions.locator(`a[href="${companion.url}"]`)).toHaveCount(1);
     const uSpace = document.searchCoverage.newDirectCitingRecords.find((record) => record.url.includes('2610.09087'))!;
-    const correspondingPaper = companions.getByRole('link', { name: 'Corresponding paper', exact: true });
+    const correspondingPaper = companions.locator(`a[href="/items/${uSpace.id}"]`);
     await expect(correspondingPaper).toHaveAttribute('href', `/items/${uSpace.id}`);
     await correspondingPaper.click();
     await expect(page.getByRole('heading', { name: catalog.items.find((item) => item.id === uSpace.id)!.title, exact: true })).toBeVisible();
@@ -217,9 +246,8 @@ test('a reader follows evidence into a small check, saves real proposal revision
     await expect(page.getByRole('link', { name: updateTitle, exact: true })).toBeVisible();
     await expect(page.getByRole('navigation', { name: '主导航' }).getByRole('link', { name: '精选', exact: true })).toBeVisible();
     await page.screenshot({ path: '.data/observatory-home.png', fullPage: true });
-    await page.getByRole('navigation', { name: '主导航' }).getByRole('link', { name: '研究导读', exact: true }).click();
-    await expect(page.getByRole('heading', { name: 'Reading information is one question. Using it is another.' })).toBeVisible();
-    await page.getByRole('link', { name: 'Continue through the graph' }).click();
+    await page.getByRole('navigation', { name: '主导航' }).getByRole('link', { name: '研究图谱', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Follow the research from left to right.' })).toBeVisible();
     await expect(page.getByRole('button', { name: /^SOURCE / })).toHaveCount(document.sources.length);
     await expect(page.getByText('Read from left to right →', { exact: true })).toBeVisible();
     await expect(page.getByText('Columns and pale dashed paths show an editorial reading order, not chronology or established research ancestry.', { exact: true })).toBeVisible();
@@ -236,7 +264,6 @@ test('a reader follows evidence into a small check, saves real proposal revision
     await expect.poll(() => new URL(page.url()).searchParams.get('edge')).toBe(document.relations.find((entry) => entry.source === 'rlens' && entry.kind === 'method')!.id);
     await page.getByRole('button', { name: 'Hide source relationships', exact: true }).click();
     await connections.locator('summary').click();
-    await expect(connections.getByRole('button')).toHaveCount(document.relations.length);
     await connections.getByRole('button', { name: /Direct citation.*R-lens → J-lens/ }).click();
     await expect(page.getByText('RELATION INSPECTOR', { exact: true })).toBeVisible();
     await expect(page.getByText('Directed · source to target', { exact: true })).toBeVisible();
@@ -327,6 +354,7 @@ test('a phone can use the readable graph path and switch language without losing
     for (const label of ['热点', '日报', '收藏']) await expect(bottom.getByRole('link', { name: label, exact: true })).toHaveCount(0);
     await expect(bottom.getByRole('link', { name: /^我的/ })).toHaveAttribute('href', '/more');
     await expect(bottom.getByRole('link', { name: '研究', exact: true })).toHaveCount(1);
+    await expect(bottom.getByRole('link', { name: '研究', exact: true })).toHaveAttribute('href', '/explore');
     await expect(page.getByRole('button', { name: 'Selected', exact: true })).toBeVisible();
     await expect(page.getByText('READING PATH / SELECT TO INSPECT', { exact: true })).toBeVisible();
     const path = page.getByRole('button', { name: /^0\d / });
@@ -352,5 +380,122 @@ test('a phone can use the readable graph path and switch language without losing
     await bottom.getByRole('link', { name: /^我的/ }).click();
     await expect(page.getByRole('heading', { name: '工具与入口', exact: true })).toBeVisible();
     for (const href of ['/starred', '/hot', '/daily']) await expect(page.locator(`main a[href="${href}"]`)).toHaveCount(0);
+  } finally { await context.close(); }
+});
+
+test('the paper index expands gradually, filters Foreword, and connects its source and citation to the graph', { timeout: 45000 }, async () => {
+  const entry = document.researchCatalog.find((material) => material.id === 'jlens-foreword')!;
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const context = await localContext({ viewport });
+    try {
+      const page = await context.newPage();
+      await visit(page, `${web.origin}/explore`);
+      const library = page.getByRole('region', { name: 'Papers, blogs, and discussion index', exact: true });
+      await expect(library.getByRole('article')).toHaveCount(6);
+      await library.getByRole('button', { name: /^Show more/ }).click();
+      await expect(library.getByRole('article')).toHaveCount(18);
+      await library.getByRole('combobox', { name: /^Material type/ }).selectOption('paper');
+      await library.getByLabel('Search title, author, or viewpoint', { exact: true }).fill('Foreword');
+      const row = library.getByRole('article');
+      await expect(row).toHaveCount(1);
+      await expect(row.getByRole('button', { name: entry.title[0], exact: true })).toBeVisible();
+      await expect(row.getByRole('link', { name: 'Source ↗', exact: true })).toHaveAttribute('href', entry.sourceUrl);
+      await row.getByRole('button', { name: 'Show in graph', exact: true }).click();
+      await expect.poll(() => new URL(page.url()).searchParams.get('node')).toBe(entry.id);
+      const inspector = page.locator('#obs-graph-inspector');
+      await expect(inspector.getByRole('heading', { name: 'Foreword', exact: true })).toBeVisible();
+      const sourceLink = inspector.getByRole('link', { name: 'Source ↗', exact: true });
+      await expect(sourceLink).toHaveAttribute('href', entry.sourceUrl);
+      await expect(inspector.getByText(entry.limitation[0], { exact: true })).toBeVisible();
+      const connections = page.locator('details').filter({ has: page.locator('summary').filter({ hasText: /^All relationships and sources/ }) });
+      await connections.locator(':scope > summary').click();
+      await connections.getByRole('button', { name: /Direct citation.*Foreword → J-lens/ }).click();
+      await expect(inspector.getByText('RELATION INSPECTOR', { exact: true })).toBeVisible();
+      await expect(inspector.getByRole('link', { name: /^Open the relationship basis/ })).toHaveAttribute('href', entry.directCitation!.proofUrl);
+      await expect(inspector.getByText(entry.directCitation!.locator, { exact: true })).toBeVisible();
+      assert.ok(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= window.innerWidth + 1), `graph and catalog overflow at ${viewport.width}px`);
+      await page.screenshot({ path: `.data/observatory-catalog-${viewport.width}.png`, fullPage: true });
+    } finally { await context.close(); }
+  }
+});
+
+test('discussion viewpoints keep Neel Nanda’s source, reply context, votes, and unreviewed graph relations', { timeout: 45000 }, async () => {
+  const note = document.discussions.notes.find((entry) => entry.id === 'lw-comment-s5dLELdceTzSPPD37')!;
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const context = await localContext({ viewport });
+    try {
+      const page = await context.newPage();
+      await visit(page, `${web.origin}/items/jlens-bench`);
+      const section = page.getByRole('region', { name: /^(Discussion viewpoints|讨论观点)$/ });
+      await expect(section.getByText(note.summary[0], { exact: true })).toBeVisible();
+      const row = section.getByRole('listitem').filter({ has: page.getByText(note.summary[0], { exact: true }) });
+      await expect(row.getByText('Neel Nanda', { exact: true })).toBeVisible();
+      await expect(row.getByText(`Source score: ${note.baseScore}`, { exact: true })).toBeVisible();
+      await expect(row.getByText(`Vote count: ${note.voteCount}`, { exact: true })).toBeVisible();
+      await expect(row.locator(`time[datetime="${note.postedAt}"]`)).toHaveCount(1);
+      await expect(row.locator(`time[datetime="${note.checkedAt}"]`)).toHaveCount(1);
+      await expect(row.getByText('Human review pending', { exact: true })).toBeVisible();
+      await expect(row.getByRole('link', { name: /^Original comment/ })).toHaveAttribute('href', note.originalUrl);
+      await expect(row.getByRole('link', { name: /^Source post/ })).toHaveAttribute('href', note.postUrl);
+      await expect(row.getByRole('link', { name: /^Parent comment/ })).toHaveAttribute('href', note.parentCommentUrl!);
+      await section.getByRole('button', { name: '讨论切换为中文', exact: true }).click();
+      await expect(section).toHaveAttribute('lang', 'zh-CN');
+      await expect(section.getByText(note.summary[1], { exact: true })).toBeVisible();
+      await section.getByRole('button', { name: 'Switch discussion to English', exact: true }).click();
+      await row.getByRole('link', { name: /^View in graph/ }).click();
+      await expect.poll(() => new URL(page.url()).searchParams.get('node')).toBe(note.id);
+      const inspector = page.locator('#obs-graph-inspector');
+      await expect(inspector.getByText('DISCUSSION VIEWPOINT · NOT A RESULT', { exact: true })).toBeVisible();
+      await expect(inspector.getByText(note.summary[0], { exact: true })).toBeVisible();
+      await expect(inspector.getByRole('link', { name: /^Original comment/ })).toHaveAttribute('href', note.originalUrl);
+      const connections = page.locator('details').filter({ has: page.locator('summary').filter({ hasText: /^All relationships and sources/ }) });
+      await connections.locator(':scope > summary').click();
+      const commentRelation = connections.getByRole('button', { name: /Comments on.*Neel Nanda → WorkspaceBench/ });
+      await expect(commentRelation).toBeVisible();
+      const replyRelation = connections.getByRole('button', { name: /Replies to.*Neel Nanda → Burny/ });
+      await expect(replyRelation).toBeVisible();
+      await replyRelation.click();
+      await expect(inspector.getByText(`parentCommentId=${note.parentCommentId}`, { exact: true })).toBeVisible();
+      await expect(inspector.getByRole('link', { name: /^Open the relationship basis/ })).toHaveAttribute('href', note.originalUrl);
+      assert.ok(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= window.innerWidth + 1), `discussion graph overflow at ${viewport.width}px`);
+      await page.screenshot({ path: `.data/observatory-discussion-${viewport.width}.png`, fullPage: true });
+    } finally { await context.close(); }
+  }
+});
+
+test('discussion loading failures remain visible and retry without inventing an empty source discussion', { timeout: 30000 }, async () => {
+  const context = await localContext({ viewport: { width: 1440, height: 1000 } });
+  try {
+    let attempts = 0;
+    let release!: () => void;
+    const held = new Promise<void>((resolve) => { release = resolve; });
+    await context.route('**/api/v1/research-discussions?item=jlens-bench', async (route) => {
+      attempts += 1;
+      if (attempts === 1) {
+        await held;
+        return route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ code: 'temporarily_unavailable' }) });
+      }
+      return route.fallback();
+    });
+    const page = await context.newPage();
+    await visit(page, `${web.origin}/items/jlens-bench`);
+    const section = page.getByRole('region', { name: 'Discussion viewpoints', exact: true });
+    await expect(section.getByRole('status')).toHaveText('Loading discussion records…');
+    release();
+    await expect(section.getByRole('alert')).toContainText('Discussion records could not load. This does not mean the source has no comments.');
+    await expect(section.getByText(/no viewpoints were selected/)).toHaveCount(0);
+    await section.getByRole('button', { name: 'Retry', exact: true }).click();
+    await expect(section.getByText('Neel Nanda', { exact: true })).toBeVisible();
+    assert.equal(attempts, 2);
+    const checkedEmpty = document.discussions.posts.find((post) => !post.selectedNoteIds.length && post.status === 'ok' && post.readingListIds.some((id) => catalogDetails.has(id)))!;
+    await visit(page, `${web.origin}/items/${checkedEmpty.readingListIds.find((id) => catalogDetails.has(id))}`);
+    await expect(page.getByText('Source discussion was checked; no viewpoints were selected in this pass. Other useful viewpoints may remain.', { exact: true })).toBeVisible();
+    await visit(page, `${web.origin}/items/${discussion.id}`);
+    await expect(page.getByText('Discussion on this material has not been checked. Absence of a record does not establish absence of comments or disagreement.', { exact: true })).toBeVisible();
+    let unrelatedRequests = 0;
+    page.on('request', (request) => { if (new URL(request.url()).pathname === '/api/v1/research-discussions') unrelatedRequests += 1; });
+    await visit(page, `${web.origin}/items/${unrelatedDetail.id}`);
+    await expect(page.getByRole('region', { name: 'Discussion viewpoints', exact: true })).toHaveCount(0);
+    assert.equal(unrelatedRequests, 0);
   } finally { await context.close(); }
 });

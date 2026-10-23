@@ -9,7 +9,7 @@
 
 <p align="center">
   <b>Understand J-lens, trace the evidence, and make a small, testable next step.</b><br>
-  Research discussions, a bilingual guide, an evolution graph, and an auditable path from reported results to an unrun proposal.
+  A research graph and ongoing discussions connect source briefs, evidence, small checks and unrun proposals.
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@ J-lens Research Observatory is a research entry point built on the [AIHOT open-s
 
 The first topic is **J-lens**, with **J-lens on looped language models / Ouro** as the first complete reader path:
 
-**Understand the question → follow the research graph → find the original evidence → inspect reported curves → perform a deterministic check → compare explanations → save and export a proposal.**
+**Enter the research graph → read a node brief and original source → inspect technical discussion and evidence → examine reported curves → perform a deterministic check → compare explanations → save and export a proposal.**
 
 LessWrong discussions, papers, code and directly relevant research updates belong in the feed. General AI news, funding, personnel changes and marketing are outside the current scope. The goal is to track what changes our research judgment, rather than rank what is popular.
 
@@ -46,7 +46,7 @@ This repository connects those steps while keeping sources and scientific status
 
 - **Research pages default to English and support Chinese** through `?lang=zh`. The inherited navigation, administration and some utility pages remain Chinese; this is not yet a fully translated application.
 - **Reading and deterministic checks need no account or model key.** The current preview uses a curated reading catalog. Continuous collection, paid model calls, pushes and IndexNow are not enabled in the recorded local setup. A fresh `.env` generated from the upstream example needs its safety valves turned off before starting services; see [Run it](#run-it).
-- **Coverage is incomplete.** The current catalog has 30 materials, including 28 dated feed entries and two undated materials with detail links. The seven core graph sources are a reading route, not a complete citation graph. These counts are not the worldwide J-lens citation count.
+- **Coverage is incomplete.** The current catalog has 36 materials, including 34 dated feed entries and two legacy undated entries with detail links. The graph starts with seven core sources and can expand the catalog and 12 technical viewpoints. This is not a complete citation graph or the worldwide J-lens citation count.
 - **Source-reported results are not independent replications.** Try recomputes published aggregates; the Observatory has not run the Ouro model experiment. Personal proposals remain unreviewed and `not_run`.
 - **The original framework remains the foundation.** Trending, report and bookmark entries are hidden from reader navigation; historical records and inherited machine interfaces are retained. Automatic report composition is disabled in `site/site.ts`.
 - **Deployment is separate from this local preview.** No public Observatory domain is documented here. Confirm administrator authentication, terms, privacy and source permissions before public deployment. Do not use the upstream AIHOT name or logo for the Observatory.
@@ -55,15 +55,17 @@ This repository connects those steps while keeping sources and scientific status
 
 The existing API, database and worker pipeline supply source management, deduplication, review tools and publication. The web frontend reads the API over HTTP; database credentials and paid services stay in the backend. Public outputs share the publication reading layer.
 
-The research module adds a versioned document of sources, claims, evidence, typed relationships and proposal templates. The guide, graph, Try and Investigate read that document through the same publication boundary. Loading an ordinary page does not call a model.
+The research module adds a versioned document of sources, claims, evidence, typed relationships and proposal templates. The graph, Try and Investigate read that document through the same publication boundary. Bilingual briefs and direct source links now sit in the graph. Historical long-guide assets are retained without a separate reader entry; `/understand` returns 302 to `/explore`, retaining query parameters and allowing the browser to inherit the original fragment. Loading an ordinary page does not call a model.
 
 ### Sources and research updates
 
 The intended workflow is **collect → deduplicate → candidate update → verify → update evidence and graph → publish**. The current preview imports a curated reading catalog manually. It does not claim this continuous workflow is already operating unattended.
 
-Source cards identify platforms such as LessWrong, X, GitHub and arXiv, while retaining the specific source and original link. There are 30 manual source-attribution records, two paused LessWrong RSS drafts and two paused X searches. Attribution records are not active subscriptions. X collection remains deferred and requires a separately configured provider before activation.
+Source cards identify platforms such as LessWrong, X, GitHub and arXiv, while retaining the specific source and original link. There are 40 source records: 36 manual source attributions, two paused LessWrong RSS drafts and two paused X searches. Attribution records are not active subscriptions. X collection remains deferred and requires a separately configured provider before activation.
 
-The inherited selection rubric, dimensions and thresholds remain available. Popularity or repeated coverage is not treated as independent scientific support. The same work's paper, code and author explanation can be linked without counting as separate replications. Search coverage, checked references and failures are documented in [the citation-search audit](docs/citation-search-2026-10-22.md).
+The inherited selection rubric, dimensions and thresholds remain available. Popularity or repeated coverage is not treated as independent scientific support. The same work's paper, code and author explanation can be linked without counting as separate replications. Search coverage, checked references and failures are documented in [the citation-search audit](docs/citation-search-2026-10-22.md) and [the graph literature audit](docs/graph-literature-audit-2026-10-22.md). Six arXiv papers were added in this pass. The 28 source-located relations yield 27 additional graph relations after deduplication; citation or method adoption is not automatically evidence support.
+
+A targeted public LessWrong inspection retrieved 30 comments across 16 posts and selected 12 substantive viewpoints, including a real scope clarification by Neel Nanda. Material details and graph nodes share note IDs, attribution, dates, original links, reply context and source scores. They distinguish not checked, checked without selected viewpoints and read failures. Scores and author prominence do not establish scientific validity. See [the discussion audit](docs/graph-discussion-audit-2026-10-22.md).
 
 ### Evidence and scientific status
 
@@ -76,8 +78,7 @@ For Ouro, Try recomputes **34.17 − 22.60 = 11.57 percentage points** from roun
 | | |
 |---|---|
 | **Research discussions** | The existing selected feed, all-updates feed, topics and search, focused on J-lens, readout methods and looped LM/Ouro. Summaries retain original links and platform attribution. |
-| **Understand** | A short English/Chinese guide, with a longer explanation and technical detail available on demand. |
-| **Research Evolution Graph** | Seven initial core sources, five research branches, inspectable typed relations and source locators, evidence and hypothesis views, plus a phone reading-list view. Readout methods and model architecture receive the initial focus. |
+| **Research Evolution Graph** | The main research entry: seven default core sources, an expandable 36-material catalog and 12 technical viewpoints. Bilingual node briefs link directly to sources. Typed relationships, evidence/hypothesis views and a phone reading list preserve scope and provenance. |
 | **Evidence** | A bounded Ouro claim, pinned source and curve snapshots, explicit estimator families, limitations and review status. Judgment-change and real-run histories are not fabricated where none exists. |
 | **Try** | Deterministic arithmetic and comparability checks on reported aggregates. No model execution or invented uncertainty estimates. |
 | **Investigate** | Editable competing explanations, predictions, controls, budget and outcome criteria. Browser-local versions preserve actual parents and export JSON/Markdown; saved proposals link back to the hypothesis view. |
@@ -93,8 +94,7 @@ After starting the site locally:
 | Page | What to inspect |
 |---|---|
 | [Selected](http://localhost:3000/) / [All updates](http://localhost:3000/all) | Research materials, discussions and visible source platforms. |
-| [Understand](http://localhost:3000/understand) | Start with the short guide; expand coverage notes or technical detail. |
-| [Explore](http://localhost:3000/explore) | Follow the left-to-right reading route, inspect a relationship and open its original evidence. |
+| [Research graph](http://localhost:3000/explore) | Read briefs from left to right, open original sources, and expand the catalog, discussion viewpoints, relationships and coverage notes. |
 | [Try](http://localhost:3000/try) | Recompute the reported change and inspect what the result cannot establish. |
 | [Investigate](http://localhost:3000/investigate) | Compare explanations, save a real revision and download a proposal. |
 | [Topics](http://localhost:3000/topics) / [Admin](http://localhost:3000/admin) | Existing research categories and backend tools. |
@@ -134,9 +134,17 @@ node --env-file=.env scripts/seed.ts
 node --env-file=.env scripts/import-reading-list.ts
 ```
 
+Manually inspect comments on an already-listed LessWrong post with the module command below. It writes ignored local candidates only, without publishing, model calls or scheduled jobs:
+
+```bash
+node modules/observatory/scripts/collect-discussions.ts --item jlens-bench --out .data/discussion-candidates.json
+```
+
+Repeated collection updates stable post/comment IDs and preserves the actual previous snapshot.
+
 For native setup, domains, HTTPS, backups and production process settings, see [Deployment](docs/deploy.md). Its inherited instructions describe optional paid collection/model workflows too; retain the disabled valves for this curated preview. The existing portable Windows runtime under `.data/` is local and ignored, and is not included in a clone.
 
-Once running, `/agent` documents the inherited MCP, RSS and API access; `/api/v1/agent` is the machine-readable entry and `/openapi-v1.json` describes the public API. `/api/v1/observatory` serves the research document. `/api/v1/research-updates` returns relevant candidates from a seven-day publication window, not a complete archive or confirmed scientific relationships.
+Once running, `/agent` documents the inherited MCP, RSS and API access; `/api/v1/agent` is the machine-readable entry and `/openapi-v1.json` describes the public API. `/api/v1/observatory` serves the research document; `/api/v1/research-discussions?item=ID` serves the corresponding material’s inspected discussion snapshot and selected viewpoints. `/api/v1/research-updates` returns relevant candidates from a seven-day publication window, not a complete archive or confirmed scientific relationships.
 
 ### Checks
 
@@ -151,7 +159,7 @@ node --test apps/web/tests/*.test.ts
 node scripts/smoke.ts --base http://localhost:3000
 ```
 
-The environment-variable syntax above is for a POSIX shell; use the corresponding `$env:DATABASE_URL` assignment in PowerShell. Recorded type, build, targeted backend/module and browser checks passed for the current reader path. The full native Windows suites have not all passed; known limits and the local development-login smoke exception are recorded in [Local preview](docs/local-preview.md). These records are not a fresh test run on your machine, and prototype test reports do not validate the current site.
+The environment-variable syntax above is for a POSIX shell; use the corresponding `$env:DATABASE_URL` assignment in PowerShell. This update passed typecheck, the web build, 21 module checks and ten research browser checks. Additional live-site checks confirmed 36 materials, 34 dated updates, 12 viewpoints, original links, the legacy guide redirect and mobile reading. The full native Windows suites have not all passed; known limits and the local development-login smoke exception are recorded in [Local preview](docs/local-preview.md). These records are not a fresh test run on your machine, and prototype test reports do not validate the current site.
 
 ## Make it your field
 
@@ -166,8 +174,9 @@ This repository is already configured for J-lens. Extend that scope in the exist
 | `industry/prompts/`, `industry/selection.ts` | Research relevance, writing instructions and inherited selection thresholds. Calibrate numerical changes using labelled examples. |
 | `site/models.ts` | Backend models for individual pipeline steps, if paid processing is enabled later. |
 | `site/brand/`, `site/pages/`, `site/public/`, `site/changelog.json` | Branding, terms/privacy templates, root files and actual project updates. |
-| `modules/observatory/` | Bilingual guide, graph, evidence, deterministic checks, personal proposal versions and exports. |
-| `modules/observatory/data/observatory.json`, `updates.json` | Research records and bilingual editorial update text. |
+| `modules/observatory/` | Graph with bilingual briefs, discussion snapshots, evidence, deterministic checks, personal proposal versions and exports; retained historical guide assets. |
+| `modules/observatory/data/observatory.json`, `updates.json` | Research catalog, typed relations, discussion viewpoints and bilingual editorial update text. |
+| `modules/observatory/scripts/collect-discussions.ts` | Manual comment-candidate inspection for listed LessWrong posts; no automatic publication. |
 | `.agents/skills/` | Pinned, project-local K-Dense development skills, their licenses and installation provenance. |
 
 Preserve the distinction between finding a real source, verifying that it supports a claim, and independently reproducing a result. Keep human-reviewed public content separate from personal browser drafts. Before enabling a collector, manually preview a small source batch, inspect relevance and noise, and repeat the fetch to verify deduplication.
@@ -182,6 +191,8 @@ Most inherited framework documents are in Chinese. The research-path and provena
 | [Observatory reader path](docs/observatory-reader-path.md) | Routes, reused architecture, graph, deterministic checks, proposal versions and source scope. |
 | [Research provenance](docs/research-provenance.md) | Reused materials, pinned originals, numeric snapshots, scientific boundaries and missing history. |
 | [Citation-search audit](docs/citation-search-2026-10-22.md) | Checked citing papers, author reports, deduplication and incomplete search coverage. |
+| [Graph literature audit](docs/graph-literature-audit-2026-10-22.md) | Current arXiv retrieval, source locations, versions, index failures and identity conflicts. |
+| [Discussion audit](docs/graph-discussion-audit-2026-10-22.md) | Actual LessWrong comments, reply context, viewpoint selection and manual collection contract. |
 | [Project research skills](docs/research-skills.md) | Four K-Dense skills, pinned upstream version, dependencies and validation. |
 | [AISafetyHot reference audit](docs/aisafetyhot-reference-plan.md) | What the public Hub does and does not contain; source-attribution reference and licensing boundaries. |
 | [Customization](docs/customize.md) | Framework site configuration, categories, sources, prompts, thresholds, models and branding. |
@@ -201,7 +212,7 @@ Read [AGENTS.md](AGENTS.md) before changing the project. [CONTRIBUTING.md](CONTR
 
 ## Next steps
 
-The next small milestone is to review the first claim and graph relationships, manually test a small LessWrong source batch twice, and record candidate updates without promoting them automatically. X remains deferred until a suitable provider is configured.
+The next small milestone is human review of graph briefs, source-located relations and technical viewpoints, including linked experimental artifacts. Extend local candidate snapshots through the manual collector; repeated WorkspaceBench collection already passed the deduplication check. Automatic tracking remains disabled, and X stays deferred until a suitable provider is configured.
 
 A real model check comes later: pin the source commit, checkpoint, data, environment, expected outputs, tolerances and budget, then attempt the reference result before testing a new hypothesis. Source-reported numbers and saved proposals do not replace that work.
 
@@ -209,4 +220,4 @@ A real model check comes later: pin the source commit, checkpoint, data, environ
 
 The code retains the upstream [MIT License](LICENSE) and copyright attribution to **数字生命卡兹克 (Khazix)**. The AIHOT name and logo are not covered by that license; this site uses its own identity. Fonts and other notices are listed in [NOTICE](NOTICE).
 
-The project-local K-Dense skills retain their upstream MIT licenses and provenance. Original papers, posts, code repositories and other linked research material remain subject to their own owners' terms; the code license does not grant blanket republication rights to that content. This site presents summaries and original links by default.
+The project-local K-Dense skills retain their upstream MIT licenses and provenance. Development-tool acknowledgement: Timothy Kassis et al. (2026), [Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents](https://arxiv.org/abs/2609.00065), checked against its current source record. This is methodological/software attribution, not J-lens evidence. Original papers, posts, code repositories and other linked research material remain subject to their own owners' terms; the code license does not grant blanket republication rights to that content. This site presents summaries and original links by default.

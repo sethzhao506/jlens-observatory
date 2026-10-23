@@ -27,11 +27,13 @@ import { takePreview } from "../features/item/preview";
 import { IconArrowLeft, IconCopy, IconDownload, IconExternal, IconImage, IconMenu, IconMore, IconShare } from "../components/icons";
 import { BarButton, PhoneBar } from "../components/shell/PhoneBar";
 import { isPhone, type Screen } from "../components/shell/screens";
+import { loadParts } from "../site-modules";
 
 export const handle: Screen = { home: "featured", toolbar: true };
 export { pageHeaders as headers } from "../lib/api.server";
 
 const PosterSheet = lazy(() => import("../features/item/PosterSheet"));
+const PARTS = await loadParts((m) => m.itemPage);
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   const item = await loadOr404<SiteItemDetail>(`/api/site/items/${encodeURIComponent(params.id)}`, { signal: request.signal });
@@ -571,6 +573,8 @@ function ItemView({ item }: { item: SiteItemDetail }) {
               ))}
             </div>
           )}
+
+          {PARTS.map(({ name, part: Part }) => <Part key={name} item={item} />)}
 
           {item.story && <StoryFollowups story={item.story} currentId={item.id} />}
 

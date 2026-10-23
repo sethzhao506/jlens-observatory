@@ -1,4 +1,5 @@
 import translations from "./data/updates.json" with { type: "json" };
+import document from "./data/observatory.json" with { type: "json" };
 
 /** Editorial associations help navigation; they never assert support, citation or replication. */
 export interface UpdateMaterial {
@@ -27,8 +28,9 @@ const known: Record<string, { nodes: string[]; branches: string[] }> = {
 
 export function researchContext(item: UpdateMaterial) {
   const text = [item.title, item.originalTitle, item.summary].filter(Boolean).join(" ");
-  if (!known[item.id] && !scope.test(text)) return null;
-  const association = known[item.id] ?? (/ouro|huginn|looped|recurrent|循环语言模型/i.test(text)
+  const curated = document.researchCatalog.find((entry) => entry.itemId === item.id);
+  if (!known[item.id] && !curated && !scope.test(text)) return null;
+  const association = curated ? { nodes: [curated.coreSourceId ?? curated.id], branches: curated.branchIds } : known[item.id] ?? (/ouro|huginn|looped|recurrent|循环语言模型/i.test(text)
     ? { nodes: ["looped", "ouro"], branches: ["architecture"] }
     : { nodes: ["jlens"], branches: ["methods"] });
   const localized = (translations as Record<string, { title: string[]; summary: string[] }>)[item.id];

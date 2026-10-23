@@ -11,7 +11,7 @@ const base = (at > 0 ? process.argv[at + 1] : process.env.SITE_URL) ?? "http://l
 const modulePages = MODULES.flatMap((m) => (m.pages ?? []).flatMap((p) => "layout" in p ? p.pages : [p]))
   .filter((p) => !p.path.includes(":"))
   .map((p) => `/${p.path}`);
-const PAGES = [...new Set(["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/starred", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy", "/more", "/admin/login", ...modulePages])];
+const PAGES = [...new Set(["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/starred", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy", "/more", "/admin/login", "/understand?lang=zh&node=ouro", ...modulePages])];
 const MACHINE: Array<[path: string, type: RegExp]> = [
   ["/api/health", /json/],
   ["/api/v1/items", /json/],

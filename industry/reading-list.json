@@ -733,6 +733,184 @@
         "proofUrl": "https://www.lesswrong.com/posts/vHxGD5HKsFuBStirq/anthropic-s-j-lens-a-research-engineer-s-analysis",
         "inspectedOn": "2026-10-22"
       }
+    },
+    {
+      "id": "jlens-foreword",
+      "sourceId": "jlens-foreword-source",
+      "url": "https://arxiv.org/abs/2610.28187",
+      "originalTitle": "Foreword: Pre-Generation Prediction and Characterisation of LLM Test Failures using the Jacobian Lens",
+      "title": "Foreword：把生成前 J-lens 特征与带标签的成功、失败样本结合，对测试输入排序。",
+      "author": "Somin Kim, Robert Feldt, Shin Yoo",
+      "publishedAt": "2026-10-20T13:23:28Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "监控应用"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.28187",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "把生成前 J-lens 特征与带标签的成功、失败样本结合，对测试输入排序。\n\n局限：结果覆盖十项任务和三个 8–9B 模型；相关性、标签参考集覆盖及部署偏移仍是局限。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§2.2; §3.1–3.4; §4.2; §7; Reference [16]。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§2.2; §3.1–3.4; §4.2; §7; Reference [16]; bib.bib15",
+        "proofUrl": "https://arxiv.org/html/2610.28187v1#bib.bib15",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-entity-lens",
+      "sourceId": "jlens-entity-lens-source",
+      "url": "https://arxiv.org/abs/2610.27241",
+      "originalTitle": "Predicting Linear Relational Decodability Without the Relation",
+      "title": "Entity Lens：在 OLMo3-7B 上，不依赖具体关系的 entity lens 能预测线性关系可读性的差异。",
+      "author": "Jonas Rohweder, Adrian Mülthaler, Faridoun Mehri, Sebastian Gerstner, Hinrich Schütze",
+      "publishedAt": "2026-10-19T20:07:21Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "读出方法",
+        "J-space"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.27241",
+      "version": "v2",
+      "versionUpdatedAt": "2026-10-21T04:56:47Z",
+      "summary": "在 OLMo3-7B 上，不依赖具体关系的 entity lens 能预测线性关系可读性的差异。\n\n局限：研究覆盖 28 种关系，报告的是相关性，而不是关系读出使用该机制的证明。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§4; §6; §9; References。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§4; §6; §9; References; bib.bib6",
+        "proofUrl": "https://arxiv.org/html/2610.27241v2#bib.bib6",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-activation-control",
+      "sourceId": "jlens-activation-control-source",
+      "url": "https://arxiv.org/abs/2608.21664",
+      "originalTitle": "Measuring Activation Control in Large Language Models",
+      "title": "Activation Control：测试按指令抑制激活能否使 J-lens 等内部监控器漏检指定概念。",
+      "author": "Marek Mateusz Kowalski, Joshua Fonseca Rivera, Uzay Macar, David Demitri Africa",
+      "publishedAt": "2026-08-21T22:12:14Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "监控应用",
+        "因果证据"
+      ],
+      "selected": false,
+      "workId": "arxiv:2608.21664",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "测试按指令抑制激活能否使 J-lens 等内部监控器漏检指定概念。\n\n局限：监控实验使用受控抄写指令；没有证明真实部署中会自发规避监控。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§2; §3.3; §4.1; Appendix B; References。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§2; §3.3; §4.1; Appendix B; References; bib.bib9",
+        "proofUrl": "https://arxiv.org/html/2608.21664v1#bib.bib9",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-j-cot",
+      "sourceId": "jlens-j-cot-source",
+      "url": "https://arxiv.org/abs/2607.21981",
+      "originalTitle": "J-CoT: Chain-of-Thought in J-Space",
+      "title": "J-CoT：用词表索引的 J-thought 系数作为递归推理计算之间的接口。",
+      "author": "Junde Wu, Jiayuan Zhu, Fengling Liu, Minhao Hu, Jiazhen Pan",
+      "publishedAt": "2026-07-24T04:57:30Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "读出方法",
+        "循环语言模型"
+      ],
+      "selected": false,
+      "workId": "arxiv:2607.21981",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "用词表索引的 J-thought 系数作为递归推理计算之间的接口。\n\n局限：基准提升针对所提出的递归框架；不是 Ouro 复现，也不证明每个标签的语义忠实性。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§2; §3; §4; References。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§2; §3; §4; References; bib.bib29",
+        "proofUrl": "https://arxiv.org/html/2607.21981v1#bib.bib29",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-silent-alarm",
+      "sourceId": "jlens-silent-alarm-source",
+      "url": "https://arxiv.org/abs/2607.12792",
+      "originalTitle": "Silent Alarm: A J-Space Protocol for Comparing Danger Recognition Across Models and Quantization Levels",
+      "title": "Silent Alarm：定义 JADR，在模型与量化设置之间比较回答前的危险相关读出。",
+      "author": "Roman Prosvirnin, Victor Minchenkov, Alexey Soldatov, Vladimir Bashun, Anton Sergeev",
+      "publishedAt": "2026-07-14T14:08:18Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "监控应用"
+      ],
+      "selected": false,
+      "workId": "arxiv:2607.12792",
+      "version": "v2",
+      "versionUpdatedAt": "2026-08-24T08:26:26Z",
+      "summary": "定义 JADR，在模型与量化设置之间比较回答前的危险相关读出。\n\n局限：冻结词典和 SafetyAUC 测量操作性识别，不是对未来有害行为的校准预测。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§2.1; §4.1–4.7; §7.2; §8; References。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§2.1; §4.1–4.7; §7.2; §8; References; bib.bib1",
+        "proofUrl": "https://arxiv.org/html/2607.12792v2#bib.bib1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-safety-accessibility",
+      "sourceId": "jlens-safety-accessibility-source",
+      "url": "https://arxiv.org/abs/2610.04316",
+      "originalTitle": "From Latent Space to Jacobian Space: Measuring, Evading, and Training Against Safety-Content Accessibility",
+      "title": "Safety Accessibility：把 JADR 扩展到成对 checkpoint、安全传递测量及针对监控器的攻击实验。",
+      "author": "Mohammad Mosafer",
+      "publishedAt": "2026-10-03T06:05:40Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "监控应用",
+        "J-space"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.04316",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "把 JADR 扩展到成对 checkpoint、安全传递测量及针对监控器的攻击实验。\n\n局限：词典与 JADR 不同，绝对 AUC 依赖测量工具；干预实验主要仍处于 135M–1.5B 规模。 作者报告，本站未复现。",
+      "reason": "原文和参考文献核对；§3–4; §4.7; §5; References。定向整理的相关研究，未自动精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "§3–4; §4.7; §5; References; bib.bib16",
+        "proofUrl": "https://arxiv.org/html/2610.04316v1#bib.bib16",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
     }
   ]
 }

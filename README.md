@@ -9,7 +9,7 @@
 
 <p align="center">
   <b>看懂 J-lens，沿证据理解研究发展，找到值得检验的下一步。</b><br>
-  研究讨论、双语导读、演化图，以及从来源报告到小检查和实验提案的一条阅读路径。
+  以研究图谱和持续讨论为入口，连接来源简要、证据、小检查与实验提案。
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@ J-lens Research Observatory 是基于 [AIHOT 开源框架](https://github.com/KK
 
 首个主题是 **J-lens**，首个完整案例是 **J-lens on looped language models / Ouro**。希望帮助读者沿着这条路径进入研究：
 
-**看懂问题 → 沿演化图理解发展 → 找到主张的原文依据 → 查看来源曲线 → 完成小检查 → 比较竞争解释 → 保存并导出调查提案。**
+**进入研究图谱 → 阅读节点简要与原始来源 → 查看技术讨论和主张依据 → 查看来源曲线 → 完成小检查 → 比较竞争解释 → 保存并导出调查提案。**
 
 内容以 LessWrong 讨论、论文、代码和直接相关进展为主；X 讨论是计划追踪的来源，目前暂缓接入。通用 AI 新闻、融资、人事和营销不进入默认研究范围。关注的是新证据改变了什么判断，而不只是热度。
 
@@ -46,7 +46,7 @@ J-lens Research Observatory 是基于 [AIHOT 开源框架](https://github.com/KK
 
 - **研究页面默认英文，可以切换中文。** 使用 `?lang=zh` 切换；原框架导航、后台及部分工具页仍为中文，尚未完成全站翻译。
 - **阅读和确定性检查无需登录或模型密钥。** 当前使用人工整理的阅读目录，本地采集、模型调用、推送和 IndexNow 均关闭。从上游模板生成新 `.env` 后，需要先关闭相关开关，见[跑起来](#跑起来)。
-- **收录数量不等于全部引用。** 当前目录有 30 条资料，28 条有日期、进入动态流，另两条未知日期资料保留详情入口。演化图的 7 个核心来源是阅读路径，不是完整 citation graph；J-lens 全球引用总数仍未知。
+- **收录数量不等于全部引用。** 当前目录有 36 条资料，34 条有日期、进入动态流，另两条旧目录无日期资料保留详情入口。演化图默认从 7 个核心来源开始，可按需展开目录和 12 条技术观点；这不是完整 citation graph，J-lens 全球引用总数仍未知。
 - **作者报告、算术重算和独立复现是不同状态。** Try 重算来源汇总值，没有运行 Ouro 模型实验。个人提案尚未公共审核，也尚未运行。
 - **延续原框架，精简读者入口。** 热点榜、日报和收藏入口已隐藏，保留历史记录和上游机器接口。`site/site.ts` 已停用自动日报、周报和月报排程。
 - **当前为本地开发版本。** 尚未配置正式 Observatory 域名。正式部署前需要确认管理员认证、条款、隐私与来源权限；本站使用自己的名称，不使用上游 AIHOT 品牌。
@@ -55,15 +55,17 @@ J-lens Research Observatory 是基于 [AIHOT 开源框架](https://github.com/KK
 
 沿用原有 API、数据库和 worker，复用信源管理、去重、内容诊断、人工修改和统一发布读取层。前端只通过 HTTP 读取后端，数据库与模型密钥保留在后端；普通页面浏览不触发模型调用。
 
-研究模块保存来源、主张、证据、带类型的关系及提案模板。导读、图谱、Try 和 Investigate 共享这些标识，通过原有发布边界读取研究文档，没有另建一套网站框架。
+研究模块保存来源、主张、证据、带类型的关系及提案模板。图谱、Try 和 Investigate 共享这些标识，通过原有发布边界读取研究文档，没有另建一套网站框架。简要说明直接放在图谱内并链接原文；旧双语长导读资产保留，但不再单独展示。旧 `/understand` 地址以 302 转向 `/explore`，保留查询参数，浏览器继承原有片段定位。
 
 ### 来源与研究动态
 
 目标流程是 **采集 → 去重 → 候选更新 → 核查 → 更新证据与图谱 → 发布**。当前通过脚本导入人工整理的阅读目录，尚未开启无人值守的持续检索与发布。
 
-动态卡片和详情标出 LessWrong、X、GitHub、arXiv 等平台，并保留具体来源名及原文链接。来源配置共 34 条：30 个手动归属记录、2 个暂停的 LessWrong RSS 草案、2 个暂停的 X 搜索。来源归属不是订阅，配置存在也不代表已经采集成功。
+动态卡片和详情标出 LessWrong、X、GitHub、arXiv 等平台，并保留具体来源名及原文链接。来源配置共 40 条：36 个手动归属记录、2 个暂停的 LessWrong RSS 草案、2 个暂停的 X 搜索。来源归属不是订阅，配置存在也不代表已经采集成功。
 
-沿用现有评分结构、维度和门槛；热度不能替代证据质量。同一研究的论文、代码和作者解读可以相互关联，不算多次独立验证。已核对的引用及访问失败记录见[引用补查](docs/citation-search-2026-10-22.md)。
+沿用现有评分结构、维度和门槛；热度不能替代证据质量。同一研究的论文、代码和作者解读可以相互关联，不算多次独立验证。已核对的引用及访问失败记录见[引用补查](docs/citation-search-2026-10-22.md)和[图谱文献核查](docs/graph-literature-audit-2026-10-22.md)。本轮新增 6 篇 arXiv 论文，并将 28 条原文定位关系去重为 27 条额外图谱关系；引用与方法采用不自动变成证据支持。
+
+公开 LessWrong 评论已定向检查 16 帖、30 条评论，选录 12 条有具体研究内容的短转述，包括 Neel Nanda 的真实范围说明。动态详情与图谱复用相同观点标识，保留作者、时间、原评论、回复对象和来源分数，区分尚未检查、已检查但未选录与读取失败。分数和作者身份不是科学有效性的判据；详见[讨论核查](docs/graph-discussion-audit-2026-10-22.md)。
 
 ### 证据与研究状态
 
@@ -76,8 +78,7 @@ Ouro 的 Try 示例从来源四舍五入后的均值重算 **34.17 − 22.60 = 1
 | | |
 |---|---|
 | **研究动态与讨论** | 沿用精选、全部动态、主题与搜索，聚焦 J-lens、读出方法和 looped LM/Ouro，保留来源平台与原文链接。 |
-| **Understand 导读** | 英中短导读，完整长文、公式和技术细节按需展开。 |
-| **Research Evolution Graph** | 从 7 个核心来源开始，保留五个研究分支；点击查看关系类型、方向、原文定位与核查状态，并可切换证据和假设视图。手机提供列表阅读。 |
+| **Research Evolution Graph** | 主要研究入口；默认 7 个核心来源，按需展开 36 条目录与 12 条讨论观点。节点内有双语简要和原文链接，关系保留类型、方向、定位和核查状态；支持证据、假设视图及手机列表。 |
 | **Evidence 证据** | 一个有范围的 Ouro 主张、固定版本来源、报告曲线、估计器说明、局限和审核状态；不补造判断历史或运行结果。 |
 | **Try 小检查** | 重算来源汇总值，检查结果是否可比；明确结果能说明什么、不能说明什么。 |
 | **Investigate 调查计划** | 人工修改竞争解释、预测、控制、预算及结果判据；浏览器保存真实版本和父子关系，导出 JSON/Markdown，并关联回假设图。 |
@@ -93,8 +94,7 @@ Ouro 的 Try 示例从来源四舍五入后的均值重算 **34.17 − 22.60 = 1
 | 页面 | 可以检查什么 |
 |---|---|
 | [精选](http://localhost:3000/) / [全部动态](http://localhost:3000/all) | 论文、研究讨论、来源平台与原文链接。 |
-| [Understand](http://localhost:3000/understand) | 从短导读进入，按需展开技术细节和检索覆盖说明。 |
-| [Explore](http://localhost:3000/explore) | 从左到右阅读，点击节点和连线，追到主张与原文。 |
+| [研究图谱](http://localhost:3000/explore) | 从左到右阅读节点简要，直接打开来源，按需展开目录、讨论观点、关系与检索覆盖。 |
 | [Try](http://localhost:3000/try) | 重算报告值，并理解算术检查的边界。 |
 | [Investigate](http://localhost:3000/investigate) | 比较竞争解释，保存一次真实修订，下载提案。 |
 | [主题](http://localhost:3000/topics) / [后台](http://localhost:3000/admin) | 查看研究分类与既有管理工具。 |
@@ -134,9 +134,17 @@ node --env-file=.env scripts/seed.ts
 node --env-file=.env scripts/import-reading-list.ts
 ```
 
+已收录 LessWrong 帖的评论可通过独立手动命令检查，结果仅写入忽略的 `.data/` 候选文件，不发布、不调用模型、不创建定时任务：
+
+```bash
+node modules/observatory/scripts/collect-discussions.ts --item jlens-bench --out .data/discussion-candidates.json
+```
+
+重复采集按帖子和评论 ID 更新，并保留上一次真实快照。
+
 原生运行、域名、HTTPS、备份与进程配置见[部署](docs/deploy.md)。部署文档也介绍上游可选的付费采集与模型流程；人工目录预览仍保持开关关闭。当前开发机器的便携 Node/PostgreSQL 位于忽略的 `.data/`，不随仓库提交。
 
-运行后，`/agent` 提供 MCP、RSS 和 API 接入说明，`/api/v1/agent` 是机器入口，`/openapi-v1.json` 是公开接口描述。`/api/v1/observatory` 提供研究文档；`/api/v1/research-updates` 仅返回七天发布窗口内的相关候选，不是完整档案，也不自动确认科学关系。
+运行后，`/agent` 提供 MCP、RSS 和 API 接入说明，`/api/v1/agent` 是机器入口，`/openapi-v1.json` 是公开接口描述。`/api/v1/observatory` 提供研究文档，`/api/v1/research-discussions?item=ID` 提供相应材料的讨论检查快照与观点；`/api/v1/research-updates` 仅返回七天发布窗口内的相关候选，不是完整档案，也不自动确认科学关系。
 
 ### 运行检查
 
@@ -151,7 +159,7 @@ node --test apps/web/tests/*.test.ts
 node scripts/smoke.ts --base http://localhost:3000
 ```
 
-上面环境变量写法用于 POSIX shell；PowerShell 使用 `$env:DATABASE_URL`。当前阅读路径已有类型、构建、定向后端/模块与浏览器验证记录；原生 Windows 完整测试尚未全部通过，工具条件与本地免登录 smoke 例外见[本地预览](docs/local-preview.md)。旧原型报告不能代替当前网站验收。
+上面环境变量写法用于 POSIX shell；PowerShell 使用 `$env:DATABASE_URL`。本轮类型检查、前端构建、21 项模块检查和 10 项研究浏览器验收通过；真实本地站点另验证目录 36、动态 34、评论 12，以及来源链接、旧导读跳转和手机阅读。原生 Windows 完整测试尚未全部通过，工具条件与本地免登录 smoke 例外见[本地预览](docs/local-preview.md)。旧原型报告不能代替当前网站验收。
 
 ## 项目配置
 
@@ -166,8 +174,9 @@ node scripts/smoke.ts --base http://localhost:3000
 | `industry/prompts/`、`industry/selection.ts` | 研究相关性、写作要求及原有门槛；数字调整需要人工标注样本校准。 |
 | `site/models.ts` | 将来启用付费处理时，各步骤使用的后端模型。 |
 | `site/brand/`、`site/pages/`、`site/public/`、`site/changelog.json` | 品牌、条款与隐私模板、根文件及真实更新记录。 |
-| `modules/observatory/` | 双语导读、图谱、证据、小检查、个人提案修订与导出。 |
-| `modules/observatory/data/observatory.json`、`updates.json` | 研究记录和双语动态文案。 |
+| `modules/observatory/` | 含双语简要的图谱、讨论快照、证据、小检查、个人提案修订与导出；保留旧导读资产。 |
+| `modules/observatory/data/observatory.json`、`updates.json` | 研究目录、带类型的关系、讨论观点和双语动态文案。 |
+| `modules/observatory/scripts/collect-discussions.ts` | 已收录 LessWrong 帖的手动评论候选检查，不自动发布。 |
 | `.agents/skills/` | 固定版本的 K-Dense 开发技能、许可证与安装来源。 |
 
 来源存在、来源支持某条主张、主张得到独立验证要分别判断。个人浏览器草稿与公共审核内容分开。启用新采集源前，先试抓少量资料，检查相关性与噪声，并重复抓取验证去重。
@@ -180,6 +189,8 @@ node scripts/smoke.ts --base http://localhost:3000
 | [读者路径与实现](docs/observatory-reader-path.md) | 路由、架构复用、图谱、确定性检查、提案修订与采集范围。 |
 | [研究来源与迁移](docs/research-provenance.md) | 复用资料、固定版本原文、数值快照、科学边界与缺失历史。 |
 | [引用补查](docs/citation-search-2026-10-22.md) | 已核查的引用论文、作者讨论、去重和检索缺口。 |
+| [图谱文献核查](docs/graph-literature-audit-2026-10-22.md) | 本轮 arXiv 检索、原文定位、版本、索引失败与身份冲突。 |
+| [讨论核查](docs/graph-discussion-audit-2026-10-22.md) | 真实 LessWrong 评论、回复语境、选录依据与手动采集契约。 |
 | [项目研究 skills](docs/research-skills.md) | 四个 K-Dense 技能、来源版本、依赖与安装验证。 |
 | [AISafetyHot 参考审查](docs/aisafetyhot-reference-plan.md) | 公开 Hub 实际提供什么、来源标注参考与许可边界。 |
 | [定制](docs/customize.md) | 原框架站点配置、分类、信源、提示词、门槛、模型和品牌。 |
@@ -199,7 +210,7 @@ node scripts/smoke.ts --base http://localhost:3000
 
 ## 下一步
 
-先审核首条主张与图谱关系，人工试抓少量 LessWrong 来源并重复检查去重，再记录候选更新。X 等合适的服务配置后接入。
+先人工审核图谱简要、原文关系与技术观点，核对评论所链实验材料，再用手动采集命令扩大已收录帖的候选快照。WorkspaceBench 已重复采集验证去重，尚未开启自动追踪。X 等合适的服务配置后接入。
 
 真实模型检查另行推进：固定源码 commit、checkpoint、数据、环境、预期结果、容限和预算，先尝试复现一个参考结果，再检验新假设。来源报告的数字和保存的提案不能替代实际运行。
 
@@ -207,4 +218,4 @@ node scripts/smoke.ts --base http://localhost:3000
 
 代码保留上游 [MIT 许可证](LICENSE) 与**数字生命卡兹克（Khazix）**的版权署名。AIHOT 名称和 Logo 不在该许可范围内；本站使用自己的身份。字体等说明见 [NOTICE](NOTICE)。
 
-项目内 K-Dense skills 保留其上游 MIT 许可与来源记录。论文、帖子、外部代码和其他研究材料仍适用各自权利人的条款；代码许可证不代表可以任意转载这些内容。网站默认展示摘要与原文链接。
+项目内 K-Dense skills 保留其上游 MIT 许可与来源记录。开发工具致谢：Timothy Kassis 等（2026），[Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents](https://arxiv.org/abs/2609.00065)。本轮已核对该软件参考；它是检索与审查的方法工具，不是 J-lens 证据。论文、帖子、外部代码和其他研究材料仍适用各自权利人的条款；代码许可证不代表可以任意转载这些内容。网站默认展示摘要与原文链接。

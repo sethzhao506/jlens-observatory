@@ -298,5 +298,65 @@
       "The author measures or estimates Jacobian fitting and inference costs and explores GPT-2-medium regularization. Quality results use one small model, one metric and sometimes 32 samples. Low overhead for a restricted dictionary does not establish full-vocabulary scalability, frontier-model costs or monitoring effectiveness. Author analysis, not independently reproduced here.",
       "作者测量或估算 Jacobian 拟合与推理读出的成本，并在 GPT-2-medium 的单一忠实性指标上探索正则化。局限：质量分析只有小模型、单指标且部分样本仅 32 条；少量监测词的低开销不能直接推广到全词表、大模型或有效的安全监控。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
     ]
+  },
+  "jlens-foreword": {
+    "title": [
+      "Foreword: Pre-Generation Prediction and Characterisation of LLM Test Failures using the Jacobian Lens",
+      "Foreword：把生成前 J-lens 特征与带标签的成功、失败样本结合，对测试输入排序。"
+    ],
+    "summary": [
+      "Uses pre-generation J-lens features with labeled passing and failing examples to prioritize test inputs. Results cover ten tasks and three 8–9B models; correlations, labeled-reference coverage and deployment shift remain limitations. Author report; not independently reproduced here.",
+      "把生成前 J-lens 特征与带标签的成功、失败样本结合，对测试输入排序。\n\n局限：结果覆盖十项任务和三个 8–9B 模型；相关性、标签参考集覆盖及部署偏移仍是局限。 作者报告，本站未复现。"
+    ]
+  },
+  "jlens-entity-lens": {
+    "title": [
+      "Predicting Linear Relational Decodability Without the Relation",
+      "Entity Lens：在 OLMo3-7B 上，不依赖具体关系的 entity lens 能预测线性关系可读性的差异。"
+    ],
+    "summary": [
+      "A relation-agnostic entity lens predicts variation in linear relational decodability on OLMo3-7B. The study spans 28 relations and reports correlation, not proof of the mechanism used by relational readouts. Author report; not independently reproduced here.",
+      "在 OLMo3-7B 上，不依赖具体关系的 entity lens 能预测线性关系可读性的差异。\n\n局限：研究覆盖 28 种关系，报告的是相关性，而不是关系读出使用该机制的证明。 作者报告，本站未复现。"
+    ]
+  },
+  "jlens-activation-control": {
+    "title": [
+      "Measuring Activation Control in Large Language Models",
+      "Activation Control：测试按指令抑制激活能否使 J-lens 等内部监控器漏检指定概念。"
+    ],
+    "summary": [
+      "Tests whether instructed activation suppression can hide named concepts from J-lens and other internal monitors. The monitor experiment uses controlled transcription instructions; it does not establish spontaneous evasion during real deployment. Author report; not independently reproduced here.",
+      "测试按指令抑制激活能否使 J-lens 等内部监控器漏检指定概念。\n\n局限：监控实验使用受控抄写指令；没有证明真实部署中会自发规避监控。 作者报告，本站未复现。"
+    ]
+  },
+  "jlens-j-cot": {
+    "title": [
+      "J-CoT: Chain-of-Thought in J-Space",
+      "J-CoT：用词表索引的 J-thought 系数作为递归推理计算之间的接口。"
+    ],
+    "summary": [
+      "Uses vocabulary-indexed J-thought coefficients as an interface between recurrent reasoning computations. Benchmark gains concern the proposed recurrent framework; they are not a replication of Ouro or evidence about every label’s semantic fidelity. Author report; not independently reproduced here.",
+      "用词表索引的 J-thought 系数作为递归推理计算之间的接口。\n\n局限：基准提升针对所提出的递归框架；不是 Ouro 复现，也不证明每个标签的语义忠实性。 作者报告，本站未复现。"
+    ]
+  },
+  "jlens-silent-alarm": {
+    "title": [
+      "Silent Alarm: A J-Space Protocol for Comparing Danger Recognition Across Models and Quantization Levels",
+      "Silent Alarm：定义 JADR，在模型与量化设置之间比较回答前的危险相关读出。"
+    ],
+    "summary": [
+      "Defines JADR to compare pre-response danger-related readouts across models and quantization regimes. Its frozen lexicon and SafetyAUC operationalize recognition, not a calibrated prediction of future harmful behavior. Author report; not independently reproduced here.",
+      "定义 JADR，在模型与量化设置之间比较回答前的危险相关读出。\n\n局限：冻结词典和 SafetyAUC 测量操作性识别，不是对未来有害行为的校准预测。 作者报告，本站未复现。"
+    ]
+  },
+  "jlens-safety-accessibility": {
+    "title": [
+      "From Latent Space to Jacobian Space: Measuring, Evading, and Training Against Safety-Content Accessibility",
+      "Safety Accessibility：把 JADR 扩展到成对 checkpoint、安全传递测量及针对监控器的攻击实验。"
+    ],
+    "summary": [
+      "Extends JADR with paired checkpoints, safety-transport measurements and monitor-aware attack experiments. The lexicon differs from JADR and absolute AUCs are instrument-dependent; interventions remain primarily at 135M–1.5B scale. Author report; not independently reproduced here.",
+      "把 JADR 扩展到成对 checkpoint、安全传递测量及针对监控器的攻击实验。\n\n局限：词典与 JADR 不同，绝对 AUC 依赖测量工具；干预实验主要仍处于 135M–1.5B 规模。 作者报告，本站未复现。"
+    ]
   }
 }

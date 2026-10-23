@@ -506,6 +506,90 @@
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-foreword-source",
+      "name": "Foreword · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-entity-lens-source",
+      "name": "Entity Lens · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-activation-control-source",
+      "name": "Activation Control · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-j-cot-source",
+      "name": "J-CoT · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-silent-alarm-source",
+      "name": "Silent Alarm · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-safety-accessibility-source",
+      "name": "Safety Accessibility · arXiv",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
     }
   ]
 }

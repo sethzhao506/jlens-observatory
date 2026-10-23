@@ -11,6 +11,8 @@ export interface SearchCoverage {
   newDirectCitingWorks: number;
   newDiscussions: number;
   totalCitations: number | null;
+  curatedViewpoints?: number;
+  discussionPostsChecked?: number;
   rootWork: { title: string; url: string; arxivId: string };
   methods: Array<{ provider: CoverageText; query: CoverageText; status: CoverageText; note: CoverageText }>;
   limits: CoverageText;
@@ -23,7 +25,7 @@ const coverageText = (value: CoverageText, lang: Lang) => Array.isArray(value) ?
 export function FeedCoverage() {
   const { pathname } = useLocation();
   if (pathname !== "/all") return null;
-  return <p className="mb-3 mt-4 text-[12px] leading-relaxed text-ink-4 lg:mt-0">当前为整理中的相关资料索引，非完整引用清单；含未定日期资料。<Link to="/understand#search-coverage" className="ml-1 text-accent hover:underline">查看检索范围</Link></p>;
+  return <p className="mb-3 mt-4 text-[12px] leading-relaxed text-ink-4 lg:mt-0">当前为整理中的相关资料索引，非完整引用清单；含未定日期资料。<Link to="/explore#search-coverage" className="ml-1 text-accent hover:underline">查看检索范围</Link></p>;
 }
 
 export function CoverageDetails({ coverage, lang }: { coverage: SearchCoverage; lang: Lang }) {
@@ -38,6 +40,7 @@ export function CoverageDetails({ coverage, lang }: { coverage: SearchCoverage; 
     ["本轮新增资料", `${coverage.newEntries} 条`],
     ["本轮新增直接引用论文", `${coverage.newDirectCitingWorks} 篇（不是总引用数）`],
     ["本轮新增讨论", `${coverage.newDiscussions} 条`],
+    ...(coverage.curatedViewpoints === undefined ? [] : [["已整理评论观点", `${coverage.curatedViewpoints} 条，来自 ${coverage.discussionPostsChecked} 个已检查帖子`]]),
     ["全球引用总数", coverage.totalCitations === null ? "未知；尚未完成完整引用检索" : String(coverage.totalCitations)],
   ] : [
     ["Primary sources checked", coverage.inspectedOn],
@@ -45,6 +48,7 @@ export function CoverageDetails({ coverage, lang }: { coverage: SearchCoverage; 
     ["Materials added in this pass", String(coverage.newEntries)],
     ["Directly citing papers added in this pass", `${coverage.newDirectCitingWorks} (not a total citation count)`],
     ["Discussions added in this pass", String(coverage.newDiscussions)],
+    ...(coverage.curatedViewpoints === undefined ? [] : [["Curated comment viewpoints", `${coverage.curatedViewpoints}, from ${coverage.discussionPostsChecked} inspected posts`]]),
     ["Worldwide citation count", coverage.totalCitations === null ? "Unknown; no exhaustive citation search completed" : String(coverage.totalCitations)],
   ];
   return <details id="search-coverage" ref={details} className="obs-details">
