@@ -182,6 +182,8 @@ export interface RequestNotices {
 export interface ServerModule {
   /** Its folder under modules/. */
   name: string;
+  /** Versioned public research records, read by public exits through publication/modules.ts. */
+  publication?: { read: () => unknown };
   /** Sources whose selected articles keep independent cards/seats without changing admission or event identity (publication/rules.ts, scope.ts). */
   independentSelectedSources?: readonly string[];
   /** Its HTTP routes, and hooks on the app such as what to flush when it closes, registered before the engine's v1 fallbacks (apps/api/src/app.ts). */

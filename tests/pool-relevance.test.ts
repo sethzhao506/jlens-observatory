@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
 import { closeDb, sql } from "@aihot/backend/db";
 import { loadPool, publicMatchCondition, searchTerms } from "@aihot/backend/publication/pool";
+import { TOPICS, type Topic } from "@aihot/backend/publication/topics";
 
 const T = `relevance-${tag()}`;
 const now = new Date("2026-01-01T12:00:00Z");
@@ -49,7 +50,14 @@ test("short and multi-term relevance keep cross-field AND and deterministic scor
   assert.deepEqual([beyond.items, beyond.total, beyond.pageCount], [[], 4, 1]);
 });
 
-test("company relevance retains tag-only candidates, boosts and unique totals", async () => {
+test("company relevance retains tag-only candidates, boosts and unique totals", async (t) => {
+  // Company lookup is an engine behavior; this site's production directory uses research topics.
+  const companyTopic: Topic = {
+    slug: `company-${T}`, name: "OpenAI", group: "company", definition: "Company search fixture",
+    entityId: "openai", tags: ["entity:openai"], pattern: "(?<![A-Za-z])openai(?![A-Za-z])", aliases: ["OpenAI"],
+  };
+  TOPICS.push(companyTopic);
+  t.after(() => { TOPICS.splice(TOPICS.indexOf(companyTopic), 1); });
   await add("company-both", "openai", "openai", { title: "OpenAI", tags: ["entity:openai"], age: 100 });
   await add("company-tag", "", "", { tags: ["entity:openai"], noSearchRow: true, age: 1 });
   await add("company-text", "openai qy", "openai", { title: "OpenAI", age: 60 });

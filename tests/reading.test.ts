@@ -10,6 +10,7 @@ import { upsertMaterial } from "@aihot/backend/content/materials";
 import { stopBoss } from "@aihot/backend/jobs/queue";
 import { publishArticle } from "@aihot/backend/publication/publish";
 import { textToHtml } from "@aihot/backend/content/sanitize";
+import { TOPICS, type Topic } from "@aihot/backend/publication/topics";
 import { buildApp } from "../apps/api/src/app.ts";
 
 const T = tag();
@@ -65,7 +66,14 @@ test("a folded card's other sources are those of the fact its representative rep
   assert.equal(card.group?.additionalSourceCount, 1, "the launch's other source, not the leak's");
 });
 
-test("a query that names a company also finds the articles about it", async () => {
+test("a query that names a company also finds the articles about it", async (t) => {
+  // A temporary company topic keeps this search contract independent of the site's directory.
+  const company: Topic = {
+    slug: `company-${T}`, name: "Anthropic / Claude", group: "company", definition: "Company search fixture",
+    entityId: "anthropic", tags: ["entity:anthropic"], pattern: "(?<![A-Za-z])(anthropic|claude)(?![A-Za-z])", aliases: ["Anthropic", "Claude"],
+  };
+  TOPICS.push(company);
+  t.after(() => { TOPICS.splice(TOPICS.indexOf(company), 1); });
   const about = await report(MEDIA, { selected: false, hoursAgo: 3, subjects: ["anthropic"], title: `Sonnet 上线 Conductor ${T}` });
   const mention = await report(MEDIA, { selected: false, hoursAgo: 4, title: `claude 被一篇盘点顺带提到 ${T}` });
   const other = await report(MEDIA, { selected: false, hoursAgo: 5, title: `无关的新闻 ${T}` });

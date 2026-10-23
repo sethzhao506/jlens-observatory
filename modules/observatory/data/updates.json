@@ -1,0 +1,302 @@
+{
+  "jlens-jlens": {
+    "title": [
+      "J-lens: reading model representations through vocabulary-linked directions",
+      "J-lens：用词表方向读出模型的内部表征"
+    ],
+    "summary": [
+      "Vocabulary-linked directions support reporting, modulation and some flexible computations. Scope: Claude models and the original functional test suite. Limit: A measured J-space is an approximation to the proposed workspace. Source report or discussion; not independently replicated by this Observatory.",
+      "与词表关联的方向支持报告、调控及部分灵活计算。\n\n适用范围：Claude 模型及原论文中的功能测试。\n局限：测得的 J-space 是所提出的 workspace 的一种近似。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-rlens": {
+    "title": [
+      "R-lens: relevance propagation improves early-layer readouts",
+      "R-lens：改进早层读出的相关性传播方法"
+    ],
+    "summary": [
+      "LRP backward rules improve early readouts in several tested models. Scope: Dense and MoE models; readout and ablation comparisons. Limit: The propagated quantity is relevance, not the unmodified gradient. Source report or discussion; not independently replicated by this Observatory.",
+      "LRP 反向传播规则改善了若干被测模型的早层读出。\n\n适用范围：Dense 和 MoE 模型；读出及消融比较。\n局限：所传播的是相关性，而非未经修改的梯度。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-jpp": {
+    "title": [
+      "J++ Lens: Jacobian filtering for intermediate-concept extraction",
+      "J++ Lens：Jacobian 筛选与更忠实的中间概念提取"
+    ],
+    "summary": [
+      "Cluster-weighted Jacobians, LRP and vocabulary filtering improve intermediate extraction. Scope: Six open models, 9–284B parameters. Limit: Target-word evaluation is not open-ended audit validation. Source report or discussion; not independently replicated by this Observatory.",
+      "Jacobian 聚类加权、LRP 和词表筛选改善了中间概念提取。\n\n适用范围：六个开放模型，参数量为 9–284B。\n局限：目标词评估尚不能验证开放式审计能力。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-layer_metric": {
+    "title": [
+      "Does a clearer readout faithfully describe the current layer?",
+      "读出更清晰，是否代表更忠实于当前层？"
+    ],
+    "summary": [
+      "Predicting a later layer's answer can improve a metric without faithfully describing the current layer. Scope: Evaluation design objection. Limit: A conceptual challenge, not a measured failure of every R-lens result. Source report or discussion; not independently replicated by this Observatory.",
+      "预测后面层的答案可能提高指标，却未必忠实描述当前层。\n\n适用范围：针对评估设计的质疑。\n局限：这是概念上的挑战，并非对所有 R-lens 结果的实验否定。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-looped": {
+    "title": [
+      "Looped LMs: how recurrence changes J-lens access and interventions",
+      "Looped LM：递归结构如何改变 J-lens 的读出与干预"
+    ],
+    "summary": [
+      "Ouro content is rebuilt each loop; Huginn content persists beyond the lens's effective window. Scope: Ouro-2.6B, Huginn-0125; Qwen3.6-27B baseline. Limit: Content persistence and linear transport range are different measurements. Source report or discussion; not independently replicated by this Observatory.",
+      "Ouro 每轮重建内容；Huginn 的内容持续时间超过 lens 的有效窗口。\n\n适用范围：Ouro-2.6B、Huginn-0125；基线为 Qwen3.6-27B。\n局限：内容持续性与线性传递范围是不同的测量。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-ouro": {
+    "title": [
+      "J-lens on Ouro: own-exit and final-target recovery differ",
+      "J-lens on Ouro：本轮出口与最终终点的读出差异"
+    ],
+    "summary": [
+      "Ouro lenses targeting a pass's own exit recover more early-pass content than final-target lenses. Scope: Frozen base Ouro; late-pass confirmation on 160 questions. Limit: Own-exit analysis is post-confirmation; no tuned-lens baseline or causal-use result. Source report or discussion; not independently replicated by this Observatory.",
+      "以本轮出口为终点的 Ouro lens，比最终出口 lens 恢复更多早期轮次内容。\n\n适用范围：冻结的基础版 Ouro；160 道题上的后期轮次确认分析。\n局限：本轮出口分析是在确认分析后补做的；缺少 tuned-lens 基线及因果使用结果。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-bench": {
+    "title": [
+      "WorkspaceBench: evaluating recovery and readout hallucinations",
+      "WorkspaceBench：评估中间变量恢复与读出幻觉"
+    ],
+    "summary": [
+      "Scores recovery and hallucination across 3,356 questions and 27 families. Scope: Developed around Qwen3.6-27B. Limit: Input inversion shortcuts remain; weaker models require task adaptation. Source report or discussion; not independently replicated by this Observatory.",
+      "用 27 类、3,356 道问题评估恢复能力和幻觉。\n\n适用范围：主要围绕 Qwen3.6-27B 开发。\n局限：仍存在反推输入的捷径；较弱模型需要任务适配。\n\n来源报告／讨论摘要；未由本站独立复现。"
+    ]
+  },
+  "jlens-newline": {
+    "title": [
+      "A Qwen J-lens signal: token position and transfer limits matter",
+      "J-lens 的 Qwen 监测信号：出现的位置与跨模型迁移边界"
+    ],
+    "summary": [
+      "The author reports deception-related J-lens readouts at a post-response newline in Qwen3.6-27B. A trained probe at the same position performs better, and transfer across models is limited. Labels came from one LLM without item-by-item human review. This does not establish a pre-answer signal or a general lie detector. Source report; not independently replicated by this Observatory.",
+      "作者报告 Qwen3.6-27B 回答后的换行符出现欺骗相关读出；同位置训练的探针更强，跨模型迁移有限。局限：这是回答后的信号，标签来自单一 LLM 且未逐条人工核查，不能据此宣称回答前或通用测谎。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-swaps": {
+    "title": [
+      "Intermediate concept or direct answer? Revisiting J-space interventions",
+      "中间概念还是直接答案？一项 J-space 因果干预复查"
+    ],
+    "summary": [
+      "Across two open models and two prompt banks, direct-answer swaps outperform intermediate-concept swaps in three of four settings. Only 27–44 questions remain per setting after filtering. The result limits causal interpretations in those settings, without ruling out all workspace functions. Source report; not independently replicated by this Observatory.",
+      "两个开放模型与两套题库的四种组合中，直接答案替换在三种条件下强于中间概念替换。局限：过滤后各组仅 27–44 题；结果限制这些条件下的因果解释，不能否定全部 workspace 功能。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-mamba": {
+    "title": [
+      "J-lens in Mamba: residual streams and recurrent states offer different readouts",
+      "Mamba 中的 J-lens：残差流与循环状态提供不同读出"
+    ],
+    "summary": [
+      "The authors compare residual-stream and recurrent-state readouts in Mamba-1, Mamba-2 and Mamba-3, reporting complementary information from joint readouts. Better recovery and verbal reporting do not consistently improve relational answers. Persistence, readability and causal use remain separate measurements. Source report; not independently replicated by this Observatory.",
+      "作者在 Mamba-1、Mamba-2、Mamba-3 上比较残差流与循环状态读出，报告联合读出恢复了互补信息。局限：更好的信息恢复与口头报告没有稳定转化为更好的关系推理答案；持久性、可读性和因果用途仍需分开评价。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-review": {
+    "title": [
+      "Neel Nanda reviews J-lens science, methods and auditing uses",
+      "Neel Nanda 评述：J-lens 的科学解释、方法价值与审计用途"
+    ],
+    "summary": [
+      "Neel Nanda separates the paper’s scientific interpretation, readout method, auditing value and global-workspace analogy, and describes replication experience in open models. He still expects false positives and interpretation errors, and some details did not reproduce cleanly. A positive review does not establish reliable general auditing. Commentary and reported experience; not an Observatory replication.",
+      "Neel Nanda 分别评述科学解释、读出方法、实际审计价值与全球工作空间类比，并报告开放模型上的复现经验。局限：作者仍预期误报和解释错误，部分细节没有干净复现；正面评述不能证明可靠通用审计已经成立。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-frequency": {
+    "title": [
+      "J-space frequency and vector norms: controls and interpretation limits",
+      "J-space 的词频与范数：控制实验和解释边界"
+    ],
+    "summary": [
+      "In small trained models and GPT-2, the author finds an association between token frequency and J-lens vector-norm rankings and examines output geometry and controls. Causal reweighting remains inconclusive; the large-model capacity claim is not tested. The original retains an implementation correction. Source report; not independently replicated by this Observatory.",
+      "在小型自训模型与 GPT-2 中，作者观察到词频与 J-lens 向量范数排名相关，并分析输出几何和控制条件。局限：因果重加权试验不确定，不能将相关性写成已证明的因果关系；没有检验原论文的大模型容量主张。原文保留了实现错误的纠正。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-gpt2": {
+    "title": [
+      "GPT-2 J-lens tests: four functional criteria pass, with modulation and structure still distinct",
+      "GPT-2 的 J-lens 检查：四项功能判据通过，定向调控与结构证据仍有区别"
+    ],
+    "summary": [
+      "Using a pre-fit J-lens on GPT-2 small (124M), the authors report passing four of five functional criteria, failing directed modulation, and lacking most structural signatures. Tasks were adapted, scoring retained initially correct trials, and interventions used centered vectors and scaled ablations. Scores across different setups cannot simply be compared. This establishes neither consciousness nor a general rejection of workspace claims. Source report; not independently replicated by this Observatory.",
+      "作者用预拟合 J-lens 检查 GPT-2 small（124M），报告五项功能判据中四项通过、定向调控未通过，多数相关结构特征缺失。局限：任务经过改写，仅计模型原本能答对的样本，干预向量中心化且消融规模调整；不同设置的分数不能直接横比。结果不证明模型有意识，也不否定所有 workspace 主张。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-errors": {
+    "title": [
+      "A planted-error pilot: J-lens adds no value over output surprise in this setting",
+      "一个 planted-error 小实验：J-lens 未超过输出 surprise 基线"
+    ],
+    "summary": [
+      "In 30 planted-error/neutral pairs at one layer of Gemma 4 12B, the author finds no added value from J-lens or R-lens over an output-surprise baseline. This is a small, single-model, single-layer study without released per-pair records. It does not test prediction of the model’s own future mistakes. Source report; not independently replicated by this Observatory.",
+      "在 Gemma 4 12B 单层、30 组人为错误／中性配对中，作者未发现 J-lens 或 R-lens 超过输出 surprise 基线的额外价值。局限：单模型、单层、小样本且未公布逐对记录；这不是预测模型自身未来错误的实验。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-concept-lens": {
+    "title": [
+      "Verbalizing Multi-Token Concepts in LLMs",
+      "Concept Lens：从 J-lens 的 token 线索扩展到完整概念"
+    ],
+    "summary": [
+      "Concept Lens extends token lenses to multi-token concepts using candidate proposal and representation scoring. The current v2 evaluates J-lens and R-lens on five models; it supersedes the older First Token Is a Clue title and smaller experiment. Author report, not independently reproduced by this Observatory.",
+      "Concept Lens 用 J-lens/R-lens 的首 token 线索生成多 token 候选，再用冻结模型导出的概念向量评分。v2 报告五个 8B–70B 模型、2,400 道多跳完形题的 Rank@10 为 36.6%（J-lens）和 54.5%（R-lens），Template Lens 为 21.7%。\n\n局限：候选覆盖限制整体效果；cloze 标注概念不保证实际存在于模型计算；Oracle Lens 直接比较只涵盖一个共享层。v1/v2 数字和作者不能混用。作者报告，本站未复现。"
+    ]
+  },
+  "jlens-short-horizons": {
+    "title": [
+      "Short Horizons and Sparse Concepts: a Mathematical View of the Readout in the J-lens",
+      "J-lens 的短距离与稀疏概念：一阶传递解释及筛选实验"
+    ],
+    "summary": [
+      "A mathematical analysis separates short-horizon output paths from sparse concept positions and tests Jacobian filtering on Qwen3-8B. Author report, not independently reproduced by this Observatory.",
+      "将平均 Jacobian 解释为局部一阶传递算子，分析短距离输出路径和稀疏概念位置，并测试能量筛选。Qwen3-8B 六类任务中，保留部分能量可改善部分指标；去掉对角项也削弱概念读出。\n\n局限：实验集中于一个模型；局部线性化、非高斯输入和曲率带来偏差；删对角项没有干净分离两类信息。作者明确称工作仍在推进；并非全局因果解释已被证明。本站未复现。"
+    ]
+  },
+  "jlens-latents-wires": {
+    "title": [
+      "From Latents to Wires: Surgical Post-Editing on Large Language Models",
+      "L2W：用 J-lens 定位模型编辑目标，同时检查能力代价"
+    ],
+    "summary": [
+      "L2W applies J-lens attribution to component localization before iterative causal removal and restoration for semantic post-edits. Author report, not independently reproduced by this Observatory.",
+      "L2W 用 J-lens 为语义目标定位组件，再通过反例驱动的关闭与恢复步骤做模型编辑。报告的水印、模型元数据和拒答实验中，目标行为可被压低，但与能力纠缠的目标带来明显副作用。\n\n局限：在指定探针上未再出现目标，不等于所有提示下永久删除。§6.4 记录多个编辑的 IFEval 等能力损失，恢复并不总是补回；不能把定位成功写成无副作用。本站未复现。"
+    ]
+  },
+  "jlens-audio-dog": {
+    "title": [
+      "When Does the Concept of \"Dog\" Emerge in an Audio LLM?",
+      "音频模型中的 dog 概念：J-lens 读出与任务相关干预"
+    ],
+    "summary": [
+      "A Qwen2.5-Omni-7B study combines J-lens audio-concept readout with norm-matched directional interventions, finding task-dependent late-layer effects. Author report, not independently reproduced by this Observatory.",
+      "在 Qwen2.5-Omni-7B 中读出狗叫概念，并对 J-lens 的 dog 方向做删除、注入与交换。作者报告生成前 L22/L24 的效应较稳定，部分物种分类答案随干预变化。\n\n局限：单模型、单类声音和选定任务；animal/other 分类没有超过对应控制，其他任务的低基线限制最终答案结论。可读出概念与普遍被模型使用仍需区分。本站未复现。"
+    ]
+  },
+  "jlens-veritas": {
+    "title": [
+      "Verbalising Model's Computation for Chain-of-Thought Faithfulness Detection",
+      "VERITAS：用 J-lens 轨迹检验思维链忠实性"
+    ],
+    "summary": [
+      "VERITAS trains a CoT-faithfulness classifier on J-lens anchor trajectories across layers and reasoning phases, with tests of cross-source transfer. Author report, not independently reproduced by this Observatory.",
+      "VERITAS 用 J-lens 将层与 CoT 进度映到词汇锚点，提取轨迹特征后训练分类器判断忠实性。作者在 BonaFide 与 FaithCoT-Bench 的 Qwen/Llama 设置下报告优于所比基线，并考察跨数据源和模型迁移。\n\n局限：是带标签锚点及分类器的检测流程；依赖内部激活和生成轨迹，不是回答前的无训练通用监测。冻结分类器的迁移下降大于只迁移锚点，校准仍依赖来源。本站未复现。"
+    ]
+  },
+  "jlens-lexical-frames": {
+    "title": [
+      "Lexical Reference Frames: Interpreting LM Residual Streams in Native Semantics",
+      "LexFrame：上下文词汇参考系对固定 J-lens 读出的挑战"
+    ],
+    "summary": [
+      "Lexical reference frames propose context-sensitive residual readouts and compare them against fixed-direction lenses, including J-lens. Author report, not independently reproduced by this Observatory.",
+      "LexFrame 根据上下文及剩余层构造词汇参考系，并以 J-lens 等固定方向读出作为对照。作者在 SmolLM3-3B 和 OLMo3-7B 报告更接近最终输出的读出、归因和干预。\n\n局限：核心实验只涵盖两个模型；与最终输出一致性更高，不直接证明更忠实描述当前层的中间概念。不能将这种基准优势改写为对所有 J-space 主张的否定。本站未复现。"
+    ]
+  },
+  "jlens-u-space": {
+    "title": [
+      "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
+      "U-Space：用 J-lens 追踪不确定性，并控制输出长度混杂"
+    ],
+    "summary": [
+      "U-Space uses J-lens pullbacks of certainty and uncertainty anchors for an interpretable, label-free uncertainty readout with length-controlled evaluation. Author report, not independently reproduced by this Observatory.",
+      "用 J-lens 把不确定与确定词汇锚点拉回残差流，构造 U-Space/U-Lens，跟踪生成中的不确定性并汇总成分数。作者报告在长度控制的推理评测上仍有信息量，且提供跨模型比较。\n\n局限：答案级分数从 end-of-thinking 标记读取，并非所有设置都能回答前预警。词表锚点带语言先验；类别混合比例不是不确定性绝对大小，也不是校准后的事实正确概率。本站未复现。"
+    ]
+  },
+  "jlens-dv-lens": {
+    "title": [
+      "DV-Lens: Revealing the Functional Organization of Language Model Parameters",
+      "DV-Lens：参数级下游词汇响应，与 J-lens 有何不同"
+    ],
+    "summary": [
+      "DV-Lens studies parameter-column vocabulary responses with module-specific Jacobians. It cites J-lens as related interpretability work, rather than simply using its activation-readout pipeline. Author report, not independently reproduced by this Observatory.",
+      "DV-Lens 面向参数列，用模块特定的下游 Jacobian 得到词汇响应，再考察控制干预和权重结构。论文直接引用 J-lens 原文，但研究对象从激活读出转向参数功能，不能仅因同用 Jacobian 就标为已证实的继承。\n\n局限：提示集平均的局部响应不是单个提示下完整贡献；方向正确性不等于 token 排名完全正确。DV-Complexity 与能力的相关性不能证明结构造成能力。本站未复现。"
+    ]
+  },
+  "jlens-audio-workspace": {
+    "title": [
+      "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+      "音频模型的中层工作空间：引用 J-space，但使用 logit lens 代理"
+    ],
+    "summary": [
+      "An audio-workspace study cites J-space and tests middle-layer audio content with a logit-lens proxy, waveform swaps and activation patching. Author report, not independently reproduced by this Observatory.",
+      "在 Qwen3-Omni 音频 token 的中层用 logit lens 读取推断内容，并以换波形、激活 patching 和删层测试音频驱动信号。作者以 J-space 工作空间为研究背景，使用的是 logit lens 代理而非 J-lens。\n\n局限：定性案例和控制不是广泛基准成绩；logit lens 代理不能等同 J-lens，patching 只作较粗定位，不能把结论全归于 J-space。本站未复现。"
+    ]
+  },
+  "jlens-s-space": {
+    "title": [
+      "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
+      "S-Space：空间坐标读出与视角推理之间的差距"
+    ],
+    "summary": [
+      "S-Space investigates a gradient-derived spatial subspace in multimodal models and cites the global-workspace paper as related work. Author report, not independently reproduced by this Observatory.",
+      "S-Space 用空间答案梯度构造三维方向，在 Molmo2-ER 和 Qwen 模型中读取与干预物体坐标，并区分空间知觉和视角计算。原文引用 J-space，但不是 J-lens 复现或同一子空间的证明。\n\n局限：结论限于所测模型、空间任务和方向；空间坐标可读或可干预，不代表模型能正确完成视角转换，也不证明通用全球工作空间。本站未复现。"
+    ]
+  },
+  "jlens-awareness-order": {
+    "title": [
+      "Concept-injection reports depend on whether the answer comes first",
+      "注入概念的自我报告取决于顺序：先回答与先报告的 Qwen 对照"
+    ],
+    "summary": [
+      "On 20 factual questions with Qwen3.6-27B, changing response-field order preserved answer steering but changed exact concept reports from 322 to zero. This is a single-model deterministic protocol. The findings are consistent with self-conditioning, but do not establish it as the primary mechanism or settle general introspective ability. Author report, not independently reproduced here.",
+      "作者在 Qwen3.6-27B 的 20 道事实题中改变注入概念报告与回答的先后顺序：干预仍能改变答案，但精确报告由回答在前时的 322 次降为报告在前时的零次。局限：单模型、确定性解码、有限题目，尚不能证明自回归自条件化就是主要机制，也不能概括所有内省能力。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-topic-detector": {
+    "title": [
+      "A pilot finds topic salience rather than reliable concealment detection",
+      "主题信号不等于测谎：一项定向 J-space 监测试验的反例"
+    ],
+    "summary": [
+      "A DeepSeek-R1-Distill-Qwen-14B pilot finds a targeted readout largely tracks topic salience; pooled-token AUC is 0.55, and fine-tuning does not lower the conflict signal as predicted. One model and seed, with targeted VJPs over selected tokens rather than the full workspace matrix, limit generalization. Author report, not independently reproduced here.",
+      "作者在 DeepSeek-R1-Distill-Qwen-14B 的单种议题设置中发现，定向读出主要区分话题，未可靠区分隐瞒；合并词类后的 AUC 仅为 0.55，微调也未按假设降低冲突信号。局限：单模型、单种子，使用预选词的定向 VJP，不能直接当作完整 J-lens 或一般测谎能力的结论。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-vision": {
+    "title": [
+      "Readable visual evidence can coexist with LLaVA's yes/no hallucinations",
+      "LLaVA 的物体幻觉：可读出的图像证据与问法偏差"
+    ],
+    "summary": [
+      "On 39 core images with LLaVA-1.5-7B, the author reports readable object evidence despite yes-biased hallucinations, and explores CLIP readouts. The sample and model coverage are limited. Ordinary logit-lens readouts give similar language-model-layer results; those effects are not specific to J-lens. Author report, not independently reproduced here.",
+      "作者在 LLaVA-1.5-7B 的 39 张核心图像中报告：模型会对不存在的灯回答存在，但二选一问法和内部读出能区分真实物体；另探索了 CLIP 内部读出。局限：单模型、小图像集，语言模型层的主要读出用普通 logit lens 也能得到类似结果，不能把全部效果归功于 J-lens。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-meta-tokens": {
+    "title": [
+      "Meta-tokens suggest candidate computations to test with interventions",
+      "J-space 元词元：从读出中提出并干预候选计算过程"
+    ],
+    "summary": [
+      "Qwen3.6-27B case studies use J-lens meta-tokens to investigate disambiguation, GCD computation and hedging, with interventions on selected candidates. Coverage is limited, some evaluation uses LLM raters, and the broader search yields few validated candidates. A readout token need not itself be causal. Author report, not independently reproduced here.",
+      "作者用 Qwen3.6-27B 的 J-lens 研究歧义解释、最大公约数和保留措辞等元词元，通过具体干预检验部分候选计算。局限：单模型与有限案例、部分评分依赖 LLM，单词元词表限制可发现的描述；搜索循环找到的多数候选并不可靠，读出词元不必本身就是因果机制。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-auditing-negative": {
+    "title": [
+      "A reward-hacking pilot finds little incremental auditing value from J-space",
+      "一项奖励黑客小试验中，J-space 未提供稳健的额外审计价值"
+    ],
+    "summary": [
+      "A Qwen3-8B model-organism pilot compares transcript and J-space auditing conditions, finding little robust added discrimination and worse calibration on honest responses. One model family, one behavior and easy-task ceiling effects limit the result. Logit interventions do not establish causation of reward hacking. Author report, not independently reproduced here.",
+      "作者在 Qwen3-8B 奖励黑客模型生物中比较仅记录、记录加 J-space 等审计条件，报告未见稳健的额外区分力，并观察到诚实回答上的校准变差。局限：单模型家族、单种行为设置、简单任务存在天花板效应；因果 logit 控制不能证明对奖励黑客行为的因果作用。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  },
+  "jlens-engineering-cost": {
+    "title": [
+      "J-lens engineering costs depend on vocabulary, layers and readout setup",
+      "J-lens 的工程成本：词典大小、层数与 GPT-2-medium 的读出修正"
+    ],
+    "summary": [
+      "The author measures or estimates Jacobian fitting and inference costs and explores GPT-2-medium regularization. Quality results use one small model, one metric and sometimes 32 samples. Low overhead for a restricted dictionary does not establish full-vocabulary scalability, frontier-model costs or monitoring effectiveness. Author analysis, not independently reproduced here.",
+      "作者测量或估算 Jacobian 拟合与推理读出的成本，并在 GPT-2-medium 的单一忠实性指标上探索正则化。局限：质量分析只有小模型、单指标且部分样本仅 32 条；少量监测词的低开销不能直接推广到全词表、大模型或有效的安全监控。\n\n已核对作者原文与发布时间；未由本站独立复现实验。"
+    ]
+  }
+}

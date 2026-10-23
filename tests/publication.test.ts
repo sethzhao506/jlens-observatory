@@ -18,6 +18,7 @@ import { publishArticle, republishSource } from "@aihot/backend/publication/publ
 import { computeHotRanking } from "@aihot/backend/events/hot";
 import { latestHotRanking } from "@aihot/backend/publication/hot";
 import { loadItemShare } from "@aihot/backend/publication/og";
+import { publicSourceRef } from "@aihot/backend/publication/rules";
 import { buildApp } from "../apps/api/src/app.ts";
 
 const T = tag();
@@ -64,6 +65,41 @@ async function get(url: string, headers: Record<string, string> = {}) {
   const res = await app.inject({ method: "GET", url, headers });
   return { status: res.statusCode, body: res.body, etag: res.headers.etag as string | undefined };
 }
+
+test("source platforms follow the original host, without mistaking source notes or lookalike domains for attribution", () => {
+  for (const [url, platform] of [
+    ["https://www.lesswrong.com/posts/fixture", "LessWrong"],
+    ["https://mobile.twitter.com/researcher/status/123", "X"],
+    ["https://x.com/researcher/status/123", "X"],
+    ["https://github.com/researcher/paper", "GitHub"],
+    ["https://arxiv.org/abs/0000.00000", "arXiv"],
+    ["https://huggingface.co/org/model", "Hugging Face"],
+    ["https://lesswrong.com.example.org/posts/fixture", "lesswrong.com.example.org"],
+    ["https://example.org/x.com/fixture", "example.org"],
+  ]) {
+    assert.deepEqual(publicSourceRef("Original source（editor note）", url!), {
+      name: "Original source", platform, originalUrl: url,
+    });
+  }
+  for (const url of ["unavailable", "javascript:alert(1)", "https://user:private@example.org/post"]) {
+    assert.deepEqual(publicSourceRef("Original source", url), { name: "Original source" });
+  }
+});
+
+test("site feed and detail expose the hosting platform and original link while the public v1 schema stays unchanged", async () => {
+  const id = await article();
+  const original = `https://www.lesswrong.com/posts/${id}/research-discussion`;
+  await sql`UPDATE articles SET url = ${original} WHERE id = ${id}`;
+  await sql`UPDATE analyses SET tags = ${[T]} WHERE article_id = ${id}`;
+  await publishArticle(id, released());
+  const detail = JSON.parse((await get(`/api/site/items/${id}`)).body);
+  assert.deepEqual(detail.source, { name: "Test publication", platform: "LessWrong", originalUrl: original });
+  assert.equal(detail.links.original, original);
+  const feed = JSON.parse((await get(`/api/site/timeline?tag=${T}`)).body);
+  assert.deepEqual(feed.cards.find((card: any) => card.item.id === id)?.item.source, detail.source);
+  const v1 = JSON.parse((await get(`/api/v1/items?mode=all&q=${encodeURIComponent(detail.title)}&limit=10`)).body);
+  assert.deepEqual(v1.items.find((item: any) => item.id === id)?.source, { name: "Test publication" });
+});
 
 // Failure modes: a revoked score falls back to the erroneous model score, zero is treated as
 // missing, republishing loses a correction, invalid scores or stale edits alter public state,

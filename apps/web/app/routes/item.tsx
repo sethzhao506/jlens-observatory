@@ -14,7 +14,7 @@ import { ScoreLabel, shownScore } from "../components/ui/Score";
 import { PillTabs } from "../components/ui/Tabs";
 import { ArticleLayout, RailSection, useContainedScroll } from "../components/ui/Page";
 import { Menu, MenuItem } from "../components/ui/Menu";
-import { StarButton } from "../features/feed/parts";
+import { SourceLine, StarButton } from "../features/feed/parts";
 import { GroupButton, GroupSources } from "../features/feed/ReadingGroup";
 import { StoryFollowups } from "../features/item/StoryFollowups";
 import { MediaGallery } from "../features/item/MediaGallery";
@@ -210,8 +210,7 @@ function ItemPreview({ preview }: { preview: FeedItemSummary }) {
       <PhoneBar back={{ to: preview.selected ? "/" : "/all", label: preview.selected ? "精选" : "全部" }} title={isX ? preview.x!.authorName : preview.title} />
       <article className="pb-6 pt-3" aria-busy="true">
         <div className="mb-3 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[13px] text-ink-3">
-          <span className="font-semibold text-ink-2">{isX ? preview.x!.authorName : preview.source.name}</span>
-          {isX && <span>· @{preview.x!.handle} · X</span>}
+          <SourceLine item={preview} className="font-semibold text-ink-2" />
           <span>·</span>
           {!preview.publishedAt && <span>收录于</span>}
           <time dateTime={shownAt} className="mono">{fullDateTime(shownAt)}</time>
@@ -389,7 +388,7 @@ function ItemView({ item }: { item: SiteItemDetail }) {
   // under the facts (or under the notes when only the right rail shows).
   const facts = (
     <RailSection title="来源">
-      <div className="text-[14px] font-semibold leading-snug text-ink">{isX ? item.x!.authorName : item.source.name}</div>
+      <SourceLine item={item} className="max-w-full text-[14px] font-semibold leading-snug text-ink" />
       <div className="mt-1 text-[12.5px] leading-relaxed text-ink-3">
         {isX ? `@${item.x!.handle} · X` : item.author ?? hostOf(item.links.original)}
       </div>
@@ -474,8 +473,7 @@ function ItemView({ item }: { item: SiteItemDetail }) {
         <div className="sticky top-0 z-20 -mx-2 hidden bg-bg/95 px-2 py-1.5 backdrop-blur lg:block 2xl:hidden">{backButton}</div>
         <article className="pb-6 pt-3 lg:pt-2 2xl:pt-1">
           <div className={`flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[13px] text-ink-3 2xl:hidden ${isX ? "" : "mb-3"}`}>
-            <span className="font-semibold text-ink-2">{isX ? item.x!.authorName : item.source.name}</span>
-            {isX && <span>· @{item.x!.handle} · X</span>}
+            <SourceLine item={item} className="font-semibold text-ink-2" />
             {item.author && !isX && <span>· {item.author}</span>}
             <span>·</span>
             {!item.publishedAt && <span>收录于</span>}
@@ -554,13 +552,10 @@ function ItemView({ item }: { item: SiteItemDetail }) {
           {isX && item.x!.media.length > 0 && <MediaGallery media={item.x!.media} postUrl={item.links.original} />}
           {isX && item.x!.quoted?.text && <QuotedPost quoted={item.x!.quoted} original={lang === "original"} />}
 
-          <p className="mt-8 text-[13px] text-ink-4">
+          <div className="mt-8 flex items-center gap-1.5 text-[13px] text-ink-4">
             来源：
-            <a href={item.links.original} target="_blank" rel="noopener noreferrer" className="text-ink-3 hover:text-accent">
-              {isX ? item.x!.authorName : item.source.name}
-            </a>
-            <span> · {hostOf(item.links.original)}</span>
-          </p>
+            <SourceLine item={item} className="text-ink-3" />
+          </div>
 
           {(item.topics.length > 0 || item.tags.length > 0) && (
             <div className="mt-4 flex flex-wrap gap-1.5 lg:hidden">

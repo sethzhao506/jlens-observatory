@@ -1,5 +1,6 @@
 // Publication rules. Each rule is defined once here and used by every exit.
 import { serverModules } from '../modules.ts';
+import type { SourceRef } from '@aihot/contracts/site';
 
 /** Presentation exceptions never alter scoring, selection eligibility or fact membership. */
 export function independentSelectedSources(): string[] {
@@ -89,4 +90,25 @@ export function publicSourceName(name: string): string {
   while (/（[^（）]*）/.test(bare)) bare = bare.replace(/（[^（）]*）/g, " ");
   const x = /^X[:：]\s*(.*?)\s*(?:\(@[^)]*\))?\s*$/.exec(bare);
   return (x ? x[1]! : bare).replace(/\s+/g, " ").trim() || /@\w+/.exec(name)?.[0] || name.trim();
+}
+
+/** A platform describes where the original is hosted; it makes no claim about its evidence quality. */
+export function publicSourceRef(name: string, originalUrl: string): SourceRef {
+  const source: SourceRef = { name: publicSourceName(name) };
+  try {
+    const url = new URL(originalUrl);
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return source;
+    const host = url.hostname.toLowerCase().replace(/^www\./, '');
+    const on = (domain: string) => host === domain || host.endsWith(`.${domain}`);
+    source.platform = on('lesswrong.com') ? 'LessWrong'
+      : on('x.com') || on('twitter.com') ? 'X'
+      : on('github.com') ? 'GitHub'
+      : on('arxiv.org') ? 'arXiv'
+      : on('huggingface.co') ? 'Hugging Face'
+      : host;
+    source.originalUrl = originalUrl;
+  } catch {
+    // An unavailable original stays unnamed rather than guessing its platform from a source label.
+  }
+  return source;
 }

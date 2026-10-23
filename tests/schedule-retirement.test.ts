@@ -9,18 +9,22 @@ import { getBoss, stopBoss } from "@aihot/backend/jobs/queue";
 import { installModules } from "@aihot/backend/modules";
 import { runsOverview } from "@aihot/backend/admin/runs";
 import { registerSchedules } from "../apps/worker/src/schedules.ts";
+import { REPORTS } from "@aihot/site";
 
-after(async () => { await stopBoss(); await closeDb(); });
+const reports = REPORTS as { enabled: boolean };
+const reportsWereEnabled = reports.enabled;
+after(async () => { reports.enabled = reportsWereEnabled; await stopBoss(); await closeDb(); });
 
 test("retired schedules leave the current overview and execution queues while live jobs and history remain", async () => {
+  reports.enabled = false;
   let externalJobs = ["external.kept", "kept", "external.kept"];
   const boss = await getBoss();
-  const retired = ["cron.retired.scheduled", "cron.retired.unscheduled", "cron.paused", "cron.renamed.old"];
+  const retired = ["cron.retired.scheduled", "cron.retired.unscheduled", "cron.paused", "cron.renamed.old", "cron.reports.compose"];
   for (const name of [...retired, "cron.kept", "cron.renamed.new", "business.kept"]) {
     await boss.createQueue(name);
     await boss.send(name, { fixture: true }, { startAfter: "2099-01-01" });
   }
-  for (const name of [retired[0]!, "cron.paused", "cron.renamed.old"]) await boss.schedule(name, "0 0 1 1 *");
+  for (const name of [retired[0]!, "cron.paused", "cron.renamed.old", "cron.reports.compose"]) await boss.schedule(name, "0 0 1 1 *");
   for (const name of retired) {
     await sql`INSERT INTO job_runs (job, status, finished_at) VALUES (${name.slice("cron.".length)}, 'failed', now())`;
   }

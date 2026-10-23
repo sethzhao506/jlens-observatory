@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "source": "https://github.com/K-Dense-AI/scientific-agent-skills",
+  "commit": "593377bb048752abb0152deab9fbb1083a6087df",
+  "license": "MIT",
+  "licenseCopyright": "Copyright (c) 2025 K-Dense Inc.",
+  "installer": "OpenAI skill-installer/scripts/install-skill-from-github.py",
+  "skills": [
+    {
+      "name": "paper-lookup",
+      "path": ".agents/skills/paper-lookup",
+      "version": "2.4",
+      "upstreamPath": "skills/paper-lookup",
+      "upstreamFileCount": 24,
+      "skillSha256": "567d6e3f512ddf94406cf86ba10dbd14e547f2ec01446b811e86f031c337440d",
+      "modifications": [],
+      "additionalFiles": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "citation-management",
+      "path": ".agents/skills/citation-management",
+      "version": "2.3",
+      "upstreamPath": "skills/citation-management",
+      "upstreamFileCount": 22,
+      "skillSha256": "ca1b473108c4b49843538f49ea1219668472a9ddec9624d1da41383a8aab2a05",
+      "modifications": [],
+      "additionalFiles": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "literature-review",
+      "path": ".agents/skills/literature-review",
+      "version": "1.11",
+      "upstreamPath": "skills/literature-review",
+      "upstreamFileCount": 12,
+      "skillSha256": "20ce73246d4b60038638b221ab1b6fea43e0eb81dd920dcc3ad4df4a2716730b",
+      "modifications": [],
+      "additionalFiles": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "scientific-critical-thinking",
+      "path": ".agents/skills/scientific-critical-thinking",
+      "version": "1.5",
+      "upstreamPath": "skills/scientific-critical-thinking",
+      "upstreamFileCount": 9,
+      "skillSha256": "cd80217c03ac740b6c835b826f8d98d016b157e8cedd96419c84072b7225fa43",
+      "modifications": [],
+      "additionalFiles": [
+        "LICENSE.md"
+      ]
+    }
+  ]
+}

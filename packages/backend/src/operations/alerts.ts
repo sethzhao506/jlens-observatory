@@ -6,7 +6,7 @@
 //           closed on its own: a fix removes it, and one judged not worth fixing is closed with a reason.
 // Delivery goes through sendAlert (ops chat, internal-chat fallback; off unless FEISHU_INTERNAL_ENABLED).
 import { addDays, beijingAt, beijingDate, beijingDay, beijingStamp, isValidDate } from "@aihot/contracts/time";
-import { ALERTS, EDITION_TIMES } from "@aihot/site";
+import { ALERTS, EDITION_TIMES, REPORTS } from "@aihot/site";
 import { audit } from "../audit.ts";
 import { sql } from "../db.ts";
 import { agentHandoffs, closeAgentWake, wakeAgent } from "../notify/agent.ts";
@@ -353,7 +353,7 @@ async function alertState(): Promise<AlertState> {
 }
 
 async function dailyReportFindings(now: number, open: AlertState): Promise<Finding[]> {
-  if (!collecting() || !modelsOn()) return [];
+  if (!REPORTS.enabled || !collecting() || !modelsOn()) return [];
   const today = beijingDate(now);
   const [activity] = await sql<{ first_report: string | null; first_attempt: Date | null }[]>`
     SELECT (SELECT min(key) FROM reports WHERE kind = 'daily') AS first_report,
@@ -387,6 +387,14 @@ async function dailyReportFindings(now: number, open: AlertState): Promise<Findi
 async function settleDailies(open: AlertState, found: Set<string>, now: number): Promise<{ missing: Set<string>; sent: string[] }> {
   const missing = new Set<string>();
   const sent: string[] = [];
+  if (!REPORTS.enabled) {
+    for (const key of Object.keys(open).filter((key) => dailyDate(key))) {
+      await closeAgentWake(key);
+      await audit("system", "report.alert.retired", key, "Automatic reports disabled by site configuration", open[key], null);
+      delete open[key];
+    }
+    return { missing, sent };
+  }
   const dates = Object.keys(open).filter((key) => !found.has(key)).map(dailyDate).filter((date): date is string => !!date);
   if (!dates.length) return { missing, sent };
   const published = new Set((await sql<{ key: string }[]>`SELECT key FROM reports WHERE kind = 'daily' AND key IN ${sql(dates)}`).map((r) => r.key));

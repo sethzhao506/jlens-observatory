@@ -11,6 +11,7 @@ import { CodeBlock, CopyButton } from "./CodeBlock";
 import { PillTabs } from "../../components/ui/Tabs";
 import type { AgentPanelProps } from "../../modules";
 import { AGENT_PARTS, GUIDE_CLIENTS, TAG } from "./module-parts";
+import { inNav } from "../../components/shell/nav";
 import { Address, Ask, Block, Bullets, Details, Mono, PanelHead, Step, Steps, Table, Tips } from "./parts";
 
 const V = PUBLIC_INTERFACE_VERSION;
@@ -65,11 +66,13 @@ export function McpPanel(props: AgentPanelProps) {
           rows={[
             [<Mono>{T.latest}</Mono>, "过去 24 小时或最近 7 天的精选、全部资讯", `${subjectAfter("今天有什么", "新闻")}？`],
             [<Mono>{T.search}</Mono>, AGENT.search.scope, AGENT.search.ask],
-            [<Mono>{T.hot}</Mono>, "当前热点榜 Top 10", "现在最热的是什么？"],
+            ...(inNav("/hot") ? [[<Mono>{T.hot}</Mono>, "当前热点榜 Top 10", "现在最热的是什么？"]] : []),
             [<Mono>{T.story}</Mono>, "一个热点事件的时间线和持续更新的综述", "这件事的来龙去脉？"],
-            [<Mono>{T.daily}</Mono>, subjectAfter("最新或指定日期的", "日报"), "给我今天的日报。"],
-            [<Mono>{T.weekly}</Mono>, subjectAfter("最新或指定一周的", "周报"), `${subjectAfter("这周", "圈")}有哪些大事？`],
-            [<Mono>{T.monthly}</Mono>, subjectAfter("最新或指定月份的", "月报"), `${subjectAfter("上个月", "圈")}发生了什么？`],
+            ...(inNav("/daily") ? [
+              [<Mono>{T.daily}</Mono>, subjectAfter("最新或指定日期的", "日报"), "给我今天的日报。"],
+              [<Mono>{T.weekly}</Mono>, subjectAfter("最新或指定一周的", "周报"), `${subjectAfter("这周", "圈")}有哪些大事？`],
+              [<Mono>{T.monthly}</Mono>, subjectAfter("最新或指定月份的", "月报"), `${subjectAfter("上个月", "圈")}发生了什么？`],
+            ] : []),
             ...AGENT_PARTS.flatMap((a) => a.tools ?? []).map((t) => [<Mono>{t.name}</Mono>, t.does, t.ask]),
           ]}
         />
@@ -126,7 +129,7 @@ export function RssPanel(props: AgentPanelProps) {
         {lead}
       </PanelHead>
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {FEEDS.map((f) => (
+        {FEEDS.filter((f) => inNav("/daily") || !/^\/feed\/(daily|weekly|monthly)\.xml$/.test(f.path)).map((f) => (
           <div key={f.path} className="card flex flex-col p-4">
             <div className="flex items-center gap-2">
               <span className="text-[15px] font-semibold text-ink">{f.name}</span>
@@ -171,7 +174,9 @@ export function ApiPanel(props: AgentPanelProps) {
   const { base, tag } = props;
   const userAgent = [ACCESS.userAgent, TAG && tag ? TAG.userAgent(tag) : null].filter(Boolean).join(" ");
   const curl = `curl --compressed${userAgent ? ` -A '${userAgent}'` : ""}`;
-  let pace = `内容多久变一次：新资讯全天陆续进来，精选每天变几次到几十次，日报${EDITION_WHEN.daily}、周报${EDITION_WHEN.weekly}、月报${EDITION_WHEN.monthly}（北京时间）各一期。`;
+  let pace = inNav("/daily")
+    ? `内容多久变一次：新资讯全天陆续进来，精选每天变几次到几十次，日报${EDITION_WHEN.daily}、周报${EDITION_WHEN.weekly}、月报${EDITION_WHEN.monthly}（北京时间）各一期。`
+    : "采集与审核后发布新的研究动态；使用 ETag 检查是否有更新。订阅频率不代表来源已产生新内容。";
   if (ACCESS.ratePerMinute) pace += `同一个 IP 每分钟超过约 ${ACCESS.ratePerMinute} 次会收到 429，请按 Retry-After 等待，不要并发重试。`;
   const [recipe, setRecipe] = useState<string>("latest");
   const recipes = AGENT_PARTS.flatMap((a) => a.recipes ?? []);
@@ -193,7 +198,7 @@ export function ApiPanel(props: AgentPanelProps) {
           items={[
             { title: "开压缩", text: <>curl 加 <Mono>--compressed</Mono>，其他客户端打开 gzip 或 br。JSON 压缩后只有原来的 1/4 到 1/8。</> },
             { title: "带上 ETag", text: <>保存响应里的 ETag，下次带 <Mono>If-None-Match</Mono>；内容没变时返回 304，不传正文。</> },
-            { title: "按节奏取", text: `资讯和热点最快一分钟一次；日报${EDITION_WHEN.daily} 后取一次，周报、月报出刊后取一次；往回翻页翻到已有的那条就停。` },
+            { title: "按节奏取", text: inNav("/daily") ? `资讯和热点最快一分钟一次；日报${EDITION_WHEN.daily} 后取一次，周报、月报出刊后取一次；往回翻页翻到已有的那条就停。` : "动态最快一分钟一次；往回翻页翻到已有的那条就停。" },
           ]}
         />
         <p className="mt-3 text-[13px] leading-[1.75] text-ink-3">{pace}</p>
@@ -206,9 +211,10 @@ export function ApiPanel(props: AgentPanelProps) {
           rows={[
             { group: "资讯" },
             [<Mono>/api/v1/items</Mono>, "精选或最近 7 天全部动态，可按分类、时间窗、关键词筛", "最快 1 分钟一次"],
-            { group: "热点与事件" },
-            [<Mono>/api/v1/hot-topics</Mono>, "当前热点榜 Top 10", "最快 1 分钟一次"],
+            { group: inNav("/hot") ? "热点与事件" : "研究事件" },
+            ...(inNav("/hot") ? [[<Mono>/api/v1/hot-topics</Mono>, "当前热点榜 Top 10", "最快 1 分钟一次"]] : []),
             [<Mono>{"/api/v1/stories/{publicId}"}</Mono>, "一个事件的报道时间线、AI 综述和关联事件", "需要时"],
+            ...(inNav("/daily") ? [
             { group: "日报" },
             [<Mono>/api/v1/dailies/latest</Mono>, "最新一期日报", `${EDITION_WHEN.daily} 后一次`],
             [<Mono>{"/api/v1/dailies/{date}"}</Mono>, "指定日期日报；撤稿会移除引用", "缓存过期后使用前验证 ETag"],
@@ -220,6 +226,7 @@ export function ApiPanel(props: AgentPanelProps) {
             [<Mono>/api/v1/monthlies/latest</Mono>, "最新一期月报", `${EDITION_WHEN.monthly} 后一次`],
             [<Mono>{"/api/v1/monthlies/{month}"}</Mono>, "指定月份，如 2026-09", "缓存过期后使用前验证 ETag"],
             [<Mono>/api/v1/monthlies</Mono>, "月报索引", "每月一次"],
+            ] : []),
             ...AGENT_PARTS.flatMap((a) => (a.api ? [{ group: a.api.group }, ...a.api.rows.map(([path, does, often]) => [<Mono>{path}</Mono>, does, often])] : [])),
             { group: "给 AI 助手" },
             [<Mono>/api/v1/agent</Mono>, `给 Agent 的使用说明，列出的地址返回整理好的中文 Markdown${GUIDE_CLIENTS ? `；${GUIDE_CLIENTS} 用的就是它们` : ""}`, "需要时"],

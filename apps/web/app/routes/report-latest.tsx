@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import type { Route } from "./+types/report-latest";
 import { REPORT_NAMES, type ReportLatestPage } from "@aihot/contracts/site";
 import { REPORTS, subjectAfter, withSubject } from "@aihot/site";
@@ -11,12 +11,14 @@ import { ReportLayout } from "../features/report/ReportLayout";
 import { ReportPaper, reportOutline } from "../features/report/ReportPaper";
 import { feedLink, kindFromPath } from "../features/report/format";
 import type { Screen } from "../components/shell/screens";
+import { inNav } from "../components/shell/nav";
 
 export const handle: Screen = { tab: "daily", name: "日报" };
 export { pageHeaders as headers } from "../lib/api.server";
 export const { clientLoader, shouldRevalidate } = pageReuse<typeof loader>();
 
 export async function loader({ request }: Route.LoaderArgs) {
+  if (!inNav("/daily")) throw redirect("/all");
   const kind = kindFromPath(new URL(request.url).pathname);
   const { index, report } = await loadOr404<ReportLatestPage>(`/api/site/reports/${kind}/latest-page`, { signal: request.signal });
   return cachedPage(600, { kind, report, index, today: beijingDate(Date.now()) });

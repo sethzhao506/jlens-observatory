@@ -6,6 +6,10 @@ import { isoWeekRange, monthDay } from "./time.ts";
 export interface SourceRef {
   /** The name readers see (publication/rules.ts publicSourceName), as is every source name here. */
   name: string;
+  /** Hosting platform inferred from the original URL, not an evidence or review status. */
+  platform?: string;
+  /** This report's original URL, rather than the source's homepage. */
+  originalUrl?: string;
 }
 
 export interface MediaView {

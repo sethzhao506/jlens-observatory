@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import { IntentLink } from "../components/ui/IntentLink";
 import type { ReportIndexEntry, ReportIndexResponse } from "@aihot/contracts/site";
 import { SITE, withSubject } from "@aihot/site";
@@ -12,12 +12,14 @@ import { archiveGroups, ENTRIES_UNIT } from "../features/report/format";
 import { Rows, SectionPage } from "../features/report/ReportPaper";
 import { Nameplate } from "../features/report/Nameplate";
 import type { Screen } from "../components/shell/screens";
+import { inNav } from "../components/shell/nav";
 
 export const handle: Screen = { tab: "daily", name: "往期" };
 export { pageHeaders as headers } from "../lib/api.server";
 export const { clientLoader, shouldRevalidate } = pageReuse<typeof loader>();
 
 export async function loader({ request }: { request: Request }) {
+  if (!inNav("/daily")) throw redirect("/all");
   const { items: index } = await apiGet<ReportIndexResponse>("/api/site/reports/daily", { signal: request.signal });
   return cachedPage(600, { index, today: beijingDate(Date.now()) });
 }

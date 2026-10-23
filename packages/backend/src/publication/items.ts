@@ -8,7 +8,7 @@ import { isChineseText } from "../lib/text.ts";
 import { isEmptyOrLinkOnly } from "../content/posts.ts";
 import { proxiedImage, proxiedImageSet } from "../media/imgproxy.ts";
 import { sourceOwnsPost } from "../sources/account.ts";
-import { displayTags, publicSourceName } from "./rules.ts";
+import { displayTags, publicSourceRef } from "./rules.ts";
 import { foldableSelectionCondition, seatedCondition } from "./scope.ts";
 
 export interface ItemRow {
@@ -157,7 +157,7 @@ export function toItemSummary(row: ItemRow): ItemSummary {
     originalTitle: row.original_title,
     summary: row.summary,
     reason: row.selected ? row.reason : null,
-    source: { name: publicSourceName(row.source_name) },
+    source: publicSourceRef(row.source_name, row.url),
     links: { original: row.url },
     publishedAt: row.published_at?.toISOString() ?? null,
     discoveredAt: row.discovered_at.toISOString(),

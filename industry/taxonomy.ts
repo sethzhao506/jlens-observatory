@@ -12,12 +12,12 @@
  * feedLabel 是分类 RSS 标题里的名字（不写就用 label）。公开接口、RSS 和 MCP 里要把一类并进另一类发布，写在站点设置里（site/site.ts 的 PUBLIC_CATEGORIES）。
  */
 export const CATEGORIES = [
-  { key: "ai-models", tagColor: "indigo", label: "模型", feedLabel: "AI 模型", section: "模型发布/更新", guide: "模型本身的发布、版本、权重开放、能力或价格变化，以及既有榜单上的模型成绩。公布一次跑分不是发布新基准，也不是教程。" },
-  { key: "ai-products", tagColor: "turquoise", label: "产品", feedLabel: "AI 产品", section: "产品发布/更新", guide: "可使用的 AI 产品、功能、应用、工具、API、平台和工程组件的发布更新。模型厂商发布的推理框架、算子库、硬件适配组件仍是产品，不能因为厂商名归成模型。" },
-  { key: "industry", tagColor: "orange", label: "行业", feedLabel: "行业动态", section: "行业动态", guide: "已发生的公司经营、融资并购、人事、合作、诉讼、政策、真实安全事故及调查进展。新闻由当事人发帖、带有态度，也不因此变成观点。" },
-  { key: "paper", tagColor: "violet", label: "论文", feedLabel: "论文", section: "论文研究", guide: "以新研究方法、实验设计与发现为核心的论文、技术报告、新基准或研究数据集。系统性红队实验属于研究；既有榜单成绩归模型，真实事故的新闻调查归行业。" },
-  { key: "tip", tagColor: "green", label: "教程", section: "技巧与观点", guide: "读者可以照着使用的方法、提示词、工具用法、工程实践复盘与技术讲解。重点是可复用的做法；单纯发布工具归产品，只有态度和预测而无做法归观点。", commentary: true },
-  { key: "opinion", tagColor: "purple", label: "观点", section: "技巧与观点", guide: "重点是作者的解释、判断、主张、预测、评论或访谈观点。讨论市场不自动归行业，作者是名人不自动归观点。", commentary: true },
+  { key: "ai-models", tagColor: "indigo", label: "Models & weights", feedLabel: "Research models", section: "研究资源", guide: "直接影响 J-lens、读出方法或 looped LM/Ouro 检查可执行性的模型、checkpoint、权重与版本更新。说明具体研究用途；通用模型营销、价格新闻和无关榜单成绩不在收录范围。" },
+  { key: "ai-products", tagColor: "turquoise", label: "Code & tools", feedLabel: "Research code", section: "研究资源", guide: "与当前研究直接相关的官方代码、数据、评测工具和修正；必须说明它如何影响测量或复现。代码公开不代表实验已运行。通用产品、营销和促销不收录。" },
+  { key: "industry", tagColor: "orange", label: "Research notes", feedLabel: "Research notes", section: "研究更正与进展", guide: "当前研究的更正、撤回、复现条件变更和有依据的研究进展。公司经营、融资、人事、营销及泛 AI 新闻不属于本项目范围。" },
+  { key: "paper", tagColor: "violet", label: "Research", feedLabel: "Research papers", section: "论文与评测", guide: "J-lens、读出方法、looped LM/Ouro 及直接相关主张的论文、版本、实验、基准和研究数据集。包含独立复现、失败和反例，热度不决定研究价值。" },
+  { key: "tip", tagColor: "green", label: "Explainers", section: "讲解与讨论", guide: "能帮助理解当前研究问题、方法、公式或复现实操的讲解。指出原始来源及适用边界；不能将教程或算术重算写成独立模型复现。", commentary: true },
+  { key: "opinion", tagColor: "purple", label: "Discussion", section: "讲解与讨论", guide: "针对当前研究主张、有具体依据的解释、质疑、混杂分析和竞争解释。区分作者报告、评论和已核查证据；单纯态度、泛预测和市场评论不收录。", commentary: true },
 ] as const satisfies ReadonlyArray<{ key: string; tagColor: string; label: string; feedLabel?: string; section: string; guide: string; commentary?: true }>;
 
 /**
@@ -25,7 +25,7 @@ export const CATEGORIES = [
  * category 是类别，tag 是标签，两者都对上才算；unit 接在数字后面。
  * 没有这样一类的行业设成 null，报头就不显示这个数。
  */
-export const RELEASE: { category: string; tag: string; unit: string } | null = { category: "ai-models", tag: "模型发布", unit: "个新模型" };
+export const RELEASE: { category: string; tag: string; unit: string } | null = null;
 
 /** 周报月报的总述可以直接写、不必在报道里找到出处的行业通用词（小写）。站名会自动算进去。 */
 export const PLAIN_TERMS: readonly string[] = ["ai", "api", "llm", "gpu", "agi", "ceo", "ipo"];
@@ -46,7 +46,8 @@ export const CATEGORY_TAGS = [
 
 /** 可选的主题标签。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "J-lens", "R-lens", "J-lens++", "读出方法", "模型结构", "looped LM", "Ouro", "因果证据", "模型监测", "J-space", "独立复现",
+  "评测问题", "负结果", "混杂因素", "概念强度", "校准", "目标出口", "计算距离",
 ] as const;
 
 /** 可选的实体标签（公司、机构、平台）。 */
@@ -54,6 +55,10 @@ export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Goog
 
 /** 模型常写的近义词，统一成词表里的写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
+  jlens: "J-lens", "j-lens": "J-lens", "JLens": "J-lens", "r-lens": "R-lens", "R lens": "R-lens",
+  "j-lens++": "J-lens++", "J++ Lens": "J-lens++", "readout methods": "读出方法",
+  "model architecture": "模型结构", "looped lm": "looped LM", "recurrent LM": "looped LM", "循环语言模型": "looped LM",
+  ouro: "Ouro", "causal evidence": "因果证据", monitoring: "模型监测", "j-space": "J-space", "independent replication": "独立复现",
   "教程/玩法": "教程/实践", "技巧/最佳实践": "教程/实践", "合作/生态": "行业动态", "融资/收购": "行业动态", "公司动态": "行业动态",
   合作: "行业动态", 生态: "行业动态", 融资: "行业动态", 收购: "行业动态", 投资: "行业动态", 并购: "行业动态",
   政策: "政策/监管", 监管: "政策/监管", 法规: "政策/监管", 安全: "安全/对齐", 对齐: "安全/对齐",

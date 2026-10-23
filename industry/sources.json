@@ -1,367 +1,508 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里新建、修改和暂停。字段说明见 docs/customize.md。",
+  "$comment": "J-lens/Ouro 阅读资料与暂停的 LessWrong RSS、X 搜索草案。RSS 仅完成手动预览，未启用采集；LessWrong 全站 feed 只是有限窗口的候选发现，不能代表全部讨论。X 需要配置 SOCIALDATA_API_KEY 和请求预算后才运行；查询保留回复，排除纯转推。全文展示与再分发关闭。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-transformer-circuits",
+      "name": "J-lens · Gurnee et al.",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": "openai",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-rlens",
+      "name": "R-lens · Blank, Bhatia & Nanda",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": "google",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://research.google/blog/rss/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-jpp",
+      "name": "J++ Lens · Ayonrinde & Lindsey",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": "google",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方",
-        "研究"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "hugging-face",
+      "id": "jlens-layer-comment",
+      "name": "Layer fidelity · StellaAthena",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方",
-        "开源"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-looped-paper",
+      "name": "Ouro and Huginn · Wang & Reid",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": "microsoft",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方",
-        "研究"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-ouro-repository",
+      "name": "Own-exit comparison · VykosMolt",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": "nvidia",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-workspacebench",
+      "name": "WorkspaceBench · Blank et al.",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方",
-        "教程"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-newline-source",
+      "name": "Qwen newline signal · Jimmy Liu",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://mistral.ai/news/rss",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-swaps-source",
+      "name": "Intermediate vs answer · Mirella Zeisler",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 1440,
       "tags": [
-        "官方"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-mamba-source",
+      "name": "Residual and state · Wang & Reid",
+      "kind": "external",
+      "config": {},
       "tier": "T1",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 1440,
       "tags": [
-        "研究"
+        "J-lens"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
+      "id": "jlens-review-source",
+      "name": "Useful for hypotheses · Neel Nanda",
+      "kind": "external",
+      "config": {},
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-frequency-source",
+      "name": "Frequency confound · Jayrup",
+      "kind": "external",
+      "config": {},
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-errors-source",
+      "name": "Planted-error null · Daniel Huber",
+      "kind": "external",
+      "config": {},
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-gpt2-source",
+      "name": "GPT-2 functional tests · Cairns, yix & Roe",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "lw-camila-blank-rss",
+      "name": "LessWrong：Camila Blank（作者 RSS，暂停草案）",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "feedUrl": "https://www.lesswrong.com/feed.xml?userId=tCJsGiwvCCXjeqkLq"
       },
       "tier": "T2",
-      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": false
+    },
+    {
+      "id": "lw-research-discovery-rss",
+      "name": "LessWrong：最近文章（发现草案，有限窗口）",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.lesswrong.com/feed.xml"
+      },
+      "tier": "T2",
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": [],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": false
     },
     {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
+      "id": "x-jlens-discussions",
+      "name": "X：J-lens / Jacobian lens 讨论（待配置）",
+      "kind": "x_search",
       "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "query": "(\"J-lens\" OR JLens OR \"Jacobian lens\" OR \"Jacobian-lens\") -filter:retweets",
+        "searchType": "Latest"
       },
       "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
-        "媒体"
+        "J-lens",
+        "讨论"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": false
     },
     {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
+      "id": "x-jlens-methods",
+      "name": "X：R-lens / J++ / WorkspaceBench（待配置）",
+      "kind": "x_search",
       "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "query": "(\"R-lens\" OR \"J++ Lens\" OR \"J-lens++\" OR WorkspaceBench) -filter:retweets",
+        "searchType": "Latest"
       },
       "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
-        "个人"
+        "J-lens",
+        "讨论"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": false
+    },
+    {
+      "id": "jlens-concept-lens-source",
+      "name": "Verbalizing Multi-Token Concepts in LLMs · Xijie Gong, Zimeng Huang, Tonghan Wang",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "R-lens",
+        "读出方法"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-import-ai",
-      "name": "Import AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://importai.substack.com/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-short-horizons-source",
+      "name": "Short Horizons and Sparse Concepts · Shi-Qi Yan, Kai-Xuan Ding, Chao-Hong Tan, Qian Chen, Wen Wang, Xiangang Li, Zhen-Hua Ling",
+      "kind": "external",
+      "config": {},
       "tier": "T2",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 1440,
       "tags": [
-        "个人",
-        "周刊"
+        "J-lens",
+        "J-space",
+        "读出方法"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.latent.space/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
+      "id": "jlens-latents-wires-source",
+      "name": "From Latents to Wires · Jiankai Jin, Xiangzheng Zhang, Zhao Liu, Wenzhuo Xu, Dongdong Yang, Deyue Zhang, Quanchen Zou",
+      "kind": "external",
+      "config": {},
       "tier": "T2",
-      "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 1440,
       "tags": [
-        "个人"
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-audio-dog-source",
+      "name": "When Does the Concept of \"Dog\" Emerge in an Audio LLM? · Zhe Wang, Shiqi Liu, Ruiyun Zhong, Tiechong Zhu, Yihua Tan",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型结构"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-veritas-source",
+      "name": "Verbalising Model's Computation for Chain-of-Thought Faithfulness Detection · Yujing Wang, Yulan He, Wenya Wang, Hanqi Yan",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型监测"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-lexical-frames-source",
+      "name": "Lexical Reference Frames · Jian Gu, Hongyu Zhang, Chunyang Chen, Aldeida Aleti",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "读出方法"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-u-space-source",
+      "name": "U-Space · Tobias Braun, Nils Loose, Alexander Herzog, Virginia Ceccatelli, Marcus Rohrbach, Thomas Eisenbarth, Lorenzo Cavallaro",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "J-space",
+        "模型监测"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-dv-lens-source",
+      "name": "DV-Lens · Chenhang Cui, Jian Yu, Shuyi Miao, Xiaohao Liu, Rui Huang, Fei Shen, An Zhang, Tat-Seng Chua",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "读出方法"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-audio-workspace-source",
+      "name": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace · Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar, Qi Luo, Jia-Hong Huang, M. Maruf, Roger Ren, Yile Gu, Rahul Pandey, Ge Liu, Ivan Bulyko",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型结构"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-s-space-source",
+      "name": "S-Space · Zhiyuan Shi, Xiang Li, Xingzhuo Guo, Shangchen Miao, Weiliang Chen, Qiyu Dai, Jinshan Ren, Jiangran Lyu, Fangfu Liu, Mingsheng Long, Jialong Wu",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型结构"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-awareness-order-source",
+      "name": "Concept-injection reports depend on whether the answer comes first · Ethan Garcia",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-topic-detector-source",
+      "name": "A pilot finds topic salience rather than reliable concealment detection · Melchior de Polignac",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型监测"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-vision-source",
+      "name": "Readable visual evidence can coexist with LLaVA's yes/no hallucinations · Hawrani",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型结构"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-meta-tokens-source",
+      "name": "Meta-tokens suggest candidate computations to test with interventions · Agam Bhatia, Camila Blank & Neel Nanda",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "J-space"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-auditing-negative-source",
+      "name": "A reward-hacking pilot finds little incremental auditing value from J-space · Kartikay Luthra",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "模型监测"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jlens-engineering-cost-source",
+      "name": "J-lens engineering costs depend on vocabulary, layers and readout setup · willkn",
+      "kind": "external",
+      "config": {},
+      "tier": "T2",
+      "participation_mode": "editorial",
+      "interval_minutes": 1440,
+      "tags": [
+        "J-lens",
+        "读出方法",
+        "模型监测"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false

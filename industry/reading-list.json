@@ -1,0 +1,738 @@
+{
+  "description": "J-lens/Ouro 相关研究资料索引；本轮补查原论文的直接引文和作者讨论，非完整引用清单。作者报告未经本站独立复现，未知日期保留 null；同一研究的作者导读不重复计为独立支持。",
+  "items": [
+    {
+      "id": "jlens-jlens",
+      "sourceId": "jlens-transformer-circuits",
+      "url": "https://transformer-circuits.pub/2026/workspace/",
+      "originalTitle": "J-lens",
+      "title": "J-lens：用词表方向读出模型的内部表征",
+      "author": "Gurnee et al.",
+      "publishedAt": "2026-07-06",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-space"
+      ],
+      "summary": "与词表关联的方向支持报告、调控及部分灵活计算。\n\n适用范围：Claude 模型及原论文中的功能测试。\n局限：测得的 J-space 是所提出的 workspace 的一种近似。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true,
+      "workId": "arxiv:2607.15495",
+      "relatedPublications": [
+        {
+          "url": "https://arxiv.org/abs/2607.15495",
+          "title": "Verbalizable Representations Form a Global Workspace in Language Models",
+          "publishedAt": "2026-07-16T22:54:30Z",
+          "kind": "arxiv_version_same_work"
+        }
+      ]
+    },
+    {
+      "id": "jlens-rlens",
+      "sourceId": "jlens-rlens",
+      "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+      "originalTitle": "R-lens",
+      "title": "R-lens：改进早层读出的相关性传播方法",
+      "author": "Blank, Bhatia & Nanda",
+      "publishedAt": "2026-08-05",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "R-lens",
+        "读出方法"
+      ],
+      "summary": "LRP 反向传播规则改善了若干被测模型的早层读出。\n\n适用范围：Dense 和 MoE 模型；读出及消融比较。\n局限：所传播的是相关性，而非未经修改的梯度。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-jpp",
+      "sourceId": "jlens-jpp",
+      "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "originalTitle": "J++ Lens",
+      "title": "J++ Lens：Jacobian 筛选与更忠实的中间概念提取",
+      "author": "Ayonrinde & Lindsey",
+      "publishedAt": "2026-10-08",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-lens++",
+        "读出方法"
+      ],
+      "summary": "Jacobian 聚类加权、LRP 和词表筛选改善了中间概念提取。\n\n适用范围：六个开放模型，参数量为 9–284B。\n局限：目标词评估尚不能验证开放式审计能力。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-layer_metric",
+      "sourceId": "jlens-layer-comment",
+      "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers?commentId=tx8tp7PwFNcP4BvPh",
+      "originalTitle": "Layer fidelity",
+      "title": "读出更清晰，是否代表更忠实于当前层？",
+      "author": "StellaAthena",
+      "publishedAt": null,
+      "category": "opinion",
+      "tags": [
+        "大佬观点",
+        "J-lens",
+        "R-lens",
+        "读出方法"
+      ],
+      "summary": "预测后面层的答案可能提高指标，却未必忠实描述当前层。\n\n适用范围：针对评估设计的质疑。\n局限：这是概念上的挑战，并非对所有 R-lens 结果的实验否定。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-looped",
+      "sourceId": "jlens-looped-paper",
+      "url": "https://arxiv.org/abs/2609.01924",
+      "originalTitle": "Ouro and Huginn",
+      "title": "Looped LM：递归结构如何改变 J-lens 的读出与干预",
+      "author": "Wang & Reid",
+      "publishedAt": "2026-09-01",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "looped LM",
+        "Ouro"
+      ],
+      "summary": "Ouro 每轮重建内容；Huginn 的内容持续时间超过 lens 的有效窗口。\n\n适用范围：Ouro-2.6B、Huginn-0125；基线为 Qwen3.6-27B。\n局限：内容持续性与线性传递范围是不同的测量。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-ouro",
+      "sourceId": "jlens-ouro-repository",
+      "url": "https://github.com/VykosMolt/JLens-Ouro",
+      "originalTitle": "Own-exit comparison",
+      "title": "J-lens on Ouro：本轮出口与最终终点的读出差异",
+      "author": "VykosMolt",
+      "publishedAt": null,
+      "category": "ai-products",
+      "tags": [
+        "开源/仓库",
+        "J-lens",
+        "looped LM",
+        "Ouro"
+      ],
+      "summary": "以本轮出口为终点的 Ouro lens，比最终出口 lens 恢复更多早期轮次内容。\n\n适用范围：冻结的基础版 Ouro；160 道题上的后期轮次确认分析。\n局限：本轮出口分析是在确认分析后补做的；缺少 tuned-lens 基线及因果使用结果。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-bench",
+      "sourceId": "jlens-workspacebench",
+      "url": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the",
+      "originalTitle": "WorkspaceBench",
+      "title": "WorkspaceBench：评估中间变量恢复与读出幻觉",
+      "author": "Blank et al.",
+      "publishedAt": "2026-09-23",
+      "category": "paper",
+      "tags": [
+        "评测/基准",
+        "J-lens",
+        "读出方法",
+        "评测问题"
+      ],
+      "summary": "用 27 类、3,356 道问题评估恢复能力和幻觉。\n\n适用范围：主要围绕 Qwen3.6-27B 开发。\n局限：仍存在反推输入的捷径；较弱模型需要任务适配。\n\n来源报告／讨论摘要；未由本站独立复现。",
+      "reason": "首批 J-lens/Ouro 阅读资料，迁自已有导读。用于理解研究方向与追溯原文，未执行模型实验。",
+      "selected": true
+    },
+    {
+      "id": "jlens-newline",
+      "sourceId": "jlens-newline-source",
+      "url": "https://www.lesswrong.com/posts/bhvaAbSPZgiG3oJPu/on-qwen-the-j-lens-readouts-at-the-newline-token-reveal-lies-4",
+      "originalTitle": "On Qwen, the J-lens readouts at the newline token reveal lies",
+      "title": "J-lens 的 Qwen 监测信号：出现的位置与跨模型迁移边界",
+      "author": "Jimmy Liu",
+      "publishedAt": "2026-10-19",
+      "category": "paper",
+      "tags": [
+        "评测/基准",
+        "J-lens",
+        "模型监测"
+      ],
+      "summary": "作者报告 Qwen3.6-27B 回答后的换行符出现欺骗相关读出；同位置训练的探针更强，跨模型迁移有限。局限：这是回答后的信号，标签来自单一 LLM 且未逐条人工核查，不能据此宣称回答前或通用测谎。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-swaps",
+      "sourceId": "jlens-swaps-source",
+      "url": "https://www.lesswrong.com/posts/pnDjvdo6cX2H7Ddsy/is-the-j-space-a-global-workspace-for-multi-hop-reasoning-an",
+      "originalTitle": "Is the J-Space a global workspace for multi-hop reasoning? An investigation in open-weight models",
+      "title": "中间概念还是直接答案？一项 J-space 因果干预复查",
+      "author": "Mirella Zeisler",
+      "publishedAt": "2026-09-28",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "因果证据"
+      ],
+      "summary": "两个开放模型与两套题库的四种组合中，直接答案替换在三种条件下强于中间概念替换。局限：过滤后各组仅 27–44 题；结果限制这些条件下的因果解释，不能否定全部 workspace 功能。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-mamba",
+      "sourceId": "jlens-mamba-source",
+      "url": "https://arxiv.org/abs/2609.32102",
+      "originalTitle": "Residual Streams Read, Recurrent States Remember: The Global Workspace in Mamba Models",
+      "title": "Mamba 中的 J-lens：残差流与循环状态提供不同读出",
+      "author": "Wang & Reid",
+      "publishedAt": "2026-09-26",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型结构"
+      ],
+      "summary": "作者在 Mamba-1、Mamba-2、Mamba-3 上比较残差流与循环状态读出，报告联合读出恢复了互补信息。局限：更好的信息恢复与口头报告没有稳定转化为更好的关系推理答案；持久性、可读性和因果用途仍需分开评价。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-review",
+      "sourceId": "jlens-review-source",
+      "url": "https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper",
+      "originalTitle": "A Review of Anthropic's Global Workspace Paper",
+      "title": "Neel Nanda 评述：J-lens 的科学解释、方法价值与审计用途",
+      "author": "Neel Nanda",
+      "publishedAt": "2026-07-06",
+      "category": "opinion",
+      "tags": [
+        "大佬观点",
+        "J-lens",
+        "因果证据"
+      ],
+      "summary": "Neel Nanda 分别评述科学解释、读出方法、实际审计价值与全球工作空间类比，并报告开放模型上的复现经验。局限：作者仍预期误报和解释错误，部分细节没有干净复现；正面评述不能证明可靠通用审计已经成立。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-frequency",
+      "sourceId": "jlens-frequency-source",
+      "url": "https://jayrup.me/blog/jacobian-lens-frequency",
+      "originalTitle": "What the Jacobian Lens Measures",
+      "title": "J-space 的词频与范数：控制实验和解释边界",
+      "author": "Jayrup",
+      "publishedAt": "2026-08-07",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-space"
+      ],
+      "summary": "在小型自训模型与 GPT-2 中，作者观察到词频与 J-lens 向量范数排名相关，并分析输出几何和控制条件。局限：因果重加权试验不确定，不能将相关性写成已证明的因果关系；没有检验原论文的大模型容量主张。原文保留了实现错误的纠正。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-gpt2",
+      "sourceId": "jlens-gpt2-source",
+      "url": "https://www.lesswrong.com/posts/GeKveaNdruATcj2Fj/even-gpt-2-passes-most-functional-global-workspace-tests",
+      "originalTitle": "Even GPT-2 passes most functional global workspace tests",
+      "title": "GPT-2 的 J-lens 检查：四项功能判据通过，定向调控与结构证据仍有区别",
+      "author": "Finn Cairns, yix & Zephaniah Roe",
+      "publishedAt": "2026-10-21T21:48:04.041Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "评测问题"
+      ],
+      "summary": "作者用预拟合 J-lens 检查 GPT-2 small（124M），报告五项功能判据中四项通过、定向调控未通过，多数相关结构特征缺失。局限：任务经过改写，仅计模型原本能答对的样本，干预向量中心化且消融规模调整；不同设置的分数不能直接横比。结果不证明模型有意识，也不否定所有 workspace 主张。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "近期 LessWrong 研究报告直接检验 J-lens 功能判据的区分力，保留具体方法调整、适用范围与原文依据。",
+      "selected": true
+    },
+    {
+      "id": "jlens-errors",
+      "sourceId": "jlens-errors-source",
+      "url": "https://www.agent-engineering.ch/experiments/jacobian-lens/",
+      "originalTitle": "Reading a model's mistakes from its middle layer",
+      "title": "一个 planted-error 小实验：J-lens 未超过输出 surprise 基线",
+      "author": "Daniel Huber",
+      "publishedAt": "2026-10-10",
+      "category": "paper",
+      "tags": [
+        "评测/基准",
+        "J-lens",
+        "模型监测"
+      ],
+      "summary": "在 Gemma 4 12B 单层、30 组人为错误／中性配对中，作者未发现 J-lens 或 R-lens 超过输出 surprise 基线的额外价值。局限：单模型、单层、小样本且未公布逐对记录；这不是预测模型自身未来错误的实验。\n\n已核对原文的来源报告／评述；未由本站独立复现实验。",
+      "reason": "扩展已有导读的相关讨论与评测，保留失败结果、适用范围和原文链接。",
+      "selected": true
+    },
+    {
+      "id": "jlens-concept-lens",
+      "sourceId": "jlens-concept-lens-source",
+      "url": "https://arxiv.org/abs/2608.31084",
+      "originalTitle": "Verbalizing Multi-Token Concepts in LLMs",
+      "title": "Concept Lens：从 J-lens 的 token 线索扩展到完整概念",
+      "author": "Xijie Gong, Zimeng Huang, Tonghan Wang",
+      "publishedAt": "2026-08-31T16:56:20Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "R-lens",
+        "读出方法"
+      ],
+      "selected": false,
+      "workId": "arxiv:2608.31084",
+      "version": "v2",
+      "versionUpdatedAt": "2026-09-28T16:07:58Z",
+      "summary": "Concept Lens 用 J-lens/R-lens 的首 token 线索生成多 token 候选，再用冻结模型导出的概念向量评分。v2 报告五个 8B–70B 模型、2,400 道多跳完形题的 Rank@10 为 36.6%（J-lens）和 54.5%（R-lens），Template Lens 为 21.7%。\n\n局限：候选覆盖限制整体效果；cloze 标注概念不保证实际存在于模型计算；Oracle Lens 直接比较只涵盖一个共享层。v1/v2 数字和作者不能混用。作者报告，本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v2；References: Gurnee et al. (2026), linked to transformer-circuits.pub/2026/workspace/; §1, §2.1, §2.3, §3.2. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), linked to transformer-circuits.pub/2026/workspace/; §1, §2.1, §2.3, §3.2.",
+        "proofUrl": "https://arxiv.org/html/2608.31084v2",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-short-horizons",
+      "sourceId": "jlens-short-horizons-source",
+      "url": "https://arxiv.org/abs/2608.25347",
+      "originalTitle": "Short Horizons and Sparse Concepts: a Mathematical View of the Readout in the J-lens",
+      "title": "J-lens 的短距离与稀疏概念：一阶传递解释及筛选实验",
+      "author": "Shi-Qi Yan, Kai-Xuan Ding, Chao-Hong Tan, Qian Chen, Wen Wang, Xiangang Li, Zhen-Hua Ling",
+      "publishedAt": "2026-08-26T04:02:59Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-space",
+        "读出方法"
+      ],
+      "selected": false,
+      "workId": "arxiv:2608.25347",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "将平均 Jacobian 解释为局部一阶传递算子，分析短距离输出路径和稀疏概念位置，并测试能量筛选。Qwen3-8B 六类任务中，保留部分能量可改善部分指标；去掉对角项也削弱概念读出。\n\n局限：实验集中于一个模型；局部线性化、非高斯输入和曲率带来偏差；删对角项没有干净分离两类信息。作者明确称工作仍在推进；并非全局因果解释已被证明。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；References: Gurnee et al. (2026), CoRR abs/2607.15495; §1, §2 and §5.1. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), CoRR abs/2607.15495; §1, §2 and §5.1.",
+        "proofUrl": "https://arxiv.org/html/2608.25347v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-latents-wires",
+      "sourceId": "jlens-latents-wires-source",
+      "url": "https://arxiv.org/abs/2609.32434",
+      "originalTitle": "From Latents to Wires: Surgical Post-Editing on Large Language Models",
+      "title": "L2W：用 J-lens 定位模型编辑目标，同时检查能力代价",
+      "author": "Jiankai Jin, Xiangzheng Zhang, Zhao Liu, Wenzhuo Xu, Dongdong Yang, Deyue Zhang, Quanchen Zou",
+      "publishedAt": "2026-09-26T10:08:32Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "因果证据"
+      ],
+      "selected": false,
+      "workId": "arxiv:2609.32434",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "L2W 用 J-lens 为语义目标定位组件，再通过反例驱动的关闭与恢复步骤做模型编辑。报告的水印、模型元数据和拒答实验中，目标行为可被压低，但与能力纠缠的目标带来明显副作用。\n\n局限：在指定探针上未再出现目标，不等于所有提示下永久删除。§6.4 记录多个编辑的 IFEval 等能力损失，恢复并不总是补回；不能把定位成功写成无副作用。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；References: Gurnee et al. (2026), linked to original Transformer Circuits article; §1, §2 and §4. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), linked to original Transformer Circuits article; §1, §2 and §4.",
+        "proofUrl": "https://arxiv.org/html/2609.32434v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-audio-dog",
+      "sourceId": "jlens-audio-dog-source",
+      "url": "https://arxiv.org/abs/2609.33458",
+      "originalTitle": "When Does the Concept of \"Dog\" Emerge in an Audio LLM?",
+      "title": "音频模型中的 dog 概念：J-lens 读出与任务相关干预",
+      "author": "Zhe Wang, Shiqi Liu, Ruiyun Zhong, Tiechong Zhu, Yihua Tan",
+      "publishedAt": "2026-09-27T11:09:36Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型结构",
+        "因果证据"
+      ],
+      "selected": false,
+      "workId": "arxiv:2609.33458",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "在 Qwen2.5-Omni-7B 中读出狗叫概念，并对 J-lens 的 dog 方向做删除、注入与交换。作者报告生成前 L22/L24 的效应较稳定，部分物种分类答案随干预变化。\n\n局限：单模型、单类声音和选定任务；animal/other 分类没有超过对应控制，其他任务的低基线限制最终答案结论。可读出概念与普遍被模型使用仍需区分。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；Reference [7] Gurnee et al. (2026), arXiv:2607.15495; §1 and §2.2. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Reference [7] Gurnee et al. (2026), arXiv:2607.15495; §1 and §2.2.",
+        "proofUrl": "https://arxiv.org/html/2609.33458v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-veritas",
+      "sourceId": "jlens-veritas-source",
+      "url": "https://arxiv.org/abs/2610.23275",
+      "originalTitle": "Verbalising Model's Computation for Chain-of-Thought Faithfulness Detection",
+      "title": "VERITAS：用 J-lens 轨迹检验思维链忠实性",
+      "author": "Yujing Wang, Yulan He, Wenya Wang, Hanqi Yan",
+      "publishedAt": "2026-10-16T10:44:23Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型监测",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.23275",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "VERITAS 用 J-lens 将层与 CoT 进度映到词汇锚点，提取轨迹特征后训练分类器判断忠实性。作者在 BonaFide 与 FaithCoT-Bench 的 Qwen/Llama 设置下报告优于所比基线，并考察跨数据源和模型迁移。\n\n局限：是带标签锚点及分类器的检测流程；依赖内部激活和生成轨迹，不是回答前的无训练通用监测。冻结分类器的迁移下降大于只迁移锚点，校准仍依赖来源。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；References: Gurnee et al. (2026), arXiv:2607.15495; §1, §2.1, §4.2. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §1, §2.1, §4.2.",
+        "proofUrl": "https://arxiv.org/html/2610.23275v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-lexical-frames",
+      "sourceId": "jlens-lexical-frames-source",
+      "url": "https://arxiv.org/abs/2610.22169",
+      "originalTitle": "Lexical Reference Frames: Interpreting LM Residual Streams in Native Semantics",
+      "title": "LexFrame：上下文词汇参考系对固定 J-lens 读出的挑战",
+      "author": "Jian Gu, Hongyu Zhang, Chunyang Chen, Aldeida Aleti",
+      "publishedAt": "2026-10-15T16:29:27Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "读出方法",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.22169",
+      "version": "v2",
+      "versionUpdatedAt": "2026-10-18T11:22:37Z",
+      "summary": "LexFrame 根据上下文及剩余层构造词汇参考系，并以 J-lens 等固定方向读出作为对照。作者在 SmolLM3-3B 和 OLMo3-7B 报告更接近最终输出的读出、归因和干预。\n\n局限：核心实验只涵盖两个模型；与最终输出一致性更高，不直接证明更忠实描述当前层的中间概念。不能将这种基准优势改写为对所有 J-space 主张的否定。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v2；References: Gurnee et al. (2026), arXiv:2607.15495; §1 and §2. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §1 and §2.",
+        "proofUrl": "https://arxiv.org/html/2610.22169v2",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-u-space",
+      "sourceId": "jlens-u-space-source",
+      "url": "https://arxiv.org/abs/2610.09087",
+      "originalTitle": "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
+      "title": "U-Space：用 J-lens 追踪不确定性，并控制输出长度混杂",
+      "author": "Tobias Braun, Nils Loose, Alexander Herzog, Virginia Ceccatelli, Marcus Rohrbach, Thomas Eisenbarth, Lorenzo Cavallaro",
+      "publishedAt": "2026-10-06T20:40:29Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-space",
+        "模型监测"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.09087",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "用 J-lens 把不确定与确定词汇锚点拉回残差流，构造 U-Space/U-Lens，跟踪生成中的不确定性并汇总成分数。作者报告在长度控制的推理评测上仍有信息量，且提供跨模型比较。\n\n局限：答案级分数从 end-of-thinking 标记读取，并非所有设置都能回答前预警。词表锚点带语言先验；类别混合比例不是不确定性绝对大小，也不是校准后的事实正确概率。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；References: Gurnee et al. (2026), arXiv:2607.15495; §2-3 and Appendix A. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §2-3 and Appendix A.",
+        "proofUrl": "https://arxiv.org/html/2610.09087v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": [
+        {
+          "url": "https://www.lesswrong.com/posts/hcpiLD8XjK7cqG6Lr/uncertainty-in-the-verbalizable-workspace-1",
+          "title": "Uncertainty in the Verbalizable Workspace",
+          "publishedAt": "2026-10-17T03:43:13.054Z",
+          "kind": "author_explanation_same_work"
+        }
+      ]
+    },
+    {
+      "id": "jlens-dv-lens",
+      "sourceId": "jlens-dv-lens-source",
+      "url": "https://arxiv.org/abs/2610.04489",
+      "originalTitle": "DV-Lens: Revealing the Functional Organization of Language Model Parameters",
+      "title": "DV-Lens：参数级下游词汇响应，与 J-lens 有何不同",
+      "author": "Chenhang Cui, Jian Yu, Shuyi Miao, Xiaohao Liu, Rui Huang, Fei Shen, An Zhang, Tat-Seng Chua",
+      "publishedAt": "2026-10-03T12:45:07Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "读出方法"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.04489",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "DV-Lens 面向参数列，用模块特定的下游 Jacobian 得到词汇响应，再考察控制干预和权重结构。论文直接引用 J-lens 原文，但研究对象从激活读出转向参数功能，不能仅因同用 Jacobian 就标为已证实的继承。\n\n局限：提示集平均的局部响应不是单个提示下完整贡献；方向正确性不等于 token 排名完全正确。DV-Complexity 与能力的相关性不能证明结构造成能力。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；References: Gurnee et al. (2026), original Transformer Circuits URL; related-work paragraph on sparse/internal representations. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "References: Gurnee et al. (2026), original Transformer Circuits URL; related-work paragraph on sparse/internal representations.",
+        "proofUrl": "https://arxiv.org/html/2610.04489v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-audio-workspace",
+      "sourceId": "jlens-audio-workspace-source",
+      "url": "https://arxiv.org/abs/2608.24958",
+      "originalTitle": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+      "title": "音频模型的中层工作空间：引用 J-space，但使用 logit lens 代理",
+      "author": "Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar, Qi Luo, Jia-Hong Huang, M. Maruf, Roger Ren, Yile Gu, Rahul Pandey, Ge Liu, Ivan Bulyko",
+      "publishedAt": "2026-08-25T06:17:28Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型结构"
+      ],
+      "selected": false,
+      "workId": "arxiv:2608.24958",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "在 Qwen3-Omni 音频 token 的中层用 logit lens 读取推断内容，并以换波形、激活 patching 和删层测试音频驱动信号。作者以 J-space 工作空间为研究背景，使用的是 logit lens 代理而非 J-lens。\n\n局限：定性案例和控制不是广泛基准成绩；logit lens 代理不能等同 J-lens，patching 只作较粗定位，不能把结论全归于 J-space。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；Reference [12] Gurnee et al. (2026), CoRR abs/2607.15495; §1-3 and §5. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Reference [12] Gurnee et al. (2026), CoRR abs/2607.15495; §1-3 and §5.",
+        "proofUrl": "https://arxiv.org/html/2608.24958v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-s-space",
+      "sourceId": "jlens-s-space-source",
+      "url": "https://arxiv.org/abs/2610.13527",
+      "originalTitle": "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
+      "title": "S-Space：空间坐标读出与视角推理之间的差距",
+      "author": "Zhiyuan Shi, Xiang Li, Xingzhuo Guo, Shangchen Miao, Weiliang Chen, Qiyu Dai, Jinshan Ren, Jiangran Lyu, Fangfu Liu, Mingsheng Long, Jialong Wu",
+      "publishedAt": "2026-10-09T12:48:41Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型结构",
+        "因果证据"
+      ],
+      "selected": false,
+      "workId": "arxiv:2610.13527",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "summary": "S-Space 用空间答案梯度构造三维方向，在 Molmo2-ER 和 Qwen 模型中读取与干预物体坐标，并区分空间知觉和视角计算。原文引用 J-space，但不是 J-lens 复现或同一子空间的证明。\n\n局限：结论限于所测模型、空间任务和方向；空间坐标可读或可干预，不代表模型能正确完成视角转换，也不证明通用全球工作空间。本站未复现。",
+      "reason": "本轮核对：原文参考文献直接引用 Gurnee 等的 J-lens 工作（arXiv:2607.15495）。v1；Reference [24] Gurnee et al. (2026), linked to original Transformer Circuits article. 引用不等于支持或独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_citation",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Reference [24] Gurnee et al. (2026), linked to original Transformer Circuits article.",
+        "proofUrl": "https://arxiv.org/html/2610.13527v1",
+        "inspectedOn": "2026-10-22"
+      },
+      "relatedPublications": []
+    },
+    {
+      "id": "jlens-awareness-order",
+      "sourceId": "jlens-awareness-order-source",
+      "url": "https://www.lesswrong.com/posts/uvgw5FTS2RXgFFFii/when-and-when-not-llms-can-verbalize-awareness-of-j-space",
+      "originalTitle": "When (and when not) LLMs can verbalize awareness of J-Space concept injections - Initial results",
+      "title": "注入概念的自我报告取决于顺序：先回答与先报告的 Qwen 对照",
+      "author": "Ethan Garcia",
+      "publishedAt": "2026-08-12T01:21:55.228Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "因果证据",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "lesswrong:uvgw5FTS2RXgFFFii",
+      "summary": "作者在 Qwen3.6-27B 的 20 道事实题中改变注入概念报告与回答的先后顺序：干预仍能改变答案，但精确报告由回答在前时的 322 次降为报告在前时的零次。局限：单模型、确定性解码、有限题目，尚不能证明自回归自条件化就是主要机制，也不能概括所有内省能力。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对直接链接原 J-lens 论文；Experimental motivation and question links original Section 3.1; Interpretation links Appendix A.14. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_source_link",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Experimental motivation and question links original Section 3.1; Interpretation links Appendix A.14.",
+        "proofUrl": "https://www.lesswrong.com/posts/uvgw5FTS2RXgFFFii/when-and-when-not-llms-can-verbalize-awareness-of-j-space",
+        "inspectedOn": "2026-10-22"
+      }
+    },
+    {
+      "id": "jlens-topic-detector",
+      "sourceId": "jlens-topic-detector-source",
+      "url": "https://www.lesswrong.com/posts/GZCMmCHZiF8vhsczr/a-topic-detector-not-a-lie-detector-what-j-space-monitoring",
+      "originalTitle": "A Topic Detector, Not a Lie Detector: what J-space monitoring actually tracks",
+      "title": "主题信号不等于测谎：一项定向 J-space 监测试验的反例",
+      "author": "Melchior de Polignac",
+      "publishedAt": "2026-08-11T02:18:33.923Z",
+      "category": "paper",
+      "tags": [
+        "评测/基准",
+        "J-lens",
+        "模型监测",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "lesswrong:GZCMmCHZiF8vhsczr",
+      "summary": "作者在 DeepSeek-R1-Distill-Qwen-14B 的单种议题设置中发现，定向读出主要区分话题，未可靠区分隐瞒；合并词类后的 AUC 仅为 0.55，微调也未按假设降低冲突信号。局限：单模型、单种子，使用预选词的定向 VJP，不能直接当作完整 J-lens 或一般测谎能力的结论。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对明确的方法讨论，未记作正式直接引用；TL:DR explicitly describes Anthropic J-lens; Limitations distinguishes targeted VJP from Anthropic's full Jacobian workspace matrix. No direct original-paper hyperlink was found among the rendered article links. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "related_discussion",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "TL:DR explicitly describes Anthropic J-lens; Limitations distinguishes targeted VJP from Anthropic's full Jacobian workspace matrix. No direct original-paper hyperlink was found among the rendered article links.",
+        "proofUrl": "https://www.lesswrong.com/posts/GZCMmCHZiF8vhsczr/a-topic-detector-not-a-lie-detector-what-j-space-monitoring",
+        "inspectedOn": "2026-10-22"
+      }
+    },
+    {
+      "id": "jlens-vision",
+      "sourceId": "jlens-vision-source",
+      "url": "https://www.lesswrong.com/posts/T3u6Hctes6vkawsib/reading-into-vlm-hallucinations-using-the-jacobian-lens",
+      "originalTitle": "Reading into VLM hallucinations using the Jacobian lens",
+      "title": "LLaVA 的物体幻觉：可读出的图像证据与问法偏差",
+      "author": "Hawrani",
+      "publishedAt": "2026-07-10T00:31:48.557Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "模型结构",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "lesswrong:T3u6Hctes6vkawsib",
+      "summary": "作者在 LLaVA-1.5-7B 的 39 张核心图像中报告：模型会对不存在的灯回答存在，但二选一问法和内部读出能区分真实物体；另探索了 CLIP 内部读出。局限：单模型、小图像集，语言模型层的主要读出用普通 logit lens 也能得到类似结果，不能把全部效果归功于 J-lens。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对明确的方法讨论，未记作正式直接引用；Opening and TL;DR explicitly link Anthropic's research overview; What's new here attributes the coordinate swap to that work. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "related_discussion",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Opening and TL;DR explicitly link Anthropic's research overview; What's new here attributes the coordinate swap to that work.",
+        "proofUrl": "https://www.lesswrong.com/posts/T3u6Hctes6vkawsib/reading-into-vlm-hallucinations-using-the-jacobian-lens",
+        "inspectedOn": "2026-10-22"
+      }
+    },
+    {
+      "id": "jlens-meta-tokens",
+      "sourceId": "jlens-meta-tokens-source",
+      "url": "https://www.lesswrong.com/posts/6ek6n7yZ5DzfarJHy/towards-surfacing-model-algorithms-with-meta-tokens-in-the-j",
+      "originalTitle": "Towards surfacing model algorithms with meta-tokens in the J-Space",
+      "title": "J-space 元词元：从读出中提出并干预候选计算过程",
+      "author": "Agam Bhatia, Camila Blank & Neel Nanda",
+      "publishedAt": "2026-07-20T19:45:04.835Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "J-space",
+        "因果证据"
+      ],
+      "selected": false,
+      "workId": "lesswrong:6ek6n7yZ5DzfarJHy",
+      "summary": "作者用 Qwen3.6-27B 的 J-lens 研究歧义解释、最大公约数和保留措辞等元词元，通过具体干预检验部分候选计算。局限：单模型与有限案例、部分评分依赖 LLM，单词元词表限制可发现的描述；搜索循环找到的多数候选并不可靠，读出词元不必本身就是因果机制。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对直接链接原 J-lens 论文；Motivation links J-lens directly; Related Work attributes the technique to Gurnee et al.; Appendix reports selected replication tests. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_source_link",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Motivation links J-lens directly; Related Work attributes the technique to Gurnee et al.; Appendix reports selected replication tests.",
+        "proofUrl": "https://www.lesswrong.com/posts/6ek6n7yZ5DzfarJHy/towards-surfacing-model-algorithms-with-meta-tokens-in-the-j",
+        "inspectedOn": "2026-10-22"
+      }
+    },
+    {
+      "id": "jlens-auditing-negative",
+      "sourceId": "jlens-auditing-negative-source",
+      "url": "https://www.lesswrong.com/posts/69fachkoAs2ZHeSst/j-space-auditing-might-be-unreliable-1",
+      "originalTitle": "J-space auditing might be unreliable",
+      "title": "一项奖励黑客小试验中，J-space 未提供稳健的额外审计价值",
+      "author": "Kartikay Luthra",
+      "publishedAt": "2026-09-16T14:06:59.246Z",
+      "category": "paper",
+      "tags": [
+        "评测/基准",
+        "J-lens",
+        "模型监测",
+        "评测问题"
+      ],
+      "selected": false,
+      "workId": "lesswrong:69fachkoAs2ZHeSst",
+      "summary": "作者在 Qwen3-8B 奖励黑客模型生物中比较仅记录、记录加 J-space 等审计条件，报告未见稳健的额外区分力，并观察到诚实回答上的校准变差。局限：单模型家族、单种行为设置、简单任务存在天花板效应；因果 logit 控制不能证明对奖励黑客行为的因果作用。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对直接链接原 J-lens 论文；Introduction links Anthropic overview; Experiments Overview links official implementation and original technical paper. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "direct_source_link",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Introduction links Anthropic overview; Experiments Overview links official implementation and original technical paper.",
+        "proofUrl": "https://www.lesswrong.com/posts/69fachkoAs2ZHeSst/j-space-auditing-might-be-unreliable-1",
+        "inspectedOn": "2026-10-22"
+      }
+    },
+    {
+      "id": "jlens-engineering-cost",
+      "sourceId": "jlens-engineering-cost-source",
+      "url": "https://www.lesswrong.com/posts/vHxGD5HKsFuBStirq/anthropic-s-j-lens-a-research-engineer-s-analysis",
+      "originalTitle": "Anthropic's J-Lens: A Research Engineer's Analysis",
+      "title": "J-lens 的工程成本：词典大小、层数与 GPT-2-medium 的读出修正",
+      "author": "willkn",
+      "publishedAt": "2026-07-24T00:54:09.585Z",
+      "category": "paper",
+      "tags": [
+        "论文/研究",
+        "J-lens",
+        "读出方法",
+        "模型监测"
+      ],
+      "selected": false,
+      "workId": "lesswrong:vHxGD5HKsFuBStirq",
+      "summary": "作者测量或估算 Jacobian 拟合与推理读出的成本，并在 GPT-2-medium 的单一忠实性指标上探索正则化。局限：质量分析只有小模型、单指标且部分样本仅 32 条；少量监测词的低开销不能直接推广到全词表、大模型或有效的安全监控。\n\n已核对作者原文与发布时间；未由本站独立复现实验。",
+      "reason": "已核对明确的方法讨论，未记作正式直接引用；Opening names the original paper and several figures attribute Gurnee et al. 2026. No direct original-paper hyperlink was found in rendered article links. 来源报告不等于独立验证；未自动列为精选。",
+      "discovery": {
+        "relation": "related_discussion",
+        "rootWork": "arxiv:2607.15495",
+        "locator": "Opening names the original paper and several figures attribute Gurnee et al. 2026. No direct original-paper hyperlink was found in rendered article links.",
+        "proofUrl": "https://www.lesswrong.com/posts/vHxGD5HKsFuBStirq/anthropic-s-j-lens-a-research-engineer-s-analysis",
+        "inspectedOn": "2026-10-22"
+      }
+    }
+  ]
+}

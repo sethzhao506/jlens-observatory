@@ -5,7 +5,10 @@ import { beijingAt } from "@aihot/contracts/time";
 import { closeDb, sql } from "@aihot/backend/db";
 import { getBoss, stopBoss } from "@aihot/backend/jobs/queue";
 import { checkAlerts, collectFindings } from "@aihot/backend/operations/alerts";
+import { REPORTS } from "@aihot/site";
 
+const reports = REPORTS as { enabled: boolean };
+const reportsWereEnabled = reports.enabled;
 const at = (date: string, time = "10:00") => beijingAt(date, time).getTime();
 const key = (date: string) => `report.daily:${date}`;
 const daily = (keys: string[]) => keys.filter(k => k.startsWith("report.daily"));
@@ -14,12 +17,13 @@ async function report(date: string) {
 }
 before(async () => { await getBoss(); });
 beforeEach(async () => {
+  reports.enabled = true;
   Object.assign(process.env, { COLLECT_ENABLED: "true", MODEL_CALLS_ENABLED: "true", FEISHU_INTERNAL_ENABLED: "false" });
   await sql`DELETE FROM reports`;
   await sql`DELETE FROM job_runs WHERE job='reports.compose'`;
   await sql`DELETE FROM settings WHERE key IN ('alerts.state','heartbeat.worker')`;
 });
-after(async () => { await stopBoss(); await closeDb(); });
+after(async () => { reports.enabled = reportsWereEnabled; await stopBoss(); await closeDb(); });
 
 test("midnight preserves a missing edition; each date recovers only when its report exists", async () => {
   let result = await checkAlerts(at("2026-10-06", "23:30"));
@@ -74,4 +78,17 @@ test("an edition still missing past the scan window is closed once instead of re
   assert.ok(!result.open.includes(key("2026-10-01")));
   result = await checkAlerts(at("2026-10-08", "12:00"));
   assert.ok(!result.sent.some(k => k.startsWith(key("2026-10-01"))));
+});
+
+test("disabling report automation retires missing-edition alerts without claiming recovery", async () => {
+  await checkAlerts(at("2026-10-01"));
+  reports.enabled = false;
+  assert.deepEqual(daily((await collectFindings(at("2026-10-08"))).map((finding) => finding.key)), []);
+  const result = await checkAlerts(at("2026-10-08"));
+  assert.deepEqual(daily(result.open), []);
+  assert.deepEqual(daily(result.sent), []);
+  const retired = await sql`SELECT action FROM audit_log WHERE action = 'report.alert.retired' AND subject = ${key("2026-10-01")}`;
+  assert.equal(retired.length, 1);
+  await checkAlerts(at("2026-10-08", "12:00"));
+  assert.equal((await sql`SELECT action FROM audit_log WHERE action = 'report.alert.retired' AND subject = ${key("2026-10-01")}`).length, 1);
 });

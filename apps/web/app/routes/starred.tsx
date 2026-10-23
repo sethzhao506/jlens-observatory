@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, redirect, useLocation } from "react-router";
 import type { ItemAvailability } from "@aihot/contracts/site";
 import { SITE } from "@aihot/site";
 import { Presence } from "../components/ui/Presence";
@@ -12,8 +12,14 @@ import { readSnapshot, restoreAnchor, useSaveOnLeave } from "../lib/restore";
 import { PhoneBar } from "../components/shell/PhoneBar";
 import type { Screen } from "../components/shell/screens";
 import { webModules } from "../site-modules";
+import { inNav } from "../components/shell/nav";
 
 export const handle: Screen = { tab: "me", name: "收藏" };
+
+export function loader() {
+  if (!inNav("/starred")) throw redirect("/all");
+  return null;
+}
 
 export function headers() {
   return edgeTtl(300);

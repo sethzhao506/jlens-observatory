@@ -1,0 +1,1606 @@
+{
+  "schemaVersion": 1,
+  "revision": "observatory-reader-path-2026-10-22",
+  "coverage": {
+    "lastSearchAt": "2026-10-22",
+    "humanReviewedAt": null,
+    "scope": [
+      "Seven core sources, with readout methods and looped-model architecture as the initial focus. Targeted primary-source inspection; not a systematic review or a census of X discussions.",
+      "七个核心来源，首批重点是读出方法与循环模型结构。当前为定向一手来源检查，并非系统综述，也不是 X 讨论普查。"
+    ],
+    "missingReason": [
+      "No human review is recorded. First-discovery timestamps are unknown. This release has no model experiment or independent replication; historical changes are not reconstructed from publication dates.",
+      "尚无人工审核记录，来源首次发现时间未知。本版没有运行模型实验或独立复现，也不根据发表日期反向编造判断变化。"
+    ],
+    "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+  },
+  "sources": [
+    {
+      "id": "jlens",
+      "label": [
+        "J-lens",
+        "J-lens"
+      ],
+      "author": "Gurnee et al.",
+      "url": "https://transformer-circuits.pub/2026/workspace/",
+      "kind": [
+        "Reported experiment",
+        "报告实验"
+      ],
+      "branch": "root",
+      "locator": [
+        "Introduction; §§3–5; Discussion",
+        "引言；§§3–5；讨论"
+      ],
+      "publishedAt": "2026-07-06",
+      "version": null,
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Vocabulary-linked directions support reporting, modulation and some flexible computations.",
+        "与词表关联的方向支持报告、调控及部分灵活计算。"
+      ],
+      "scope": [
+        "Claude models and the original functional test suite.",
+        "Claude 模型及原论文中的功能测试。"
+      ],
+      "limitation": [
+        "A measured J-space is an approximation to the proposed workspace.",
+        "测得的 J-space 是所提出的 workspace 的一种近似。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Original article: publication line, introduction and method description.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ]
+    },
+    {
+      "id": "rlens",
+      "label": [
+        "R-lens",
+        "R-lens"
+      ],
+      "author": "Blank, Bhatia & Nanda",
+      "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+      "kind": [
+        "Reported experiment",
+        "报告实验"
+      ],
+      "branch": "methods",
+      "locator": [
+        "TL;DR; Methods; ablation studies",
+        "TL;DR；方法；消融实验"
+      ],
+      "publishedAt": "2026-08-05",
+      "version": null,
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "LRP backward rules improve early readouts in several tested models.",
+        "LRP 反向传播规则改善了若干被测模型的早层读出。"
+      ],
+      "scope": [
+        "Dense and MoE models; readout and ablation comparisons.",
+        "Dense 和 MoE 模型；读出及消融比较。"
+      ],
+      "limitation": [
+        "The propagated quantity is relevance, not the unmodified gradient.",
+        "所传播的是相关性，而非未经修改的梯度。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Original post: TL;DR, Methods, Evals and comment text.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ]
+    },
+    {
+      "id": "jpp",
+      "label": [
+        "J++ Lens",
+        "J++ Lens"
+      ],
+      "author": "Ayonrinde & Lindsey",
+      "url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "kind": [
+        "Reported experiment",
+        "报告实验"
+      ],
+      "branch": "methods",
+      "locator": [
+        "Methods; Table 1; Appendix H",
+        "方法；表 1；附录 H"
+      ],
+      "publishedAt": "2026-10-08",
+      "version": null,
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Cluster-weighted Jacobians, LRP and vocabulary filtering improve intermediate extraction.",
+        "Jacobian 聚类加权、LRP 和词表筛选改善了中间概念提取。"
+      ],
+      "scope": [
+        "Six open models, 9–284B parameters.",
+        "六个开放模型，参数量为 9–284B。"
+      ],
+      "limitation": [
+        "Target-word evaluation is not open-ended audit validation.",
+        "目标词评估尚不能验证开放式审计能力。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Original post: introduction, backward-pass changes and Appendix B reference to WorkspaceBench.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ]
+    },
+    {
+      "id": "layer_metric",
+      "label": [
+        "Layer fidelity",
+        "当前层的忠实性"
+      ],
+      "author": "StellaAthena",
+      "url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers?commentId=tx8tp7PwFNcP4BvPh",
+      "kind": [
+        "Comment / challenge",
+        "评论与质疑"
+      ],
+      "branch": "methods",
+      "locator": [
+        "Comment beginning “One reason we didn't really follow up…”",
+        "以“One reason we didn't really follow up…”开头的评论"
+      ],
+      "publishedAt": null,
+      "version": null,
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Predicting a later layer's answer can improve a metric without faithfully describing the current layer.",
+        "预测后面层的答案可能提高指标，却未必忠实描述当前层。"
+      ],
+      "scope": [
+        "Evaluation design objection.",
+        "针对评估设计的质疑。"
+      ],
+      "limitation": [
+        "A conceptual challenge, not a measured failure of every R-lens result.",
+        "这是概念上的挑战，并非对所有 R-lens 结果的实验否定。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Original comment text on the linked R-lens post; exact publication timestamp remains unknown.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ]
+    },
+    {
+      "id": "looped",
+      "label": [
+        "Ouro and Huginn",
+        "Ouro 与 Huginn"
+      ],
+      "author": "Wang & Reid",
+      "url": "https://arxiv.org/abs/2609.01924",
+      "kind": [
+        "Preprint result",
+        "预印本结果"
+      ],
+      "branch": "architecture",
+      "locator": [
+        "Abstract; HTML §§3.3–4",
+        "摘要；HTML §§3.3–4"
+      ],
+      "publishedAt": "2026-09-01",
+      "version": "arXiv v1",
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Ouro content is rebuilt each loop; Huginn content persists beyond the lens's effective window.",
+        "Ouro 每轮重建内容；Huginn 的内容持续时间超过 lens 的有效窗口。"
+      ],
+      "scope": [
+        "Ouro-2.6B, Huginn-0125; Qwen3.6-27B baseline.",
+        "Ouro-2.6B、Huginn-0125；基线为 Qwen3.6-27B。"
+      ],
+      "limitation": [
+        "Content persistence and linear transport range are different measurements.",
+        "内容持续性与线性传递范围是不同的测量。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "arXiv v1 abstract, introduction, method and references in HTML.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ],
+      "pinnedUrl": "https://arxiv.org/html/2609.01924v1"
+    },
+    {
+      "id": "ouro",
+      "label": [
+        "Own-exit comparison",
+        "本轮出口的比较"
+      ],
+      "author": "VykosMolt",
+      "url": "https://github.com/VykosMolt/JLens-Ouro",
+      "kind": [
+        "Repository report",
+        "仓库报告"
+      ],
+      "branch": "architecture",
+      "locator": [
+        "Pinned README: The study; Results; Limitations. Verification source: band selection and family contrasts.",
+        "固定版本 README：The study、Results、Limitations。验证源码：层带选择及同族差值。"
+      ],
+      "publishedAt": null,
+      "version": "a47fad18d91df4cebbed9259700d2cc32a841558",
+      "versionUpdatedAt": "2026-09-20T18:04:31Z",
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Ouro lenses targeting a pass's own exit recover more early-pass content than final-target lenses.",
+        "以本轮出口为终点的 Ouro lens，比最终出口 lens 恢复更多早期轮次内容。"
+      ],
+      "scope": [
+        "Frozen base Ouro; late-pass confirmation on 160 questions.",
+        "冻结的基础版 Ouro；160 道题上的后期轮次确认分析。"
+      ],
+      "limitation": [
+        "Own-exit analysis is post-confirmation; no tuned-lens baseline or causal-use result.",
+        "本轮出口分析是在确认分析后补做的；缺少 tuned-lens 基线及因果使用结果。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Pinned README and NumPy verification source inspected; neither verification script nor model code executed.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ],
+      "pinnedUrl": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/README.md"
+    },
+    {
+      "id": "bench",
+      "label": [
+        "WorkspaceBench",
+        "WorkspaceBench"
+      ],
+      "author": "Blank et al.",
+      "url": "https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the",
+      "kind": [
+        "Benchmark",
+        "评测基准"
+      ],
+      "branch": "causal",
+      "locator": [
+        "TL;DR; Introduction",
+        "TL;DR；引言"
+      ],
+      "publishedAt": "2026-09-23",
+      "version": null,
+      "versionUpdatedAt": null,
+      "firstDiscoveredAt": null,
+      "inheritedCheckedAt": "2026-10-21",
+      "checkedAt": "2026-10-22",
+      "humanReviewedAt": null,
+      "reviewStatus": "machine_inspected_pending_human",
+      "summary": [
+        "Scores recovery and hallucination across 3,356 questions and 27 families.",
+        "用 27 类、3,356 道问题评估恢复能力和幻觉。"
+      ],
+      "scope": [
+        "Developed around Qwen3.6-27B.",
+        "主要围绕 Qwen3.6-27B 开发。"
+      ],
+      "limitation": [
+        "Input inversion shortcuts remain; weaker models require task adaptation.",
+        "仍存在反推输入的捷径；较弱模型需要任务适配。"
+      ],
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "inspectionScope": "Original post: introduction, scope, metrics and background links.",
+      "publicationStatus": "source_reported",
+      "replicationStatus": "not_replicated_by_observatory",
+      "timestampNote": [
+        "Publication and source-version times are separate from this inspection. Null fields are unknown.",
+        "发表及来源版本时间与本次检查时间分别记录。空值表示未知。"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "edge-1",
+      "source": "rlens",
+      "target": "jlens",
+      "kind": "citation",
+      "label": [
+        "references",
+        "引用"
+      ],
+      "note": [
+        "The evaluation section explicitly links to the original J-lens paper.",
+        "评估部分明确链接到原始 J-lens 论文。"
+      ],
+      "locator": "Results → Evals; link to Appendix A.6",
+      "proof_url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-2",
+      "source": "jpp",
+      "target": "jlens",
+      "kind": "citation",
+      "label": [
+        "references",
+        "引用"
+      ],
+      "note": [
+        "The post links to Gurnee et al. and builds on the J-lens formulation.",
+        "文章链接到 Gurnee 等人的工作，并以 J-lens 表述为基础。"
+      ],
+      "locator": "Introduction; Background → J-Lens",
+      "proof_url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-3",
+      "source": "jpp",
+      "target": "rlens",
+      "kind": "citation",
+      "label": [
+        "references",
+        "引用"
+      ],
+      "note": [
+        "The post explicitly cites the R-lens and adopts its LRP backward pass.",
+        "文章明确引用 R-lens，并采用其 LRP 反向传播。"
+      ],
+      "locator": "Introduction, change (2); Background → R-Lens",
+      "proof_url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-4",
+      "source": "jpp",
+      "target": "bench",
+      "kind": "citation",
+      "label": [
+        "references",
+        "引用"
+      ],
+      "note": [
+        "The related-work section links to WorkspaceBench as an alternative evaluation set.",
+        "相关工作部分链接到 WorkspaceBench，将其列为另一组评估。"
+      ],
+      "locator": "Appendix B → Related Work → Multi-hop reasoning",
+      "proof_url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-5",
+      "source": "looped",
+      "target": "jlens",
+      "kind": "citation",
+      "label": [
+        "references",
+        "引用"
+      ],
+      "note": [
+        "The paper explicitly cites the original workspace study and extends its lens and experimental suite to recurrence.",
+        "论文明确引用原始 workspace 工作，并把其 lens 与实验套件扩展到递归结构。"
+      ],
+      "locator": "§1 Introduction; Gurnee et al. (2026), reference entry",
+      "proof_url": "https://arxiv.org/abs/2609.01924",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-6",
+      "source": "layer_metric",
+      "target": "rlens",
+      "kind": "challenge",
+      "label": [
+        "comment on",
+        "评论于"
+      ],
+      "note": [
+        "The stored comment permalink belongs to this source post. This is a discussion relationship, not a paper citation.",
+        "已存储的评论永久链接属于这篇文章；这是讨论关系，不是论文引用。"
+      ],
+      "locator": "Comment beginning “One reason we didn't really follow up…”",
+      "proof_url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers?commentId=tx8tp7PwFNcP4BvPh",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "edge-13",
+      "source": "looped",
+      "target": "ouro",
+      "kind": "editorial",
+      "label": [
+        "related endpoint evidence",
+        "相关的终点证据"
+      ],
+      "note": [
+        "An editor-selected relationship from the existing reading map. Direct citation, agreement and contradiction are not established by this edge.",
+        "来自已有阅读图的编辑性关联；此连线不确认直接引用、一致或矛盾。"
+      ],
+      "locator": null,
+      "proof_url": null,
+      "directed": false,
+      "reviewStatus": "editorial_not_scientific_evidence",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": null
+    },
+    {
+      "id": "edge-16",
+      "source": "jlens",
+      "target": "bench",
+      "kind": "editorial",
+      "label": [
+        "benchmarks readout",
+        "评估读出"
+      ],
+      "note": [
+        "An editor-selected relationship from the existing reading map. Direct citation, agreement and contradiction are not established by this edge.",
+        "来自已有阅读图的编辑性关联；此连线不确认直接引用、一致或矛盾。"
+      ],
+      "locator": null,
+      "proof_url": null,
+      "directed": false,
+      "reviewStatus": "editorial_not_scientific_evidence",
+      "inheritedReviewStatus": "inherited_pending_review",
+      "humanReviewedAt": null,
+      "machineInspectedAt": null
+    },
+    {
+      "id": "method-r-j",
+      "source": "rlens",
+      "target": "jlens",
+      "kind": "method",
+      "label": [
+        "adapts method",
+        "继承方法"
+      ],
+      "note": [
+        "Changes the backward pass of the J-lens.",
+        "修改 J-lens 的反向传播。"
+      ],
+      "locator": "TL;DR; Methods",
+      "proof_url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "pending",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "method-jpp-r",
+      "source": "jpp",
+      "target": "rlens",
+      "kind": "method",
+      "label": [
+        "adopts LRP",
+        "采用 LRP"
+      ],
+      "note": [
+        "J++ explicitly adopts the R-lens backward pass.",
+        "J++ 明确采用 R-lens 的反向传播。"
+      ],
+      "locator": "Introduction, change (2)",
+      "proof_url": "https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "pending",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "eval-r-j",
+      "source": "rlens",
+      "target": "jlens",
+      "kind": "evaluation",
+      "label": [
+        "compares readouts",
+        "比较读出"
+      ],
+      "note": [
+        "A readout evaluation against J-lens; it is not independent proof of causal use.",
+        "与 J-lens 比较读出；不是因果使用的独立证明。"
+      ],
+      "locator": "Results → Evals",
+      "proof_url": "https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers",
+      "directed": true,
+      "reviewStatus": "machine_inspected_pending_human",
+      "inheritedReviewStatus": "pending",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    }
+  ],
+  "branches": [
+    {
+      "id": "methods",
+      "title": [
+        "Readout methods",
+        "读出方法"
+      ],
+      "question": [
+        "What improves when a lens improves?",
+        "Lens 变好，究竟改善了什么？"
+      ],
+      "coverage": "initial",
+      "coverageNote": [
+        "Initial sources are populated; review and coverage remain incomplete.",
+        "已填充首批来源，审核与覆盖仍不完整。"
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": [
+        "Model architecture",
+        "模型结构"
+      ],
+      "question": [
+        "Does the readout endpoint change what we can see?",
+        "读出终点是否改变了我们能看到的内容？"
+      ],
+      "coverage": "initial",
+      "coverageNote": [
+        "Initial sources are populated; review and coverage remain incomplete.",
+        "已填充首批来源，审核与覆盖仍不完整。"
+      ]
+    },
+    {
+      "id": "causal",
+      "title": [
+        "Causal evidence",
+        "因果证据"
+      ],
+      "question": [
+        "Is readable information actually used?",
+        "读得出的信息是否实际参与计算？"
+      ],
+      "coverage": "gap",
+      "coverageNote": [
+        "Question retained; a reviewed branch synthesis has not yet been added.",
+        "保留研究问题，尚未添加经审核的分支综述。"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "title": [
+        "Monitoring",
+        "监控应用"
+      ],
+      "question": [
+        "Can a signal help before the answer?",
+        "能否在回答之前提供有用信号？"
+      ],
+      "coverage": "gap",
+      "coverageNote": [
+        "Question retained; a reviewed branch synthesis has not yet been added.",
+        "保留研究问题，尚未添加经审核的分支综述。"
+      ]
+    },
+    {
+      "id": "meaning",
+      "title": [
+        "Meaning of J-space",
+        "J-space 的含义"
+      ],
+      "question": [
+        "How does the measuring vocabulary shape the result?",
+        "测量词表如何影响结果？"
+      ],
+      "coverage": "gap",
+      "coverageNote": [
+        "Question retained; a reviewed branch synthesis has not yet been added.",
+        "保留研究问题，尚未添加经审核的分支综述。"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "ouro-target",
+      "branch": "architecture",
+      "title": [
+        "Earlier passes can be more readable when the lens targets their own exit.",
+        "Lens 指向本轮出口时，较早轮次的内容可能更容易读出。"
+      ],
+      "status": "source_reported",
+      "reviewStatus": "machine_inspected_pending_human",
+      "evidenceIds": [
+        "ouro-own-exit"
+      ],
+      "statement": [
+        "The repository reports positive own-exit minus final-target excess-hit@10 contrasts in passes 1–3 of base Ouro-2.6B. This supports target-dependent recoverability in that setting.",
+        "仓库报告：基础 Ouro-2.6B 第 1–3 轮中，本轮出口相对最终终点的 excess-hit@10 差值为正。这支持该设置下的目标依赖读出。"
+      ],
+      "question": [
+        "Does a weak final-target readout mean the intermediate concept has disappeared?",
+        "最终终点读出较弱，是否意味着中间概念已经消失？"
+      ],
+      "conditions": [
+        "160-question confirmation states; physical blocks 26–37 in each pass; own-exit/final-target estimator family; post-confirmation analysis.",
+        "160 个问题的确认集状态；每轮物理块 26–37；本轮出口／最终终点同一估计器族；确认后的分析。"
+      ],
+      "limitations": [
+        "Target and transport distance remain coupled. No tuned-lens baseline; no causal-use result or Observatory replication. Post-confirmation scope limits generalization.",
+        "目标与传输距离仍然耦合。缺少 tuned-lens 基线、因果使用结果及本站复现。确认后分析的范围限制泛化。"
+      ],
+      "counterevidence": [
+        "No direct refutation of this within-Ouro contrast is recorded here. The negative Huginn pilot and estimator sensitivity in the same source limit generalization; they are not independent replications.",
+        "当前没有收录对 Ouro 内部差值的直接反驳。同一来源的 Huginn 负结果与估计器敏感性限制泛化，且不构成独立复现。"
+      ],
+      "next": [
+        "Compare matched target distances on the same cached-state cohort, with equal calibration and a tuned baseline.",
+        "在相同缓存状态样本上匹配目标距离、校准预算，并加入 tuned 基线。"
+      ],
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ouro-own-exit",
+      "claimId": "ouro-target",
+      "sourceId": "ouro",
+      "role": "support",
+      "curveId": "ouro-own-final",
+      "status": "reported_not_replicated",
+      "locator": [
+        "README → Results (own-exit contrasts); Limitations; verification script selects blocks 26–37.",
+        "README → Results（本轮出口差值）、Limitations；验证脚本选取物理块 26–37。"
+      ],
+      "codeUrl": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/research/closeout_2026-09-11/local_exit/confirmation_2026-09-12/verify_own_exit_family.py",
+      "sourceCommit": "a47fad18d91df4cebbed9259700d2cc32a841558",
+      "rawDataBundled": false,
+      "sourceUrl": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/README.md",
+      "reviewStatus": "machine_inspected_pending_human",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "observation": [
+        "The three rounded own-exit minus final-target means are 22.60, 26.50 and 34.17 percentage points.",
+        "三个已报告并取整的本轮出口减最终终点均值为 22.60、26.50 和 34.17 个百分点。"
+      ],
+      "entailment": [
+        "Supports target-dependent recovery in the reported setting, without identifying why.",
+        "支持报告设置下的目标依赖恢复，但没有识别成因。"
+      ]
+    }
+  ],
+  "curves": [
+    {
+      "id": "ouro-own-final",
+      "label": [
+        "Own-exit − final-target",
+        "本轮出口 − 最终终点"
+      ],
+      "source_id": "ouro",
+      "source_url": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/README.md",
+      "locator": "README: Results, third bullet; post-confirmation scope paragraph",
+      "model": "ByteDance/Ouro-2.6B (base)",
+      "model_revision": "1ed04250da1a9936042725d302e81c8fa2ab5abd",
+      "cohort": "160-question confirmation states",
+      "metric": "excess hit@10",
+      "unit": "percentage points",
+      "x": "recurrent pass",
+      "quantity": "own-exit minus final-target contrast",
+      "estimator_family": "initial-study own-exit/final-target family",
+      "analysis": "post-confirmation",
+      "status": "source_reported_summary",
+      "raw_rows_available": false,
+      "points": [
+        [
+          1,
+          22.6
+        ],
+        [
+          2,
+          26.5
+        ],
+        [
+          3,
+          34.17
+        ]
+      ],
+      "boundary": [
+        "Three reported aggregate contrasts. No raw ranks or interval endpoints are bundled. A larger gap does not identify its mechanism or establish a scaling law.",
+        "三个已报告的汇总差值；未附原始排名或区间端点。差距增大不能识别机制，也不能证明 scaling law。"
+      ],
+      "rounding": "Reported means rounded to two decimal places; arithmetic here uses those rounded values.",
+      "snapshot_sha256": "b832c5124d4f62fe71d82dfdce1705c09460f022b413165dbcd0850f895b5037",
+      "revisionNote": [
+        "Checkpoint revision is transcribed from the pinned README. Model files, data and environment have not been checked for executable reproduction.",
+        "Checkpoint revision 录自固定版本 README；尚未核对模型文件、数据与环境是否足以执行复现。"
+      ],
+      "source_commit": "a47fad18d91df4cebbed9259700d2cc32a841558",
+      "code_url": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/research/closeout_2026-09-11/local_exit/confirmation_2026-09-12/verify_own_exit_family.py",
+      "checkpoint_revision_status": "reported_in_pinned_source_not_downloaded",
+      "machine_inspected_at": "2026-10-23T04:32:12.859Z",
+      "human_reviewed_at": null,
+      "block_band": [
+        26,
+        37
+      ],
+      "block_indexing": "one_based_physical_inclusive",
+      "sample_count": 160,
+      "distinct_concept_count": 80,
+      "dependency_group_count": 28,
+      "uncertainty": null,
+      "uncertaintyNote": [
+        "No item-level data or interval endpoints are bundled here; this interface does not infer confidence intervals or significance.",
+        "本站未附逐样本数据或区间端点，界面不推断置信区间或显著性。"
+      ],
+      "inherited_snapshot_sha256": "76591eac4655203754782e545cadf9950f83b87f5ec642921f294ad97bc52992"
+    },
+    {
+      "id": "ouro-fit01-final",
+      "label": [
+        "Frozen fit01: final-target excess",
+        "冻结 fit01：最终终点的 excess"
+      ],
+      "source_id": "ouro",
+      "source_url": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/README.md",
+      "locator": "README: Results, second bullet; estimator-family clarification",
+      "model": "ByteDance/Ouro-2.6B (base)",
+      "model_revision": "1ed04250da1a9936042725d302e81c8fa2ab5abd",
+      "cohort": "160-question confirmation states",
+      "metric": "excess hit@10",
+      "unit": "percentage points",
+      "x": "recurrent pass",
+      "quantity": "final-target excess level",
+      "estimator_family": "frozen confirmation fit01",
+      "analysis": "post-confirmation",
+      "status": "source_reported_summary",
+      "raw_rows_available": false,
+      "points": [
+        [
+          1,
+          -6.5
+        ],
+        [
+          2,
+          -8.64
+        ],
+        [
+          3,
+          -11.14
+        ]
+      ],
+      "boundary": [
+        "A different estimator family. Do not add these values to the own-exit contrast to invent absolute own-exit scores.",
+        "来自不同的估计器族。不能将这些值与本轮出口差值相加，拼出绝对本轮出口分数。"
+      ],
+      "rounding": "Reported means rounded to two decimal places; arithmetic here uses those rounded values.",
+      "snapshot_sha256": "649d808b7d8cd17dbf720f41ed7ac018b92e49a4dc8b8ac0b5a3a2cea7f64398",
+      "revisionNote": [
+        "Checkpoint revision is transcribed from the pinned README. Model files, data and environment have not been checked for executable reproduction.",
+        "Checkpoint revision 录自固定版本 README；尚未核对模型文件、数据与环境是否足以执行复现。"
+      ],
+      "source_commit": "a47fad18d91df4cebbed9259700d2cc32a841558",
+      "code_url": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/research/closeout_2026-09-11/local_exit/confirmation_2026-09-12/verify_own_exit_family.py",
+      "checkpoint_revision_status": "reported_in_pinned_source_not_downloaded",
+      "machine_inspected_at": "2026-10-23T04:32:12.859Z",
+      "human_reviewed_at": null,
+      "block_band": [
+        26,
+        37
+      ],
+      "block_indexing": "one_based_physical_inclusive",
+      "sample_count": 160,
+      "distinct_concept_count": 80,
+      "dependency_group_count": 28,
+      "uncertainty": null,
+      "uncertaintyNote": [
+        "No item-level data or interval endpoints are bundled here; this interface does not infer confidence intervals or significance.",
+        "本站未附逐样本数据或区间端点，界面不推断置信区间或显著性。"
+      ],
+      "inherited_snapshot_sha256": "852b939da4dac08f1ab0bbb2eca75b62ba2ffa5c90882f4dd21f5db3a263bbbc"
+    }
+  ],
+  "changes": [],
+  "hypothesisVersions": [
+    {
+      "id": "architecture:endpoint:en:cc37544a:seed",
+      "parent_ids": [],
+      "case_id": "architecture",
+      "created_at": "2026-10-21",
+      "author": "atlas_editor",
+      "operation": "curated_starter",
+      "snapshot": {
+        "claim": "The information persists, but the chosen derivative target makes it hard for this lens to recover.",
+        "plan": "Start with the reported widening gap. Cache identical states and sweep target exits using one estimator family and equal calibration budgets. Separate remaining target distance from source-pass position; include distance-matched pairs where the design permits, an independent concept-strength readout, and held-out tasks. Obtain item-level data before estimating uncertainty with the documented dependency groups.",
+        "criteria": "Predefine a practically meaningful residual effect on development data. If distance and calibration explain the gap on held-out tasks, prefer a measurement account. If source-pass or target-exit effects remain after those controls, investigate target specialization or representation change. Either outcome changes the next experiment; neither establishes causal use or erasure.",
+        "alternatives": [
+          "Content persists in a changing basis or state carrier that the current lens tracks poorly.",
+          "An intermediate representation changes or disappears across a loop boundary; a later pass may reconstruct it."
+        ],
+        "consequence": "The answer changes whether we redesign the readout, investigate a changing representation, or claim that content has been lost.",
+        "increment": "Own-exit advantage is already reported. The increment is a distance- and calibration-matched comparison, with an independent persistence measure.",
+        "evidence_ids": [
+          "looped",
+          "ouro"
+        ],
+        "evidence_snapshot": "e3af73dd24d591d2a16be39ad2177a5007efe1cd5e8c6d5b3f424721cf4448dd",
+        "resource_tier": "summaries",
+        "language": "en",
+        "status": "proposed_not_run"
+      },
+      "execution_status": "not_run",
+      "assessment": "not_reviewed",
+      "origin": "imported_prototype_example",
+      "recordFormat": "legacy_prototype_v1",
+      "evidenceIdNamespace": "source",
+      "language": "en",
+      "importedAt": "2026-10-23T04:32:12.859Z",
+      "reviewStatus": "inherited_pending_human",
+      "historyNote": "Actual saved prototype records; not research execution results. Original timestamps and parent_ids retained."
+    },
+    {
+      "id": "rev-mvj76c3b-fsar",
+      "parent_ids": [
+        "architecture:endpoint:en:cc37544a:seed"
+      ],
+      "case_id": "architecture",
+      "created_at": "2026-10-22T07:06:12.791Z",
+      "author": "reader",
+      "operation": "revision",
+      "changed_field": "plan",
+      "reason": "The three reported aggregate points do not provide item-level uncertainty or isolate target distance.",
+      "before": "Start with the reported widening gap. Cache identical states and sweep target exits using one estimator family and equal calibration budgets. Separate remaining target distance from source-pass position; include distance-matched pairs where the design permits, an independent concept-strength readout, and held-out tasks. Obtain item-level data before estimating uncertainty with the documented dependency groups.",
+      "after": "Sweep target exits on the same cached states, match calibration and concept strength, then estimate uncertainty using the documented dependency groups on held-out data.",
+      "snapshot": {
+        "claim": "The information persists, but the chosen derivative target makes it hard for this lens to recover.",
+        "plan": "Sweep target exits on the same cached states, match calibration and concept strength, then estimate uncertainty using the documented dependency groups on held-out data.",
+        "criteria": "Predefine a practically meaningful residual effect on development data. If distance and calibration explain the gap on held-out tasks, prefer a measurement account. If source-pass or target-exit effects remain after those controls, investigate target specialization or representation change. Either outcome changes the next experiment; neither establishes causal use or erasure.",
+        "alternatives": [
+          "Content persists in a changing basis or state carrier that the current lens tracks poorly.",
+          "An intermediate representation changes or disappears across a loop boundary; a later pass may reconstruct it."
+        ],
+        "consequence": "The answer changes whether we redesign the readout, investigate a changing representation, or claim that content has been lost.",
+        "increment": "Own-exit advantage is already reported. The increment is a distance- and calibration-matched comparison, with an independent persistence measure.",
+        "evidence_ids": [
+          "looped",
+          "ouro"
+        ],
+        "evidence_snapshot": "e3af73dd24d591d2a16be39ad2177a5007efe1cd5e8c6d5b3f424721cf4448dd",
+        "resource_tier": "summaries",
+        "language": "en",
+        "status": "proposed_not_run"
+      },
+      "assessment": "not_reviewed",
+      "execution_status": "not_run",
+      "origin": "imported_prototype_example",
+      "recordFormat": "legacy_prototype_v1",
+      "evidenceIdNamespace": "source",
+      "language": "en",
+      "importedAt": "2026-10-23T04:32:12.859Z",
+      "reviewStatus": "inherited_pending_human",
+      "historyNote": "Actual saved prototype records; not research execution results. Original timestamps and parent_ids retained."
+    },
+    {
+      "id": "rev-mvj7b93n-5cla",
+      "parent_ids": [
+        "architecture:endpoint:en:cc37544a:seed"
+      ],
+      "case_id": "architecture",
+      "created_at": "2026-10-22T07:10:02.195Z",
+      "author": "reader",
+      "operation": "revision",
+      "changed_field": "claim",
+      "reason": "The reported own-exit advantage grows from 22.60 to 34.17 pp across passes 1–3 at the same physical layer band, while the remaining distance to the final exit decreases. This motivates separating distance from target specialization; it does not establish either mechanism.",
+      "before": "The information persists, but the chosen derivative target makes it hard for this lens to recover.",
+      "after": "A source-pass or target-exit effect may remain in Ouro concept recovery after matching target distance, calibration budget and independently measured concept strength.",
+      "snapshot": {
+        "claim": "A source-pass or target-exit effect may remain in Ouro concept recovery after matching target distance, calibration budget and independently measured concept strength.",
+        "plan": "Start with the reported widening gap. Cache identical states and sweep target exits using one estimator family and equal calibration budgets. Separate remaining target distance from source-pass position; include distance-matched pairs where the design permits, an independent concept-strength readout, and held-out tasks. Obtain item-level data before estimating uncertainty with the documented dependency groups.",
+        "criteria": "Predefine a practically meaningful residual effect on development data. If distance and calibration explain the gap on held-out tasks, prefer a measurement account. If source-pass or target-exit effects remain after those controls, investigate target specialization or representation change. Either outcome changes the next experiment; neither establishes causal use or erasure.",
+        "alternatives": [
+          "Content persists in a changing basis or state carrier that the current lens tracks poorly.",
+          "An intermediate representation changes or disappears across a loop boundary; a later pass may reconstruct it."
+        ],
+        "consequence": "The answer changes whether we redesign the readout, investigate a changing representation, or claim that content has been lost.",
+        "increment": "Own-exit advantage is already reported. The increment is a distance- and calibration-matched comparison, with an independent persistence measure.",
+        "evidence_ids": [
+          "looped",
+          "ouro"
+        ],
+        "evidence_snapshot": "e3af73dd24d591d2a16be39ad2177a5007efe1cd5e8c6d5b3f424721cf4448dd",
+        "resource_tier": "summaries",
+        "language": "en",
+        "status": "proposed_not_run"
+      },
+      "assessment": "not_reviewed",
+      "execution_status": "not_run",
+      "origin": "imported_prototype_example",
+      "recordFormat": "legacy_prototype_v1",
+      "evidenceIdNamespace": "source",
+      "language": "en",
+      "importedAt": "2026-10-23T04:32:12.859Z",
+      "reviewStatus": "inherited_pending_human",
+      "historyNote": "Actual saved prototype records; not research execution results. Original timestamps and parent_ids retained."
+    }
+  ],
+  "runs": [],
+  "guide": {
+    "en": "# When a concept becomes unreadable\n\nSuppose a model answers “What colour is the fourth planet from the Sun?” A two-step route is **Mars → red**. A lens turns an internal state into scores for words. If it recovers Mars at one depth but misses it later, did the concept disappear, or did the measurement stop working?\n\nThe [original J-lens study](https://transformer-circuits.pub/2026/workspace/) proposes a vocabulary-linked way to inspect part of a model’s internal representations. **Recovering a word and showing that the model uses its information are different claims.**\n\n## Follow two research branches\n\n**Readout methods:** [R-lens](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers) changes the backward pass; [J++ Lens](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace) adds filtering. Better scores motivate asking what each evaluation rewards.\n\n**Model architecture:** a looped model reuses blocks. The [Ouro repository report](https://github.com/VykosMolt/JLens-Ouro) compares lenses aimed at a pass’s own exit with lenses aimed at the final exit. Changing that endpoint changes the reported recovery on the same confirmation states. This is a reported measurement result, not an Observatory reproduction.\n\n## Read one curve carefully\n\nThe source reports own-exit minus final-target contrasts of **22.60, 26.50 and 34.17 percentage points** in passes 1–3, at physical blocks 26–37. Try can subtract the first mean from the last. That arithmetic describes three rounded aggregates; it cannot produce a confidence interval or tell us why the gap changes. Another published series uses a different estimator family and cannot be added to this contrast.\n\n## Turn the observation into a question\n\nAfter matching remaining computation distance, calibration budget and independently measured concept strength, does source pass or target exit still affect recoverability? Investigate compares transport limits, representation changes and overwritten or rebuilt content. The proposal is editable and exportable, with explicit controls, outcome criteria and missing resources. **No model experiment has been run here.**\n\nThe graph separates direct citations, method adaptation, evaluation, objections and editorial reading links. Evidence links and saved hypothesis revisions have their own meanings. Five branches remain visible; causal evidence, monitoring and the meaning of J-space still have incomplete coverage.",
+    "zh": "# 当一个概念变得读不出来\n\n假设模型回答“太阳系第四颗行星是什么颜色？”一个两步过程是 **火星 → 红色**。Lens 把内部状态转为词语分数。如果它在某个深度读到了火星，后来却读不到，是概念消失了，还是测量失效了？\n\n[原始 J-lens 研究](https://transformer-circuits.pub/2026/workspace/)提出一种与词表关联的方法，观察模型内部表示的一部分。**读到一个词，与证明模型使用了对应信息，是不同主张。**\n\n## 先沿两条分支看\n\n**读出方法：**[R-lens](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)修改反向传播；[J++ Lens](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace)加入筛选。分数提高后，还要问评估究竟奖励了什么。\n\n**模型结构：**循环模型重复使用相同块。[Ouro 仓库报告](https://github.com/VykosMolt/JLens-Ouro)比较以当前轮出口及最终出口为目标的 lens。在同一确认集状态上，改变目标出口会改变报告的恢复能力。这是来源的测量报告，并非本站复现。\n\n## 仔细读一条曲线\n\n来源报告，在物理块 26–37、第 1–3 轮，本轮出口减最终终点的差值为 **22.60、26.50、34.17 个百分点**。Try 可以用最后一个均值减去第一个。这只是三个取整汇总值的算术，不能生成置信区间，也不能解释差距变化的原因。另一个报告序列来自不同估计器族，不能与这组差值相加。\n\n## 把观察变成问题\n\n匹配剩余计算距离、校准预算及独立测得的概念强度后，源轮次或目标出口是否仍影响可恢复性？Investigate 比较传输受限、表示变化，以及内容被覆盖或重建等竞争解释。提案可编辑、保存和导出，包含对照、结果判据和缺失资源。**本站尚未运行模型实验。**\n\n演化图区分直接引用、方法继承、评测、质疑与编辑性阅读关系。证据关系和保存的假设修订各有独立含义。地图保留五条分支；因果证据、监控和 J-space 含义的覆盖仍不完整。"
+  },
+  "provenance": {
+    "origin": "sethzhao506.github.io/_guide_sources/jlens and guides/jlens",
+    "importedAt": "2026-10-22",
+    "note": [
+      "Adapted from the existing bilingual guide, evidence ledger, relation map, deterministic core and saved hypothesis example. Current core citations were inspected by an automated agent; no human review, model run or independent replication is claimed.",
+      "复用已有双语导读、证据清单、关系图、确定性逻辑与已保存的假设示例。当前核心引用由自动化 Agent 检查；不声称完成人工审核、模型运行或独立复现。"
+    ],
+    "files": [
+      {
+        "path": "guides/jlens/evidence.json",
+        "sha256": "e3af73dd24d591d2a16be39ad2177a5007efe1cd5e8c6d5b3f424721cf4448dd"
+      },
+      {
+        "path": "guides/jlens/evidence.zh.json",
+        "sha256": "f57990cf2c9d873f15d7ba00e660510e46a4860a3927003b37feee7faa64010f"
+      },
+      {
+        "path": "guides/jlens/relations-data.json",
+        "sha256": "0404a970ac3dcc6b27cde71cf44c4aa81a373a668985807d91281df38328c7ea"
+      },
+      {
+        "path": "guides/jlens/discovery-data.json",
+        "sha256": "4fc9fa1aee53d3a4bce52ae0882bc94eddc6891c8c2ea9aebbca35c5849bb78c"
+      },
+      {
+        "path": "_guide_sources/jlens/discovery-core.js",
+        "sha256": "8c2ad768c360a9afa00564e9f354d1ea5669422e30e8a5a167fa36419c23caa8"
+      },
+      {
+        "path": "_guide_sources/jlens/article.md",
+        "sha256": "b4baad23165fb5c484d3ab2d766337cfdf424b259bf9cb51f7409efd9a00036a"
+      },
+      {
+        "path": "_guide_sources/jlens/article.zh.md",
+        "sha256": "fba19abfd98b81490a1dcaa1aa92bd9e8fe4fe2e91dbf3ccffa2de0cbf4048ae"
+      },
+      {
+        "path": "guides/jlens/roadmap-data.json",
+        "sha256": "86ef83afa3a7437735ae4f016f4dbf15b334e4787c54ca423e1a48d0e8fe7d85"
+      },
+      {
+        "path": "guides/jlens/agent-design.md",
+        "sha256": "2b27fb1a2ea1b25389aa413bd393006a2aa5749e00899083f8238afc7ccdd444"
+      },
+      {
+        "path": "guides/jlens/ouro-hypothesis-example.json",
+        "sha256": "a4bf48036629a7c124d7c621abbac7f51277e790c9726cad4dd5f6de51521b6d"
+      }
+    ],
+    "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+    "missingAssets": [
+      "PROJECT_CONTEXT.md",
+      "LIGHTWEIGHT_PLAN.md",
+      "lesswrong/agent-design.md"
+    ],
+    "missingAssetSearch": "Exact filename search including hidden files in this repository, the old personal-site repository and their workspace parent directory; no matches. The corresponding _guide_sources/jlens/agent-design.md and guides/jlens/agent-design.md were read.",
+    "legacyGraphNodeCount": 31
+  },
+  "relationKinds": [
+    {
+      "id": "citation",
+      "label": [
+        "Direct citation",
+        "直接引用"
+      ],
+      "meaning": [
+        "The source work explicitly references the target work. This alone does not establish agreement.",
+        "来源工作明确引用目标工作；这本身不代表结论一致。"
+      ]
+    },
+    {
+      "id": "method",
+      "label": [
+        "Method adaptation",
+        "方法继承"
+      ],
+      "meaning": [
+        "An explicitly described method component is adopted or changed.",
+        "明确描述的方法组件被采用或修改。"
+      ]
+    },
+    {
+      "id": "evaluation",
+      "label": [
+        "Evaluation",
+        "评测"
+      ],
+      "meaning": [
+        "The source evaluates the target method within a stated setting.",
+        "来源在特定设置下评测目标方法。"
+      ]
+    },
+    {
+      "id": "challenge",
+      "label": [
+        "Challenge",
+        "质疑"
+      ],
+      "meaning": [
+        "A documented objection or limitation; not automatically an experimental refutation.",
+        "有出处的质疑或局限，不自动构成实验反例。"
+      ]
+    },
+    {
+      "id": "editorial",
+      "label": [
+        "Editorial connection",
+        "编辑性关联"
+      ],
+      "meaning": [
+        "A suggested reading connection, without a scholarly or causal inference.",
+        "建议的阅读联系，不作学术继承或因果推断。"
+      ]
+    }
+  ],
+  "changeHistoryNote": [
+    "No historical judgment-change snapshots are available for this Observatory. Source release dates are not treated as our prior beliefs. Future events must record before, new evidence, after, reason and conditions.",
+    "本站尚无历史判断变化快照。来源发布日期不作为本站此前判断。后续变化须记录此前判断、新证据、更新判断、理由与适用条件。"
+  ],
+  "hypothesisTemplate": {
+    "id": "ouro-matched-control-proposal",
+    "parent_ids": [],
+    "question": [
+      "After matching remaining computation distance, calibration budget and independently measured concept strength, does source pass or target exit still affect recoverability?",
+      "匹配剩余计算距离、校准预算及独立测得的概念强度后，源轮次或目标出口是否仍影响可恢复性？"
+    ],
+    "decision": [
+      "The answer changes whether we redesign the readout, investigate a changing representation, or claim that content has been lost.",
+      "结果决定下一步应改进读出、研究表示变化，还是讨论内容丢失。"
+    ],
+    "claim": [
+      "A residual source-pass or target-exit effect may remain after matched measurement controls.",
+      "在匹配测量条件后，仍可能存在源轮次或目标出口的残余效应。"
+    ],
+    "boundedScope": [
+      "One pinned base Ouro-2.6B checkpoint; one concept-split two-hop cohort; same cached states and one estimator family. Recovery only; causal use is a separate question.",
+      "一个固定的基础 Ouro-2.6B checkpoint；按概念划分的同一两跳样本；相同缓存状态与同一估计器族。仅研究恢复能力，因果使用另行检验。"
+    ],
+    "claimIds": [
+      "ouro-target"
+    ],
+    "evidenceIds": [
+      "ouro-own-exit"
+    ],
+    "sourceIds": [
+      "ouro",
+      "looped"
+    ],
+    "alternatives": [
+      {
+        "id": "endpoint",
+        "title": [
+          "The measurement loses reach",
+          "测量的可达范围受限"
+        ],
+        "claim": [
+          "The information persists, but the chosen derivative target makes it hard for this lens to recover.",
+          "信息仍存在，但选定的导数终点让这个 lens 难以恢复。"
+        ],
+        "prediction": [
+          "With matched states and calibration, endpoint/distance controls should reduce the deficit while an independent measure still recovers the concept.",
+          "匹配状态与校准后，终点／距离控制应减小缺口，独立测量仍能恢复概念。"
+        ]
+      },
+      {
+        "id": "reencoding",
+        "title": [
+          "The representation changes",
+          "信息换了一种表示"
+        ],
+        "claim": [
+          "Content persists in a changing basis or state carrier that the current lens tracks poorly.",
+          "内容在变化的基底或状态载体中持续存在，当前 lens 难以跟踪。"
+        ],
+        "prediction": [
+          "A suitable alternative readout may recover content even where a distance-matched lens fails. Causal-use checks remain separate.",
+          "即使距离匹配的 lens 失败，合适的另一种读出也可能恢复内容；因果使用仍需另测。"
+        ]
+      },
+      {
+        "id": "loss",
+        "title": [
+          "Content is overwritten or rebuilt",
+          "内容被覆盖或重建"
+        ],
+        "claim": [
+          "An intermediate representation changes or disappears across a loop boundary; a later pass may reconstruct it.",
+          "中间表示在循环边界发生变化或消失，后续轮次可能重建它。"
+        ],
+        "prediction": [
+          "This requires converging temporal and intervention evidence. Several failed decoders alone cannot establish erasure.",
+          "需要时间与干预证据相互印证；多个解码器失败本身不能证明擦除。"
+        ]
+      }
+    ],
+    "experiment": [
+      "Start with the reported widening gap. Cache identical states and sweep target exits using one estimator family and equal calibration budgets. Separate remaining target distance from source-pass position; include distance-matched pairs where the design permits, an independent concept-strength readout, and held-out tasks. Obtain item-level data before estimating uncertainty with the documented dependency groups.",
+      "从已报告的差距扩大现象出发。缓存相同状态，在同一估计器族与相同校准预算下扫描目标出口。区分剩余终点距离和源轮次位置；在设计允许时纳入距离匹配对照、独立概念强度读出及留出任务。取得逐样本数据后，再按已记录的依赖组估计不确定性。"
+    ],
+    "controls": [
+      "Use identical cached states, one estimator family and equal calibration examples and fitting budget. Match distance where the design permits; measure concept strength independently; split by concept before fitting; select thresholds and layers on development data; include trained and raw readout baselines. Leave unavailable distance combinations missing.",
+      "使用相同缓存状态、同一估计器族、相同校准样本及拟合预算。在设计允许处匹配距离；独立测量概念强度；拟合前按概念划分；在开发集选阈值与层；加入训练读出与原始读出基线。不可获得的距离组合保留缺失。"
+    ],
+    "data": [
+      "Need item-level ranks, exact state and target indices, checkpoint and cache manifests, calibration split, held-out tasks and dependency-group IDs. Three aggregate means cannot provide these observations.",
+      "需要逐样本排名、准确的状态及目标索引、checkpoint 与缓存清单、校准划分、留出任务和依赖组 ID。三个汇总均值不能提供这些观测。"
+    ],
+    "budget": [
+      "No compute allocation or measured cost is available. Begin with one checkpoint and a small cached-state pilot; measure memory, time and storage before fixing a run cap. This proposal starts no paid job.",
+      "尚无算力分配或实测成本。先用一个 checkpoint 和小规模缓存状态先导，测量内存、时间及存储后设定运行上限。本提案不启动付费任务。"
+    ],
+    "budgetEstimate": {
+      "gpuHours": null,
+      "cost": null,
+      "currency": null,
+      "reason": "No reference run or resource measurement has been completed."
+    },
+    "criteria": {
+      "support": [
+        "A residual pass or exit effect exceeds a practical threshold fixed on development data and survives prespecified controls on held-out concepts. This motivates representation or target-specialization tests; it does not establish mechanism.",
+        "残余轮次或出口效应超过在开发集预先固定的实际阈值，并在留出概念与预设对照下保留。结果支持继续研究表示或目标特化，并不确立机制。"
+      ],
+      "weaken": [
+        "The apparent gap shrinks after matched distance, calibration and concept strength. Prioritize improving the instrument and validate that account on held-out data.",
+        "匹配距离、校准与概念强度后差距缩小。优先改进测量工具，并在留出数据验证该解释。"
+      ],
+      "null": [
+        "With adequate precision and working positive controls, no practically meaningful residual remains. Narrow the residual-effect claim and next test the distance/calibration account across tasks; do not infer concept absence.",
+        "精度足够且正对照有效时，没有实际意义的残余效应。收窄残余效应主张，下一步跨任务检验距离／校准解释；不能推断概念不存在。"
+      ],
+      "uncertain": [
+        "Missing matched cells, failed positive controls, insufficient precision or an unvalidated estimator leave the result unresolved. Fix the limiting prerequisite before interpreting a null.",
+        "匹配条件缺失、正对照失败、精度不足或估计器未经验证时，结果不确定。解释零结果前先修复限制条件。"
+      ]
+    },
+    "missingResources": [
+      "Validated reference reproduction; compatible item-level records or state caches; checkpoint/data/environment manifests; independent concept-strength measure; held-out thresholds; measured compute budget.",
+      "经过验证的参考复现；兼容的逐样本记录或状态缓存；模型／数据／环境清单；独立概念强度测量；留出判据；实测算力预算。"
+    ],
+    "status": "not_run",
+    "reviewStatus": "editorial_proposal_pending_review",
+    "createdAt": "2026-10-23T04:32:12.859Z",
+    "ancestryNote": [
+      "This is a new bilingual template adapted from the preserved prototype example, not a revision of a published scientific hypothesis. Only saved edits create parent_ids.",
+      "这是根据保留的原型示例改编的双语模板，并非已发表科学假设的修订。只有实际保存的修改才建立 parent_ids。"
+    ]
+  },
+  "evidenceRelations": [
+    {
+      "id": "evidence-ouro-support",
+      "source": "ouro-own-exit",
+      "target": "ouro-target",
+      "kind": "support",
+      "directed": true,
+      "label": [
+        "Supports in this setting",
+        "在此设置下支持"
+      ],
+      "note": [
+        "A source-reported own-exit contrast supports the bounded claim. It does not identify mechanism or causal use.",
+        "来源报告的本轮出口差值支持有范围的主张，并不识别机制或因果使用。"
+      ],
+      "locator": [
+        "Pinned README: Results, own-exit comparison and scope paragraph",
+        "固定版本 README：Results 的本轮出口比较及分析范围说明"
+      ],
+      "proof_url": "https://github.com/VykosMolt/JLens-Ouro/blob/a47fad18d91df4cebbed9259700d2cc32a841558/README.md",
+      "reviewStatus": "machine_inspected_pending_human",
+      "humanReviewedAt": null,
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z"
+    },
+    {
+      "id": "claim-ouro-question",
+      "source": "ouro-target",
+      "target": "ouro-distance-question",
+      "kind": "motivates",
+      "directed": true,
+      "label": [
+        "Motivates a controlled question",
+        "启发受控调查问题"
+      ],
+      "note": [
+        "This Observatory asks whether the association survives matched controls. This is editorial reasoning, not a source result.",
+        "本站提出：匹配对照后关联是否仍存在。这是编辑性分析，并非来源实验结果。"
+      ],
+      "locator": null,
+      "proof_url": null,
+      "reviewStatus": "editorial_proposal_pending_review",
+      "humanReviewedAt": null
+    },
+    {
+      "id": "question-ouro-proposal",
+      "source": "ouro-distance-question",
+      "target": "ouro-matched-control-proposal",
+      "kind": "planned_test",
+      "directed": true,
+      "label": [
+        "Planned discriminating test",
+        "计划中的区分性检验"
+      ],
+      "note": [
+        "A proposed test with alternatives and criteria. No model run or result node exists.",
+        "包含竞争解释与判据的检验提案。尚无模型运行或结果节点。"
+      ],
+      "locator": null,
+      "proof_url": null,
+      "reviewStatus": "editorial_proposal_pending_review",
+      "humanReviewedAt": null
+    },
+    {
+      "id": "revision:architecture:endpoint:en:cc37544a:seed:rev-mvj76c3b-fsar",
+      "source": "architecture:endpoint:en:cc37544a:seed",
+      "target": "rev-mvj76c3b-fsar",
+      "kind": "hypothesis_revision",
+      "directed": true,
+      "label": [
+        "Actual saved revision",
+        "实际保存的修订"
+      ],
+      "note": [
+        "The three reported aggregate points do not provide item-level uncertainty or isolate target distance.",
+        "The three reported aggregate points do not provide item-level uncertainty or isolate target distance."
+      ],
+      "locator": "guides/jlens/ouro-hypothesis-example.json → history",
+      "proof_url": null,
+      "reviewStatus": "inherited_pending_human",
+      "humanReviewedAt": null,
+      "createdAt": "2026-10-22T07:06:12.791Z"
+    },
+    {
+      "id": "revision:architecture:endpoint:en:cc37544a:seed:rev-mvj7b93n-5cla",
+      "source": "architecture:endpoint:en:cc37544a:seed",
+      "target": "rev-mvj7b93n-5cla",
+      "kind": "hypothesis_revision",
+      "directed": true,
+      "label": [
+        "Actual saved revision",
+        "实际保存的修订"
+      ],
+      "note": [
+        "The reported own-exit advantage grows from 22.60 to 34.17 pp across passes 1–3 at the same physical layer band, while the remaining distance to the final exit decreases. This motivates separating distance from target specialization; it does not establish either mechanism.",
+        "The reported own-exit advantage grows from 22.60 to 34.17 pp across passes 1–3 at the same physical layer band, while the remaining distance to the final exit decreases. This motivates separating distance from target specialization; it does not establish either mechanism."
+      ],
+      "locator": "guides/jlens/ouro-hypothesis-example.json → history",
+      "proof_url": null,
+      "reviewStatus": "inherited_pending_human",
+      "humanReviewedAt": null,
+      "createdAt": "2026-10-22T07:10:02.195Z"
+    }
+  ],
+  "questionNodes": [
+    {
+      "id": "ouro-distance-question",
+      "kind": "investigation_question",
+      "branch": "architecture",
+      "title": [
+        "After matching remaining computation distance, calibration budget and independently measured concept strength, does source pass or target exit still affect recoverability?",
+        "匹配剩余计算距离、校准预算及独立测得的概念强度后，源轮次或目标出口是否仍影响可恢复性？"
+      ],
+      "status": "unresolved",
+      "evidenceIds": [
+        "ouro-own-exit"
+      ],
+      "claimIds": [
+        "ouro-target"
+      ]
+    }
+  ],
+  "guideLong": {
+    "en": "# When a workspace becomes unreadable\r\n\r\n*Research guide · 22 October 2026 · approximately 10 minutes, with optional deeper paths*\r\n\r\nSuppose a model answers a two-hop question: identify a planet, then report its colour. A lens reads the intermediate concept at one depth, loses it, and finds it again later. What happened during the gap? The concept might have disappeared. It might also have moved into a representation that this lens cannot read.\r\n\r\nThat ambiguity connects much of the discussion around J-lens. My synthesis is that **workspace visibility should be treated as a measurement with conditions attached: the method, the state being inspected, and the endpoint it reads toward.** Whether the recovered information drives a computation or helps a monitor requires additional evidence.\r\n\r\nThis is a selective map of five connected debates, including substantive comments beneath the papers. The interactive atlas contains 20 traceable entries across 14 source documents. It distinguishes reported findings, objections, author responses and untested proposals. Connections between works are editorial synthesis unless explicitly marked as a direct reply.\r\n\r\n<!-- ATLAS -->\r\n\r\n## Start here: what does a lens measure?\r\n\r\nA model's **internal state** is a collection of numbers produced as it processes an input. A **readout** turns some of those numbers into an interpretable output, such as scores for words. A **lens** is the method used to obtain that readout. Different lenses can give different answers about the same state.\r\n\r\nIn the [original J-lens study](https://transformer-circuits.pub/2026/workspace/), **workspace** refers to a proposed shared representational space involved in reporting, modulation and flexible computation. The measured J-space approximates it. A readable word is evidence about the measurement; showing that the model uses the corresponding information calls for further tests.\r\n\r\nKeep the planet example in mind: “the lens recovered *Mars*” and “the model used its representation of Mars to answer *red*” are different claims. This guide follows what evidence could connect them. You can then use the lab to check reported numbers and frame a next test; its calculations do not rerun the model.\r\n\r\n## 1. What is getting better when a lens improves?\r\n\r\nThe original [J-lens paper](https://transformer-circuits.pub/2026/workspace/) constructs vocabulary-linked readouts from averaged Jacobians and tests reporting, modulation and flexible computation. These functional claims make the work more interesting than a collection of plausible-looking token lists. But the measured J-space remains an approximation to the proposed workspace.\r\n\r\n[R-lens](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers) changes backward propagation using layer-wise relevance rules and improves early readouts in several tested models. [J++](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace) combines relevance propagation, clustered and weighted Jacobians, and vocabulary filtering, with improvements across six open models. This is real methodological progress, but “better” depends on the evaluation.\r\n\r\nTwo comments sharpen that qualification. [StellaAthena asks](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers?commentId=tx8tp7PwFNcP4BvPh) whether a score can reward anticipating a later layer rather than describing the current one. [Niranjan Deshpande asks](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace?commentId=YhfAKjBSL3ZkreasB) whether filtering gains transfer to audits without a specified target word. These are evaluation challenges, not demonstrated failures of the methods.\r\n\r\nFor a follow-up, I would separate three outcomes: recovering a known intermediate, describing a state faithfully, and discovering an unexpected concern. The first gives a clean development target. The third is closer to the audit use case. Improvement on one should motivate testing the others, rather than silently stand in for them.\r\n\r\n## 2. Architecture changes what the measurement means\r\n\r\nThe [looped-transformer preprint](https://arxiv.org/abs/2609.01924) compares Ouro and Huginn. It reports repeated reconstruction of workspace content in Ouro, while Huginn preserves content beyond the lens's effective transport window. This makes a crucial distinction: the lifetime of information and the distance over which a particular readout works can differ.\r\n\r\nA separate [Ouro repository report](https://github.com/VykosMolt/JLens-Ouro) finds stronger early-pass recovery when a lens targets that pass's own exit rather than the final exit. Its own-exit comparison is a post-confirmation analysis, and it lacks a tuned-lens baseline and a causal-use result. It is useful corroborating motivation for an endpoint experiment, with those limits attached.\r\n\r\nThe [Mamba study](https://arxiv.org/abs/2609.32102) adds another variable: the state carrier. Residual-stream and recurrent-state readouts recover complementary information; better verbal access does not consistently yield better relational answers. A residual-only comparison can therefore miss information available elsewhere in the architecture.\r\n\r\nMy inference is that an architecture survey needs a more explicit unit of comparison than “the model has a workspace.” Specify the checkpoint, computation depth, state carrier, token position, lens, and readout endpoint. Otherwise an apparent architectural difference may partly reflect a difference in measurement difficulty. This is especially relevant when one model reuses weights across many computational steps.\r\n\r\n## 3. Readability and causal use need separate scoreboards\r\n\r\n[WorkspaceBench](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the) provides 3,356 questions across 27 families, including recovery and hallucination evaluations. In the comments, [Burny asks about interventions](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the?commentId=Foio2Goqoa6pFLPir); [Neel Nanda replies](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the?commentId=s5dLELdceTzSPPD37) that causal tests are less method-agnostic and outside this benchmark's scope. That is a useful boundary on what a benchmark score establishes.\r\n\r\n[Mirella Zeisler's replication](https://www.lesswrong.com/posts/pnDjvdo6cX2H7Ddsy/is-the-j-space-a-global-workspace-for-multi-hop-reasoning-an) directly investigates interventions. Across two models and two prompt banks, direct-answer swaps outperform intermediate swaps in three of four settings. This narrows the causal interpretation of those settings without ruling out every proposed workspace function.\r\n\r\nI would therefore report recovery and intervention results side by side. A readable intermediate might be causally important, redundant, or correlated with a computation elsewhere. Conversely, a weak edit can reflect a poor intervention rather than an unused concept. Controls must test edit strength, specificity and general disruption before either positive or negative results support a broad claim.\r\n\r\n## 4. Monitoring depends on where and when you look\r\n\r\n[Neel Nanda's review](https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper) separates the paper's scientific, methodological, practical and philosophical claims. That separation helps interpret two recent monitoring reports that could otherwise look contradictory.\r\n\r\n[Jimmy Liu reports](https://www.lesswrong.com/posts/bhvaAbSPZgiG3oJPu/on-qwen-the-j-lens-readouts-at-the-newline-token-reveal-lies-4) a deception-related signal at a post-response newline in Qwen3.6-27B, with poor transfer to the other tested models. A trained probe performs better. This is a retrospective signal, so the result alone does not establish warning before an action.\r\n\r\n[Daniel Huber's small planted-error experiment](https://www.agent-engineering.ch/experiments/jacobian-lens/) finds no added value over output surprise at one layer of Gemma 4 12B. It uses 30 error/neutral pairs and development-only analysis; per-pair records are unavailable. It also does not test anticipation of the model's own future mistakes.\r\n\r\nThese studies vary in model, task, token position, layer and baseline. My inference is that neither supports a general verdict on J-lens monitoring. A useful comparison should ask what information becomes available, how early, and whether it changes a decision beyond what outputs or a trained probe already provide. [Discussion of hidden serial computation](https://www.lesswrong.com/posts/PLisnSFir8y5AHkmP/how-concerned-should-we-be-about-astra-s-recurrent) motivates that question, but does not itself validate a monitoring method.\r\n\r\n## 5. What does the word workspace commit us to?\r\n\r\nThe [Eleos commentary](https://eleosai.org/papers/eleos_gwt_commentary_20260706.pdf#page=6) distinguishes vocabulary directions from the concepts a workspace might contain, and accessible representations from an integrated stream. Functional access and phenomenal consciousness are separate claims.\r\n\r\n[Jayrup's frequency analysis](https://jayrup.me/blog/jacobian-lens-frequency) supplies a narrower measurement concern: token frequency affects vector-norm rankings in small-model tests. It does not refute the original large-model capacity claim. The original paper's [Template and Oracle extensions](https://transformer-circuits.pub/2026/workspace/) also move beyond single-token descriptions, while introducing their own costs and reliability questions.\r\n\r\nMy takeaway is to keep the operational definition visible. A token-based readout can be useful even when tokens are an imperfect description of concepts. But changing the vocabulary or the decoder may change what appears to occupy the space. Claims about a common mechanism need evidence that survives reasonable changes in this measuring apparatus.\r\n\r\n## A small experiment worth doing next\r\n\r\nOur first worked investigation asks: **how much apparent loss of an intermediate in Ouro is explained by the readout endpoint?** This section is a proposal; no new experiment has been run for this guide.\r\n\r\nStart with one frozen Ouro checkpoint and a two-hop task with known intermediates. Split by intermediate concept before fitting lenses or selecting layers. Cache the same activations for every comparison, and choose the primary metric and selection procedure before opening the held-out set.\r\n\r\nCompare own-exit and final-exit readouts on those identical states. Use equal fitting budgets for J-lens and R-lens; include a logit lens and a tuned linear readout as baselines. Plot held-out recovery against computational distance to the chosen endpoint. Report paired uncertainty clustered by concept, so paraphrases of one fact do not masquerade as independent evidence.\r\n\r\nEndpoint and transport distance are coupled in this design. To investigate that confound, compare matched distances where possible and add a depth-matched untied baseline. If the available compute cannot support those controls, report an endpoint association and leave the mechanism unresolved.\r\n\r\nThen choose one layer using the development split and test an intermediate swap on held-out examples. Include direct-answer swaps, unrelated-concept edits, matched-norm random directions and output-disruption checks. This second stage asks a different question from recovery and should retain a separate result panel.\r\n\r\nThere are useful outcomes even without a new method. Better own-exit recovery on identical states would show that unreadability depends on the measurement. An effect that disappears after distance controls would favour a transport explanation. A specific intermediate edit that predictably changes a downstream answer would add causal evidence. Failure to recover or edit the concept would leave several possibilities open; it would not by itself establish absence.\r\n\r\nThe contribution I would aim for is a precise statement of **when a readout stops being informative**, with enough controls to explain at least one failure mode. That gives architecture comparisons and monitoring experiments a firmer starting point.\r\n\r\n---\r\n\r\n*Research note: AI-assisted synthesis prepared for author review. Sources and selected comment threads checked on 21 October 2026. This is not an exhaustive survey or an independent replication. Reported findings, our interpretation and the proposed experiment are separated throughout. The atlas includes the additional Jacobian-alignment proposal and exact comment links.*\r\n\r\n## Acknowledgments\r\n\r\nThe research and criticisms in this guide belong to the authors linked above and in the source ledger, including the individual commenters. The Ouro data are credited to VykosMolt; our plots and calculations use reported summaries, not a new reproduction.\r\n\r\n[Lilian Weng](https://lilianweng.github.io/posts/2026-07-04-harness/) informs the explanatory organization, and [SafeLoop](https://safeloop-workshop.github.io/) informs the visual direction. [Paper2Agent](https://www.nature.com/articles/s41586-026-11044-y), [DiscoveryRSI](https://arxiv.org/abs/2610.23839) and [autoresearch](https://github.com/karpathy/autoresearch) inform the research-tool design. References & acknowledgments on the companion website lists each design influence, related project and implementation credit, with its specific role. AI assisted the drafting and implementation; interpretations and errors here remain our responsibility.\r\n",
+    "zh": "# 当 workspace 变得读不出来\r\n\r\n*研究导读 · 2026 年 10 月 22 日 · 入门约 10 分钟，可按需深入*\r\n\r\n假设模型正在回答一道两跳问题：先确定是哪颗行星，再回答它的颜色。我们用 lens 在某一层读到了中间概念，往后几层却读不到，再往后又出现了。这段空白里发生了什么？概念可能消失了，也可能换了一种表示，让这副 lens 暂时读不出来。\r\n\r\n这个歧义贯穿了不少 J-lens 后续讨论。我的理解是：**谈 workspace 是否可见时，需要同时说明读出方法、被观察的状态，以及读出所指向的终点。** 至于读出的信息是否参与计算、能否帮助监控模型，还需要另外的证据。\r\n\r\n下面沿着五个问题梳理相关工作，也纳入论文评论区里有实质内容的讨论。交互图收录了 14 份来源中的 20 个条目，分别标明实验报告、质疑、作者回应和待验证的提议。除明确标注的直接回复外，图中的连接都是本文对工作之间关系的整理。\r\n\r\n<!-- ATLAS -->\r\n\r\n## 从这里开始：lens 到底在测什么？\r\n\r\n模型处理输入时会产生一组组数字，这就是这里说的**内部状态**。**读出**把其中的信息转为更容易理解的输出，例如词语的分数；**lens** 是获得这种读出的方法。面对同一个状态，不同 lens 可能给出不同答案。\r\n\r\n在[原始 J-lens 研究](https://transformer-circuits.pub/2026/workspace/)中，**workspace** 指一种被提出的共享表示空间，参与报告、调控和灵活计算。测得的 J-space 是它的近似。读到一个词提供的是有关测量的证据；要说明模型实际使用了对应信息，还需要进一步检验。\r\n\r\n记住开头的行星例子：“lens 读到了火星”和“模型使用火星的表示回答红色”是两种不同主张。这份导读围绕能连接它们的证据展开。随后可以在实验室里检查报告数值、整理下一步检验；其中的计算不会重新运行模型。\r\n\r\n## 1. 一副 lens 变好了，究竟是哪方面变好？\r\n\r\n最初的 [J-lens 论文](https://transformer-circuits.pub/2026/workspace/)用平均 Jacobian 构建与词表关联的读出方向，并测试了报告、调控和灵活计算等功能。这些功能实验让它超出了“列出一些看起来合理的 token”的范围。不过，测得的 J-space 仍然只是所提出的 workspace 的一种近似。\r\n\r\n[R-lens](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)用逐层相关性传播规则修改反向传播，在若干模型上改善了早层读出。[J++](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace)结合相关性传播、Jacobian 聚类加权和词表筛选，在六个开放模型上取得了改进。这是方法上的进展，但“更好”仍取决于用什么来评估。\r\n\r\n两条评论把这个问题说得更具体。[StellaAthena 问](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers?commentId=tx8tp7PwFNcP4BvPh)：分数提高，会不会是因为读出提前预测了后面层的答案，而没有忠实描述当前层？[Niranjan Deshpande 问](https://www.lesswrong.com/posts/nc9dHfcB22JdMzGbr/j-lens-jacobian-filtering-enables-more-faithful-workspace?commentId=YhfAKjBSL3ZkreasB)：没有预先指定目标词时，筛选带来的收益还能用于审计吗？这些是在质疑评估能支持多强的结论，目前不能当作方法已经失败的证据。\r\n\r\n后续实验里，我会分别评估三件事：恢复一个已知的中间概念、忠实描述当前状态，以及发现预料之外的问题。第一项适合开发方法，第三项更接近实际审计。一项进步之后，值得接着测另外两项。\r\n\r\n## 2. 模型结构会改变测量的含义\r\n\r\n[Looped Transformer 预印本](https://arxiv.org/abs/2609.01924)比较了 Ouro 和 Huginn。作者报告，Ouro 在每轮 loop 中重建 workspace 内容；Huginn 的内容则可以持续存在，超过 lens 有效传递的范围。这提示我们：信息能保留多久，与某种读出能跨多远起作用，可以是两件事。\r\n\r\n另一份 [Ouro 仓库报告](https://github.com/VykosMolt/JLens-Ouro)发现，把读出终点设在当前轮出口，比设在最终出口更容易恢复早期轮次的内容。不过，这项比较是在确认分析之后补做的，也缺少 tuned-lens 基线和内容被因果使用的结果。它为进一步做终点实验提供了动机，结论需要保留这些边界。\r\n\r\n[Mamba 研究](https://arxiv.org/abs/2609.32102)又引入了一个变量：信息存在哪里。残差流和递归状态中的读出能够恢复互补信息，但更容易用语言读出，并不总能带来更好的关系问答表现。只看残差流，可能漏掉架构中其他位置的信息。\r\n\r\n因此，我认为架构比较需要比“这个模型有 workspace”更明确的单位：哪个 checkpoint、多少计算深度、哪类状态、哪个 token 位置、什么 lens，以及哪个读出终点。否则，看似来自架构的差异，可能有一部分来自测量难度。当模型在很多计算步骤中反复使用同一组权重时，这个问题尤其值得注意。\r\n\r\n## 3. 读得出来，与参与计算，需要分别评估\r\n\r\n[WorkspaceBench](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the)提供了 27 类、共 3,356 道问题，包含恢复和幻觉评估。评论区里，[Burny 问有没有干预实验](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the?commentId=Foio2Goqoa6pFLPir)；[Neel Nanda 回应](https://www.lesswrong.com/posts/Zeg2JztbdhguL48uH/workspacebench-evaluating-interpretability-methods-for-the?commentId=s5dLELdceTzSPPD37)，因果实验更依赖具体方法，因此没有纳入这个 benchmark。知道这个范围，才能正确理解分数。\r\n\r\n[Mirella Zeisler 的复现](https://www.lesswrong.com/posts/pnDjvdo6cX2H7Ddsy/is-the-j-space-a-global-workspace-for-multi-hop-reasoning-an)直接研究了干预。在两个模型、两组 prompt 的四种设置中，有三种设置里直接替换答案比替换中间概念更有效。这限制了这些设置中的因果解释，但尚不能排除所有提出的 workspace 功能。\r\n\r\n我会把恢复结果和干预结果并列展示。读得出的中间概念可能确实重要，也可能是冗余的，或者只是与别处的计算相关。反过来，编辑效果弱，也可能是干预方法不合适。要从结果推出更广的结论，还得检查编辑强度、特异性，以及它有没有普遍破坏模型输出。\r\n\r\n## 4. 监控能否有用，取决于在哪里、什么时候看\r\n\r\n[Neel Nanda 的评论](https://www.lesswrong.com/posts/zFJ3ZdQwrTWE9jT5S/a-review-of-anthropic-s-global-workspace-paper)区分了论文的科学、方法、实际应用和哲学主张。沿用这个区分，有助于理解两份表面上可能相互冲突的监控报告。\r\n\r\n[Jimmy Liu 报告](https://www.lesswrong.com/posts/bhvaAbSPZgiG3oJPu/on-qwen-the-j-lens-readouts-at-the-newline-token-reveal-lies-4)，在 Qwen3.6-27B 回答后的换行位置，可以读到与欺骗有关的信号，但向其他被测模型的迁移较差，训练过的 probe 表现也更好。由于信号出现在回答之后，这个结果本身还不能说明能在行动前预警。\r\n\r\n[Daniel Huber 的小规模植入错误实验](https://www.agent-engineering.ch/experiments/jacobian-lens/)在 Gemma 4 12B 的某一层上，没有发现 lens 相比输出惊讶度提供额外价值。实验用了 30 对错误／中性样本，只做了开发阶段分析，且未提供逐对记录。它也没有测试能否提前识别模型自己将要犯的错误。\r\n\r\n这些研究的模型、任务、token 位置、层和基线都不同。我的判断是，目前任何一份都不足以对 J-lens 监控做出普遍裁决。更有用的比较是：获得了什么信息、多早能获得，以及它能否在输出或训练过的 probe 之外改变实际决策。[关于隐藏串行计算的讨论](https://www.lesswrong.com/posts/PLisnSFir8y5AHkmP/how-concerned-should-we-be-about-astra-s-recurrent)说明了这个问题为什么值得关心，但它本身并未验证某种监控方法。\r\n\r\n## 5. 使用 workspace 这个词，意味着什么？\r\n\r\n[Eleos 的评论](https://eleosai.org/papers/eleos_gwt_commentary_20260706.pdf#page=6)区分了词表方向和 workspace 可能容纳的概念，也区分了可访问的表示与整合后的信息流。功能上的访问能力，与现象意识，是不同层面的主张。\r\n\r\n[Jayrup 的词频分析](https://jayrup.me/blog/jacobian-lens-frequency)指出了更具体的测量问题：在所测的小模型中，token 频率影响向量范数的排名。这尚未推翻原论文对大模型容量的主张。原论文中的 [Template 和 Oracle 扩展](https://transformer-circuits.pub/2026/workspace/)也在尝试超越单 token 描述，同时带来了新的成本与可靠性问题。\r\n\r\n我认为需要一直把操作性定义放在读者眼前。即便 token 不能完美描述概念，基于 token 的读出仍然可以有用。不过，换词表或解码器，可能改变我们看到的空间内容。关于共同机制的主张，需要经得住测量工具的合理变化。\r\n\r\n## 下一步，值得做的一个小实验\r\n\r\n第一个调查示例是：**Ouro 中有多少看似丢失的中间概念，可以用读出终点来解释？** 这里提出的是实验方案，这份导读尚未运行新实验。\r\n\r\n从一个冻结的 Ouro checkpoint 和中间概念已知的两跳任务开始。先按中间概念划分数据，再拟合 lens、选择层。所有比较使用同一份缓存激活；在查看留出集之前，确定主指标和选择流程。\r\n\r\n在这些相同状态上，比较以本轮出口和最终出口为终点的读出。J-lens 和 R-lens 使用相同的拟合预算，并加入 logit lens 和经过训练的线性读出作为基线。画出留出集恢复率随到目标终点的计算距离变化的曲线。按概念聚类报告配对比较的不确定性，避免把同一事实的不同措辞当成独立证据。\r\n\r\n这个设计里，终点和传递距离是耦合的。为了研究这个混杂因素，应该在可行时比较相同距离，并加入深度匹配、各层不共享权重的基线。如果算力不足以完成这些对照，就把结果限定为终点与恢复率之间的关联，暂时不解释机制。\r\n\r\n接着，用开发集选一层，在留出样本上替换中间概念。对照包括直接替换答案、编辑无关概念、范数匹配的随机方向，以及输出受损程度的检查。这一步回答的问题与恢复率不同，结果也应单独展示。\r\n\r\n即使没有提出新方法，几种结果仍然有价值：同一状态在本轮出口更容易读出，说明不可读性取决于测量；加入距离对照后效应消失，会更支持传递距离的解释；替换特定中间概念后，下游答案按预测改变，则增加了因果证据。如果既读不出也改不动，还存在多种可能，不能仅据此断言概念不存在。\r\n\r\n我希望这项工作最后能明确回答：**一种读出在什么条件下不再提供有效信息？** 只要对照足够，能解释清楚一种失效原因，就能为架构比较和监控实验提供更扎实的起点。\r\n\r\n---\r\n\r\n*研究说明：本文为 AI 辅助整理、待作者审阅的草稿。来源及选定评论核查于 2026 年 10 月 21 日。本文不是穷尽性综述，也没有独立复现实验。已有结果、本文解释和实验提议分别标明。交互图还收录了 Jacobian 对齐提议及具体评论链接。*\r\n\r\n## 致谢\r\n\r\n本导读使用的研究与质疑归于上文及来源清单中署名的作者，也包括每位具体评论者。Ouro 数据归于 VykosMolt；本站的图表与计算使用来源报告的汇总值，并非新的复现实验。\r\n\r\n[Lilian Weng](https://lilianweng.github.io/posts/2026-07-04-harness/) 为讲解组织提供参考，[SafeLoop](https://safeloop-workshop.github.io/) 为视觉设计提供参考。[Paper2Agent](https://www.nature.com/articles/s41586-026-11044-y)、[DiscoveryRSI](https://arxiv.org/abs/2610.23839) 与 [autoresearch](https://github.com/karpathy/autoresearch) 为研究工具设计提供参考。配套网站的“参考文献与致谢”逐条列出设计借鉴、相关项目和实现参考，并说明各自用途。撰写与实现使用了 AI 辅助；这里的解读与错误仍由本项目负责。\r\n"
+  },
+  "backgroundReferences": [
+    {
+      "id": "discovery-rsi",
+      "label": "DiscoveryRSI",
+      "url": "https://arxiv.org/abs/2610.23839v2",
+      "publishedAt": "2026-10-16",
+      "version": "v2",
+      "versionUpdatedAt": "2026-10-20",
+      "inspectionScope": "abstract_metadata_only",
+      "purpose": [
+        "Design reference for consequential questions, feasible investigations, alternatives and explicit criteria.",
+        "为有研究价值的问题、可执行调查、竞争解释和明确判据提供设计参考。"
+      ],
+      "status": "design_reference_not_integrated",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "scientificAdoption": "Full methods, dependencies, license and applicability require review before implementation. Not evidence for a J-lens claim."
+    },
+    {
+      "id": "evidence-informed",
+      "label": "Evidence-Informed LLM Beliefs for Continual Scientific Discovery",
+      "url": "https://arxiv.org/abs/2606.29182v1",
+      "publishedAt": "2026-06-28",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "inspectionScope": "abstract_metadata_only",
+      "purpose": [
+        "Design reference for preserving accumulated evidence when choosing the next investigation.",
+        "为选择后续调查时保留累积证据提供设计参考。"
+      ],
+      "status": "design_reference_not_integrated",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "scientificAdoption": "Full methods, dependencies, license and applicability require review before implementation. Not evidence for a J-lens claim."
+    },
+    {
+      "id": "hypothesis-evolution-protocol",
+      "label": "Toward Auditable AI Scientists: A Hypothesis Evolution Protocol for LLM Agents",
+      "url": "https://arxiv.org/abs/2607.09195v1",
+      "publishedAt": "2026-07-10",
+      "version": "v1",
+      "versionUpdatedAt": null,
+      "inspectionScope": "abstract_metadata_only",
+      "purpose": [
+        "Design reference for explicit hypothesis, evidence and revision records.",
+        "为明确记录假设、证据与修订提供设计参考。"
+      ],
+      "status": "design_reference_not_integrated",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "scientificAdoption": "Full methods, dependencies, license and applicability require review before implementation. Not evidence for a J-lens claim."
+    },
+    {
+      "id": "paper2agent",
+      "label": "Paper2Agent",
+      "url": "https://github.com/jmiao24/Paper2Agent",
+      "publishedAt": null,
+      "version": null,
+      "versionUpdatedAt": null,
+      "inspectionScope": "repository_overview_only",
+      "purpose": [
+        "Future reference for callable research tools backed by a pinned environment and reference outputs.",
+        "未来用于固定环境、参考输出和可调用研究工具的设计参考。"
+      ],
+      "status": "design_reference_not_integrated",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "scientificAdoption": "Full methods, dependencies, license and applicability require review before implementation. Not evidence for a J-lens claim."
+    },
+    {
+      "id": "autoresearch",
+      "label": "autoresearch",
+      "url": "https://github.com/karpathy/autoresearch",
+      "publishedAt": null,
+      "version": null,
+      "versionUpdatedAt": null,
+      "inspectionScope": "repository_overview_only",
+      "purpose": [
+        "Future reference for bounded experiment budgets and retained run records.",
+        "未来用于有预算边界的实验与运行记录的设计参考。"
+      ],
+      "status": "design_reference_not_integrated",
+      "machineInspectedAt": "2026-10-23T04:32:12.859Z",
+      "humanReviewedAt": null,
+      "scientificAdoption": "Full methods, dependencies, license and applicability require review before implementation. Not evidence for a J-lens claim."
+    }
+  ],
+  "searchCoverage": {
+    "inspectedOn": "2026-10-22",
+    "catalogEntries": 30,
+    "datedEntries": 28,
+    "newEntries": 16,
+    "newDirectCitingWorks": 10,
+    "newDiscussions": 6,
+    "totalCitations": null,
+    "rootWork": {
+      "title": "Verbalizable Representations Form a Global Workspace in Language Models",
+      "url": "https://transformer-circuits.pub/2026/workspace/",
+      "arxivId": "2607.15495"
+    },
+    "methods": [
+      {
+        "provider": "arXiv / original paper",
+        "query": "\"J-lens\"; \"Jacobian lens\"; \"2607.15495\"; original references",
+        "status": [
+          "Partial, primary references checked",
+          "部分覆盖，已逐篇核对参考文献"
+        ],
+        "note": [
+          "Ten newly catalogued papers directly cite the original work; this does not imply method use or support.",
+          "新增十篇论文均在原文参考文献中确认引用；不自动推导方法继承或支持关系。"
+        ]
+      },
+      {
+        "provider": "LessWrong / author posts",
+        "query": "\"J-lens\"; \"J-Space\"; \"Jacobian lens\"; \"U-lens\"",
+        "status": [
+          "Partial, canonical and original dates checked",
+          "部分覆盖，核对 canonical 和原始日期"
+        ],
+        "note": [
+          "Seven original posts inspected; the U-Space explanation is linked as a companion rather than counted again.",
+          "核对七篇作者报告；U-Space 作者导读作为同一研究的关联原文，不再重复计数。"
+        ]
+      },
+      {
+        "provider": "OpenAlex / Semantic Scholar",
+        "query": "arXiv:2607.15495",
+        "status": [
+          "Unavailable in this run",
+          "本轮不可用"
+        ],
+        "note": [
+          "API/DNS access failed; no worldwide cited-by count is asserted.",
+          "API/域名访问失败，没有可核实的全球引用总数。"
+        ]
+      },
+      {
+        "provider": "RSS / X",
+        "query": "Configured feeds and public web discovery",
+        "status": [
+          "Not a historical citation search",
+          "不构成历史引用检索"
+        ],
+        "note": [
+          "Two paused RSS drafts have limited recent windows. X collection remains paused; empty web searches do not establish that no discussion exists.",
+          "两个 RSS 草案暂停且返回近期窗口有限。X 采集仍暂停；公开网页搜索为空不表示没有相关讨论。"
+        ]
+      }
+    ],
+    "limits": [
+      "This is a targeted primary-source expansion, not an exhaustive citation index. Direct citations, author discussions and independent validation are distinct. The U-Space paper and its LessWrong explanation are one work. The seven-node graph remains a curated reading route. Automatic collection and X access remain off.",
+      "本轮为定向一手来源补查，并非完整引用索引。直接引用、作者讨论与独立验证分别表示；U-Space 论文及其 LessWrong 导读按同一研究去重。七节点图仍是精选阅读路径。自动采集与 X 接入仍未启用。"
+    ],
+    "undated": [
+      {
+        "id": "jlens-ouro",
+        "title": [
+          "J-lens on Ouro",
+          "J-lens on Ouro"
+        ],
+        "platform": "GitHub"
+      },
+      {
+        "id": "jlens-layer_metric",
+        "title": [
+          "R-lens layer-fidelity comment",
+          "R-lens 层忠实性评论"
+        ],
+        "platform": "LessWrong"
+      }
+    ],
+    "newDirectCitingRecords": [
+      {
+        "id": "jlens-concept-lens",
+        "title": "Verbalizing Multi-Token Concepts in LLMs",
+        "url": "https://arxiv.org/html/2608.31084v2",
+        "locator": "References: Gurnee et al. (2026), linked to transformer-circuits.pub/2026/workspace/; §1, §2.1, §2.3, §3.2."
+      },
+      {
+        "id": "jlens-short-horizons",
+        "title": "Short Horizons and Sparse Concepts: a Mathematical View of the Readout in the J-lens",
+        "url": "https://arxiv.org/html/2608.25347v1",
+        "locator": "References: Gurnee et al. (2026), CoRR abs/2607.15495; §1, §2 and §5.1."
+      },
+      {
+        "id": "jlens-latents-wires",
+        "title": "From Latents to Wires: Surgical Post-Editing on Large Language Models",
+        "url": "https://arxiv.org/html/2609.32434v1",
+        "locator": "References: Gurnee et al. (2026), linked to original Transformer Circuits article; §1, §2 and §4."
+      },
+      {
+        "id": "jlens-audio-dog",
+        "title": "When Does the Concept of \"Dog\" Emerge in an Audio LLM?",
+        "url": "https://arxiv.org/html/2609.33458v1",
+        "locator": "Reference [7] Gurnee et al. (2026), arXiv:2607.15495; §1 and §2.2."
+      },
+      {
+        "id": "jlens-veritas",
+        "title": "Verbalising Model's Computation for Chain-of-Thought Faithfulness Detection",
+        "url": "https://arxiv.org/html/2610.23275v1",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §1, §2.1, §4.2."
+      },
+      {
+        "id": "jlens-lexical-frames",
+        "title": "Lexical Reference Frames: Interpreting LM Residual Streams in Native Semantics",
+        "url": "https://arxiv.org/html/2610.22169v2",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §1 and §2."
+      },
+      {
+        "id": "jlens-u-space",
+        "title": "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
+        "url": "https://arxiv.org/html/2610.09087v1",
+        "locator": "References: Gurnee et al. (2026), arXiv:2607.15495; §2-3 and Appendix A."
+      },
+      {
+        "id": "jlens-dv-lens",
+        "title": "DV-Lens: Revealing the Functional Organization of Language Model Parameters",
+        "url": "https://arxiv.org/html/2610.04489v1",
+        "locator": "References: Gurnee et al. (2026), original Transformer Circuits URL; related-work paragraph on sparse/internal representations."
+      },
+      {
+        "id": "jlens-audio-workspace",
+        "title": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+        "url": "https://arxiv.org/html/2608.24958v1",
+        "locator": "Reference [12] Gurnee et al. (2026), CoRR abs/2607.15495; §1-3 and §5."
+      },
+      {
+        "id": "jlens-s-space",
+        "title": "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
+        "url": "https://arxiv.org/html/2610.13527v1",
+        "locator": "Reference [24] Gurnee et al. (2026), linked to original Transformer Circuits article."
+      }
+    ],
+    "companionPosts": [
+      {
+        "workId": "arxiv:2610.09087",
+        "itemId": "jlens-u-space",
+        "title": "Uncertainty in the Verbalizable Workspace",
+        "url": "https://www.lesswrong.com/posts/hcpiLD8XjK7cqG6Lr/uncertainty-in-the-verbalizable-workspace-1",
+        "publishedAt": "2026-10-17T03:43:13.054Z",
+        "note": [
+          "Author explanation of the same U-Space study; not a second independent result.",
+          "同一 U-Space 研究的作者导读，不是第二份独立结果。"
+        ]
+      }
+    ]
+  }
+}

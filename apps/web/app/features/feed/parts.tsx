@@ -5,22 +5,27 @@ import { IconBookmark } from "../../components/icons";
 import { SourceAvatar } from "../../components/ui/SourceAvatar";
 import { Lightbox } from "../../components/ui/Lightbox";
 import { toggleStar, useIsStarred } from "../../lib/local-state";
+import { inNav } from "../../components/shell/nav";
 
-/** The source's name, or, for X, avatar + display name + @handle. */
 /** The text colour of a report: grey once this browser has opened it, so the unread ones stand out. */
 export const readTone = (read: boolean, unread: string) => (read ? "text-ink-4" : unread);
 
+/** Platform plus the original source attribution; the metadata opens the original when available. */
 export function SourceLine({ item, className = "" }: { item: Pick<FeedItemSummary, "source" | "x" | "channel">; className?: string }) {
-  if (item.channel === "x" && item.x) {
-    return (
-      <span className={`flex min-w-0 items-center gap-1.5 ${className}`}>
-        <SourceAvatar name={item.x.authorName} avatarUrl={item.x.avatarUrl} avatarSrcSet={item.x.avatarSrcSet} size={16} />
-        <span className="truncate text-ink-3">{item.x.authorName}</span>
-        <span className="hidden shrink-0 text-ink-4 min-[400px]:inline">@{item.x.handle}</span>
-      </span>
-    );
-  }
-  return <span className={`min-w-0 truncate ${className}`}>{item.source.name}</span>;
+  const x = item.channel === "x" ? item.x : null;
+  const platform = item.source.platform ?? (item.channel === "x" ? "X" : null);
+  const content = <>
+    {platform && <span className="shrink-0 rounded border border-line-soft px-1.5 py-px text-[11px] font-medium leading-[15px] text-ink-3">{platform}</span>}
+    {x ? <>
+        <SourceAvatar name={x.authorName} avatarUrl={x.avatarUrl} avatarSrcSet={x.avatarSrcSet} size={16} />
+        <span className="truncate text-ink-3">{x.authorName}</span>
+        <span className="hidden shrink-0 text-ink-4 min-[400px]:inline">@{x.handle}</span>
+      </> : <span className="min-w-0 truncate">{item.source.name}</span>}
+  </>;
+  const style = `inline-flex min-w-0 items-center gap-1.5 ${className}`;
+  return item.source.originalUrl
+    ? <a href={item.source.originalUrl} target="_blank" rel="noopener noreferrer" title={`打开原文 · ${item.source.name}`} className={`relative z-10 hover:text-accent ${style}`}>{content}</a>
+    : <span className={style}>{content}</span>;
 }
 
 /** Up to four media thumbnails, kept small in lists (the detail page shows them larger). Videos are stills. */
@@ -73,6 +78,7 @@ export function useStar(item: Starrable) {
 /** Bookmark toggle kept in this browser (收藏): 26px, or sized by `size` or by `className`. */
 export function StarButton({ item, size, className = "size-[26px]" }: { item: Starrable; size?: number; className?: string }) {
   const { on, toggle, pulse } = useStar(item);
+  if (!inNav("/starred")) return null;
   return (
     <button
       type="button"

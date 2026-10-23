@@ -1,4 +1,4 @@
-import { data, useLoaderData } from "react-router";
+import { data, redirect, useLoaderData } from "react-router";
 import type { Route } from "./+types/report-detail";
 import { REPORT_NAMES, type ReportDetail, type ReportNavigationResponse, type ReportKind } from "@aihot/contracts/site";
 import { SITE, subjectAfter } from "@aihot/site";
@@ -10,6 +10,7 @@ import { ReportLayout } from "../features/report/ReportLayout";
 import { ReportPaper, reportOutline } from "../features/report/ReportPaper";
 import { feedLink, kindFromPath } from "../features/report/format";
 import type { Screen } from "../components/shell/screens";
+import { inNav } from "../components/shell/nav";
 
 export const handle: Screen = { tab: "daily", name: "日报" };
 export { pageHeaders as headers } from "../lib/api.server";
@@ -22,6 +23,7 @@ const PATTERN: Record<ReportKind, RegExp> = {
 };
 
 export async function loader({ request, params }: Route.LoaderArgs) {
+  if (!inNav("/daily")) throw redirect("/all");
   const kind = kindFromPath(new URL(request.url).pathname);
   const key = params.key ?? "";
   if (!PATTERN[kind].test(key)) throw data({ message: "not_found" }, { status: 404 });

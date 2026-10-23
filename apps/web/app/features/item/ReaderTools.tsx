@@ -5,6 +5,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Sheet } from "../../components/ui/Sheet";
 import { IconBookmark, IconExternal, IconList, IconShare } from "../../components/icons";
 import { useStar } from "../feed/parts";
+import { inNav } from "../../components/shell/nav";
 import type { FeedItemSummary } from "@aihot/contracts/site";
 
 type Starrable = Pick<FeedItemSummary, "id" | "title" | "summary" | "source" | "publishedAt" | "score" | "selected">;
@@ -65,13 +66,14 @@ export function ReaderToolbar({ item, originalUrl, originalLabel, onOutline, onS
 }) {
   const hidden = useReadingDown();
   const star = useStar(item);
+  const bookmarks = inNav("/starred");
   return (
     <nav
       aria-label="阅读工具"
       className={`fixed inset-x-0 bottom-0 z-40 bg-surface/90 pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] shadow-[0_-1px_0_var(--line)] backdrop-blur-xl backdrop-saturate-150 transition-transform duration-300 ease-[var(--ease-out-quart)] lg:hidden ${hidden ? "translate-y-full" : ""}`}
     >
-      <div className={`mx-auto grid h-[50px] max-w-[640px] ${onOutline ? "grid-cols-4" : "grid-cols-3"}`}>
-        <Tool
+      <div className="mx-auto grid h-[50px] max-w-[640px]" style={{ gridTemplateColumns: `repeat(${2 + Number(Boolean(onOutline)) + Number(bookmarks)}, minmax(0, 1fr))` }}>
+        {bookmarks && <Tool
           pressed={star.on}
           onClick={star.toggle}
           label={star.on ? "已收藏" : "收藏"}
@@ -80,7 +82,7 @@ export function ReaderToolbar({ item, originalUrl, originalLabel, onOutline, onS
               <IconBookmark size={22} filled={star.on} />
             </span>
           }
-        />
+        />}
         {onOutline && <Tool onClick={onOutline} label="目录" icon={<IconList size={22} />} />}
         <Tool onClick={onShare} label="分享" icon={<IconShare size={22} />} />
         {originalUrl ? <Tool href={originalUrl} label={originalLabel} icon={<IconExternal size={22} />} /> : <Tool label={originalLabel} icon={<IconExternal size={22} />} />}

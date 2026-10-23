@@ -14,6 +14,7 @@ import assert from "node:assert/strict";
 import { before, after, test } from "node:test";
 import { chromium, webkit, expect, type Browser } from "@playwright/test";
 import type { ReportDetail } from "@aihot/contracts/site";
+import { NAV } from "@aihot/site";
 import { FIXTURE_AT as at, fakeApi, feedItem, itemDetail, startWebServer, visit, type WebServer } from "./web-server.ts";
 
 const item = feedItem({id:'navigation-fixture',title:'性能检查文章'});
@@ -137,6 +138,11 @@ test('SSR all-pages and report kinds return offline with their own content',asyn
     await context.setOffline(true);await page.goBack();
     await expect(page.getByRole('link',{name:'全部第 1 页',exact:true})).toBeVisible({timeout:1500});
     await context.setOffline(false);await visit(page,origin+'/daily');
+    if ((NAV.hidden as readonly string[]).includes('/daily')) {
+      await expect(page).toHaveURL(origin+'/all');
+      await expect(page.getByRole('link',{name:'全部第 1 页',exact:true})).toBeVisible();
+      return;
+    }
     await page.getByRole('link',{name:'周报',exact:true}).click();
     await expect(page.locator('#report-start')).toContainText('周报');
     await context.setOffline(true);await page.getByRole('link',{name:'日报',exact:true}).click();

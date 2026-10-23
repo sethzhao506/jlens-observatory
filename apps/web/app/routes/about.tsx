@@ -12,6 +12,7 @@ import { IconArrowRight } from "../components/icons";
 import { SignalRiver, type RiverSource } from "../features/about/SignalRiver";
 import { PhoneBar } from "../components/shell/PhoneBar";
 import type { Screen } from "../components/shell/screens";
+import { inNav } from "../components/shell/nav";
 
 export const handle: Screen = { tab: "me", name: "关于" };
 export { pageHeaders as headers } from "../lib/api.server";
@@ -102,8 +103,8 @@ function stagesOf(stats: SiteStats | null): Stage[] {
     },
     {
       no: "04",
-      title: "成刊",
-      figure: stats && <Figure n={stats.dailies} unit={REPORTS.metricUnits.reportsCovered} />,
+      title: inNav("/daily") ? "成刊" : "跟进",
+      figure: inNav("/daily") && stats && <Figure n={stats.dailies} unit={REPORTS.metricUnits.reportsCovered} />,
       text: ABOUT.steps.publish,
       note: "也可以用 RSS、API、MCP 订阅",
     },
@@ -230,8 +231,8 @@ export default function AboutPage() {
           <IntentLink to="/" className={buttonClass("primary", "lg")}>
             看今天的精选 <IconArrowRight size={15} />
           </IntentLink>
-          <IntentLink to="/daily" className={buttonClass("secondary", "lg")}>
-            读最新日报
+          <IntentLink to={inNav("/daily") ? "/daily" : "/all"} className={buttonClass("secondary", "lg")}>
+            {inNav("/daily") ? "读最新日报" : "看全部动态"}
           </IntentLink>
         </div>
       </header>
@@ -243,7 +244,7 @@ export default function AboutPage() {
         <SignalRiver sources={sources} focus={focus} onArrive={onArrive} className="h-[230px] sm:h-[300px] lg:h-[360px] 2xl:h-[420px]">
           <Latest item={latest[at]} className="absolute left-[75%] top-[calc(42%+42px)] hidden w-[25%] px-6 lg:block" />
         </SignalRiver>
-        <p className="sr-only">{`示意图：每条线是一个信源；线汇成一束束，代表同一件事的多篇报道；经过精选的闸门，只有少数几束通过，${subjectAfter("汇入每天的", "日报")}。`}</p>
+        <p className="sr-only">{`示意图：每条线是一个信源；线汇成一束束，代表同一件事的多篇报道；经过精选的闸门，只有少数几束通过，${inNav("/daily") ? subjectAfter("汇入每天的", "日报") : "进入持续更新的研究动态"}。`}</p>
         <Latest item={latest[at]} className="mt-2 border-t border-line pt-4 lg:hidden" />
         <ol className="mt-4 grid grid-cols-1 border-t border-line-strong sm:grid-cols-2 lg:mt-0 lg:grid-cols-4">
           {stages.map((s, i) => (

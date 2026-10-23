@@ -1,12 +1,17 @@
 // Opens the site's main pages and machine exits and checks each answers: the whole-site check after a
 // deploy, and CI's check of the built site on an empty database.
 //   node scripts/smoke.ts [--base http://localhost:3000]
-import { SITE } from "@aihot/site";
+import { NAV, SITE } from "@aihot/site";
+import { MODULES } from "@aihot/site/modules";
+import { resolveRedirect } from "@aihot/contracts/http-policy";
 
 const at = process.argv.indexOf("--base");
 const base = (at > 0 ? process.argv[at + 1] : process.env.SITE_URL) ?? "http://localhost:3000";
 
-const PAGES = ["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/starred", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy", "/more", "/admin/login"];
+const modulePages = MODULES.flatMap((m) => (m.pages ?? []).flatMap((p) => "layout" in p ? p.pages : [p]))
+  .filter((p) => !p.path.includes(":"))
+  .map((p) => `/${p.path}`);
+const PAGES = [...new Set(["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/starred", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy", "/more", "/admin/login", ...modulePages])];
 const MACHINE: Array<[path: string, type: RegExp]> = [
   ["/api/health", /json/],
   ["/api/v1/items", /json/],
@@ -29,7 +34,13 @@ async function check(path: string, expect: (res: Response, body: string) => stri
   try {
     const res = await fetch(base + path, { redirect: "manual", signal: AbortSignal.timeout(30_000) });
     const body = res.headers.get("content-type")?.startsWith("image/") ? "" : await res.text();
-    const problem = res.status !== 200 ? `HTTP ${res.status}` : expect(res, body);
+    const address = new URL(path, base);
+    const hiddenReaderPage = (NAV.hidden as readonly string[]).includes("/daily") && /^\/(daily|weekly|monthly)(\/|$)/.test(address.pathname)
+      || (NAV.hidden as readonly string[]).includes("/starred") && address.pathname === "/starred";
+    const redirect = resolveRedirect(address.pathname, address.search) ?? (hiddenReaderPage ? { status: 302, location: "/all" } : null);
+    const problem = redirect?.location
+      ? (res.status === redirect.status && res.headers.get("Location") === redirect.location ? null : `expected redirect ${redirect.status} to ${redirect.location}, got ${res.status}`)
+      : res.status !== 200 ? `HTTP ${res.status}` : expect(res, body);
     console.log(`${problem ? "✗" : "✓"} ${path}${problem ? `  ${problem}` : ""}`);
     if (problem) failed += 1;
   } catch (error) {
